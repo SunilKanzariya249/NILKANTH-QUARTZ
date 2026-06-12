@@ -61,7 +61,8 @@ const Navbar = () => {
               onMouseEnter={() => setDropdownOpen(true)}
               onMouseLeave={() => setDropdownOpen(false)}
             >
-              <button 
+              <Link 
+                to="/products"
                 className={`flex items-center gap-1 py-2 text-sm font-semibold tracking-wide transition-colors duration-300 hover:text-brand-red ${
                   location.pathname.startsWith('/products') || location.pathname.startsWith('/category') 
                     ? 'text-brand-red font-bold' 
@@ -70,7 +71,7 @@ const Navbar = () => {
               >
                 Products
                 <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
+              </Link>
 
               {/* Dropdown Menu */}
               {dropdownOpen && (

@@ -64,7 +64,7 @@ const AdminDashboard = () => {
   const [formValidationWarning, setFormValidationWarning] = useState('');
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts({ limit: 1000 });
     fetchDashboardStats();
   }, [fetchProducts, fetchDashboardStats]);
 
@@ -157,6 +157,7 @@ const AdminDashboard = () => {
       if (success) {
         triggerToast('Product deleted successfully', 'success');
         fetchDashboardStats();
+        fetchProducts({ limit: 1000 });
       } else {
         triggerToast('Error deleting product', 'error');
       }
@@ -206,6 +207,7 @@ const AdminDashboard = () => {
         triggerToast('Product updated successfully', 'success');
         setModalOpen(false);
         fetchDashboardStats();
+        fetchProducts({ limit: 1000 });
       } else {
         triggerToast(res.message || 'Error updating product', 'error');
       }
@@ -222,6 +224,7 @@ const AdminDashboard = () => {
         triggerToast('Product created successfully', 'success');
         setModalOpen(false);
         fetchDashboardStats();
+        fetchProducts({ limit: 1000 });
       } else {
         triggerToast(res.message || 'Error creating product', 'error');
       }

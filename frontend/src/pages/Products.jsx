@@ -32,7 +32,12 @@ const Products = () => {
     if (catQuery) {
       setFilters({ category: catQuery, page: 1 });
     } else {
-      fetchProducts();
+      // If there is no category query param, clear any previously active category filter
+      if (filters.category !== '') {
+        setFilters({ category: '', page: 1 });
+      } else {
+        fetchProducts();
+      }
     }
   }, [searchParams, fetchCategories]);
 
@@ -149,6 +154,20 @@ const Products = () => {
                   Categories
                 </h3>
                 <div className="space-y-2">
+                  <button
+                    onClick={() => {
+                      setFilters({ category: '', page: 1 });
+                      setSearchParams({});
+                    }}
+                    className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                      !filters.category
+                        ? 'bg-brand-red text-white shadow-sm' 
+                        : 'text-gray-600 hover:bg-brand-light hover:text-brand-red'
+                    }`}
+                  >
+                    All Products
+                  </button>
+
                   {categories.map((cat) => {
                     const isSelected = filters.category === cat;
                     return (

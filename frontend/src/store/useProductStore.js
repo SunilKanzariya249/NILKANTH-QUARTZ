@@ -46,13 +46,13 @@ export const useProductStore = create((set, get) => ({
     get().fetchProducts();
   },
 
-  fetchProducts: async () => {
+  fetchProducts: async (customParams = null) => {
     set({ loading: true, error: null });
     try {
-      const { search, category, sort, page, limit } = get().filters;
+      const params = customParams || get().filters;
       
       const response = await axios.get('/api/products', {
-        params: { search, category, sort, page, limit }
+        params
       });
 
       set({
