@@ -227,7 +227,7 @@ Please provide more details.`;
                       >
                         <img 
                           src={img} 
-                          alt={`${name} thumbnail ${idx + 1}`} 
+                          alt={`Model ${modelNo} thumbnail ${idx + 1}`} 
                           className="max-h-full max-w-full object-contain"
                         />
                       </button>
@@ -242,6 +242,8 @@ Please provide more details.`;
                   src={video}
                   controls
                   autoPlay
+                  muted
+                  playsInline
                   className="w-full h-full object-contain"
                 />
               </div>
