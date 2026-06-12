@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
 import SEO from '../components/SEO';
 
 const Contact = () => {
   const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state && location.state.productInquiry) {
+      const prod = location.state.productInquiry;
+      setForm(prev => ({
+        ...prev,
+        message: `Hi, I would like to inquire about the following product:
+- Model No: ${prod.modelNo || 'N/A'}
+- Price: ₹${prod.price}
+- Available Colors: ${prod.colors || 'N/A'}
+- MOQ: ${prod.moq || 'N/A'} pcs
+
+Please share more details and wholesale quotes.`
+      }));
+    }
+  }, [location]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

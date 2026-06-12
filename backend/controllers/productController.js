@@ -11,10 +11,10 @@ export const getProducts = async (req, res) => {
 
     const query = {};
 
-    // Search filter (name or description)
+    // Search filter (modelNo or description)
     if (search) {
       query.$or = [
-        { name: { $regex: search, $options: 'i' } },
+        { modelNo: { $regex: search, $options: 'i' } },
         { description: { $regex: search, $options: 'i' } }
       ];
     }
@@ -29,8 +29,8 @@ export const getProducts = async (req, res) => {
     if (sort) {
       if (sort === 'price_asc') sortOption = { price: 1 };
       else if (sort === 'price_desc') sortOption = { price: -1 };
-      else if (sort === 'name_asc') sortOption = { name: 1 };
-      else if (sort === 'name_desc') sortOption = { name: -1 };
+      else if (sort === 'name_asc') sortOption = { modelNo: 1 };
+      else if (sort === 'name_desc') sortOption = { modelNo: -1 };
     }
 
     // Pagination calculations
@@ -87,12 +87,12 @@ export const getProductBySlug = async (req, res) => {
 // @access  Private (Admin)
 export const createProduct = async (req, res) => {
   try {
-    const { name, price, category, description, featured } = req.body;
+    const { price, category, description, featured, modelNo, size, pkg, moq, colors } = req.body;
 
-    if (!name || !price || !category || !description) {
+    if (!price || !category || !description || !modelNo || !size || !pkg || !moq || !colors) {
       // Clean up uploaded files in temp_uploads if validation fails
       cleanupTempFiles(req.files);
-      return res.status(400).json({ message: 'Name, price, category, and description are required' });
+      return res.status(400).json({ message: 'Price, category, description, modelNo, size, pkg, MOQ, and Available Colors are required' });
     }
 
     const imageUrls = [];
@@ -113,9 +113,13 @@ export const createProduct = async (req, res) => {
     }
 
     const product = new Product({
-      name,
       price: parseFloat(price),
       category,
+      modelNo,
+      size,
+      pkg,
+      moq: parseInt(moq) || 1,
+      colors,
       description,
       featured: featured === 'true' || featured === true,
       images: imageUrls,
@@ -136,7 +140,7 @@ export const createProduct = async (req, res) => {
 // @access  Private (Admin)
 export const updateProduct = async (req, res) => {
   try {
-    const { name, price, category, description, featured, existingImages, removeVideo } = req.body;
+    const { price, category, description, featured, existingImages, removeVideo, modelNo, size, pkg, moq, colors } = req.body;
     const productId = req.params.id;
 
     const product = await Product.findById(productId);
@@ -196,9 +200,13 @@ export const updateProduct = async (req, res) => {
     }
 
     // Update fields
-    product.name = name || product.name;
     product.price = price ? parseFloat(price) : product.price;
     product.category = category || product.category;
+    product.modelNo = modelNo || product.modelNo;
+    product.size = size || product.size;
+    product.pkg = pkg || product.pkg;
+    product.moq = moq ? parseInt(moq) : product.moq;
+    product.colors = colors || product.colors;
     product.description = description || product.description;
     product.featured = featured !== undefined ? (featured === 'true' || featured === true) : product.featured;
     product.images = finalImageUrls;

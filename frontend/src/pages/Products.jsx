@@ -128,8 +128,8 @@ const Products = () => {
               className="bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:border-brand-red"
             >
               <option value="newest">Newest Arrivals</option>
-              <option value="name_asc">Alphabetical (A - Z)</option>
-              <option value="name_desc">Alphabetical (Z - A)</option>
+              <option value="name_asc">Model Number (A - Z)</option>
+              <option value="name_desc">Model Number (Z - A)</option>
               <option value="price_asc">Price (Low to High)</option>
               <option value="price_desc">Price (High to Low)</option>
             </select>

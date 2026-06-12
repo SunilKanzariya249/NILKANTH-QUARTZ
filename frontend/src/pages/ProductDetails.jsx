@@ -65,7 +65,7 @@ const ProductDetails = () => {
     );
   }
 
-  const { name, price, category, description, images, video } = currentProduct;
+  const { price, category, description, images, video, modelNo, size, pkg, moq, colors } = currentProduct;
   const currentImage = images && images.length > 0 ? images[activeImageIdx] : 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=600&auto=format&fit=crop';
 
   // Handle Zoom Hover Move
@@ -95,8 +95,13 @@ const ProductDetails = () => {
 
 I am interested in the following product:
 
-Product Name: ${name}
-Price: ₹${price}
+Model No: ${modelNo || 'NK-N/A'}
+Wholesale Price: ₹${price}
+Category: ${category}
+Available Colors: ${colors || 'N/A'}
+MOQ: ${moq || 100} pcs
+Size: ${size || 'N/A'}
+Packaging: ${pkg || 'N/A'}
 Product Link: ${window.location.href}
 
 Please provide more details.`;
@@ -110,7 +115,7 @@ Please provide more details.`;
   const productSchema = {
     "@context": "https://schema.org/",
     "@type": "Product",
-    "name": name,
+    "name": `Model ${modelNo}`,
     "image": images,
     "description": description,
     "offers": {
@@ -242,64 +247,69 @@ Please provide more details.`;
               </div>
             )}
 
-          </div>
-
-          {/* Right Column: Spec Info & Call to Actions */}
+          </div>          {/* Right Column: Spec Info & Call to Actions */}
           <div className="md:col-span-6 space-y-6 flex flex-col justify-center">
+            
+            {/* Category badge */}
             <span className="inline-block bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md w-fit">
               {category}
             </span>
             
+            {/* Primary Header: Model No */}
             <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight leading-tight">
-              {name}
+              Model: {modelNo}
             </h1>
 
-            <div className="border-y border-gray-100 py-4 flex items-center justify-between">
-              <div>
-                <span className="text-xs text-gray-400 block font-medium">Wholesale Pricing (Morbi FOB)</span>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-black text-brand-dark">₹{price}</span>
-                  <span className="text-xs text-gray-400">/ per piece</span>
+            {/* List all details one by one in a stack */}
+            <div className="border border-gray-150 rounded-2xl bg-white divide-y divide-gray-150 overflow-hidden shadow-sm">
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
+                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Model Number</span>
+                <span className="font-extrabold text-brand-red bg-brand-red/5 px-2.5 py-1 rounded-lg border border-brand-red/10">{modelNo}</span>
+              </div>
+
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
+                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Wholesale Price (FOB)</span>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="font-black text-brand-dark text-lg">₹{price}</span>
+                  <span className="text-xs text-gray-400">/ piece</span>
                 </div>
               </div>
-              <div className="bg-emerald-50 text-emerald-600 px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1">
-                <CheckCircle className="w-4 h-4 shrink-0" />
-                In Stock (Direct Factory)
+
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
+                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Category Range</span>
+                <span className="font-bold text-gray-900">{category}</span>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <h3 className="font-bold text-sm uppercase tracking-wider text-gray-400">Description</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {description}
-              </p>
-            </div>
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
+                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Available Colors</span>
+                <span className="font-bold text-gray-900 bg-brand-light px-2.5 py-1 rounded-lg border border-gray-200">{colors}</span>
+              </div>
 
-            {/* Standard spec definitions */}
-            <div className="bg-brand-light rounded-2xl p-5 border border-gray-150 space-y-3">
-              <h4 className="font-bold text-xs uppercase tracking-wider text-gray-700">Product Specifications</h4>
-              <div className="grid grid-cols-2 gap-y-2.5 gap-x-4 text-xs text-gray-600">
-                <div>
-                  <span className="text-gray-400 font-medium block">Timepiece Motor:</span>
-                  <span className="font-bold text-gray-900">Premium Silent-Sweep Quartz</span>
-                </div>
-                <div>
-                  <span className="text-gray-400 font-medium block">Standard Shell:</span>
-                  <span className="font-bold text-gray-900">ABS Plastic / Glass Screen</span>
-                </div>
-                <div>
-                  <span className="text-gray-400 font-medium block">Average Dimension:</span>
-                  <span className="font-bold text-gray-900">300mm x 300mm (Standard)</span>
-                </div>
-                <div>
-                  <span className="text-gray-400 font-medium block">Country of Origin:</span>
-                  <span className="font-bold text-gray-900">Morbi, Gujarat, India</span>
-                </div>
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
+                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Minimum Order (MOQ)</span>
+                <span className="font-bold text-brand-dark">{moq || 100} pcs</span>
+              </div>
+
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
+                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Dimensions (Size)</span>
+                <span className="font-bold text-gray-900">{size}</span>
+              </div>
+
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
+                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Packaging (Pkg)</span>
+                <span className="font-bold text-gray-900">{pkg}</span>
+              </div>
+
+              <div className="p-4 sm:p-5 flex flex-col gap-2 text-sm">
+                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Description</span>
+                <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
+                  {description}
+                </p>
               </div>
             </div>
 
             {/* WhatsApp CTA Button */}
-            <div className="pt-4">
+            <div className="pt-2">
               <button
                 onClick={handleWhatsAppInquiry}
                 className="w-full sm:w-auto flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold uppercase tracking-wider text-xs py-4 px-8 rounded-xl shadow-lg shadow-emerald-500/10 transition-transform active:scale-95 duration-200"
@@ -310,7 +320,6 @@ Please provide more details.`;
             </div>
 
           </div>
-
         </div>
 
         {/* RELATED PRODUCTS SECTION */}

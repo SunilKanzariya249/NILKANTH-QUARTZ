@@ -45,11 +45,15 @@ const AdminDashboard = () => {
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   // Form Fields State
-  const [name, setName] = useState('');
+  const [colors, setColors] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [featured, setFeatured] = useState(false);
+  const [modelNo, setModelNo] = useState('');
+  const [size, setSize] = useState('');
+  const [pkg, setPkg] = useState('');
+  const [moq, setMoq] = useState('');
   
   // File upload state
   const [newImageFiles, setNewImageFiles] = useState([]);
@@ -81,11 +85,15 @@ const AdminDashboard = () => {
   // Open Add modal
   const handleOpenAddModal = () => {
     setEditProduct(null);
-    setName('');
+    setColors('');
     setPrice('');
     setCategory('');
     setDescription('');
     setFeatured(false);
+    setModelNo('');
+    setSize('');
+    setPkg('');
+    setMoq('');
     setNewImageFiles([]);
     setNewVideoFile(null);
     setExistingImagesToKeep([]);
@@ -98,11 +106,15 @@ const AdminDashboard = () => {
   // Open Edit modal
   const handleOpenEditModal = (prod) => {
     setEditProduct(prod);
-    setName(prod.name);
+    setColors(prod.colors || '');
     setPrice(prod.price);
     setCategory(prod.category);
     setDescription(prod.description);
     setFeatured(prod.featured);
+    setModelNo(prod.modelNo || '');
+    setSize(prod.size || '');
+    setPkg(prod.pkg || '');
+    setMoq(prod.moq || '');
     setNewImageFiles([]);
     setNewVideoFile(null);
     setExistingImagesToKeep(prod.images || []);
@@ -181,11 +193,15 @@ const AdminDashboard = () => {
     }
 
     const formData = new FormData();
-    formData.append('name', name);
+    formData.append('colors', colors);
     formData.append('price', price);
     formData.append('category', category);
     formData.append('description', description);
     formData.append('featured', featured);
+    formData.append('modelNo', modelNo);
+    formData.append('size', size);
+    formData.append('pkg', pkg);
+    formData.append('moq', moq);
 
     // Append new images files
     newImageFiles.forEach(file => {
@@ -331,9 +347,10 @@ const AdminDashboard = () => {
                 <thead>
                   <tr className="bg-gray-50 border-b border-gray-150 text-gray-500 font-bold text-xs uppercase tracking-wider">
                     <th className="px-6 py-4">Image</th>
-                    <th className="px-6 py-4">Name</th>
+                    <th className="px-6 py-4">Model No.</th>
                     <th className="px-6 py-4">Category</th>
-                    <th className="px-6 py-4">Wholesale Price</th>
+                    <th className="px-6 py-4">Available Colors</th>
+                    <th className="px-6 py-4">Price / MOQ</th>
                     <th className="px-6 py-4">Featured</th>
                     <th className="px-6 py-4 text-right">Actions</th>
                   </tr>
@@ -345,21 +362,26 @@ const AdminDashboard = () => {
                         <div className="w-12 h-12 rounded-lg bg-gray-50 border overflow-hidden p-1 flex items-center justify-center shadow-sm">
                           <img 
                             src={prod.images && prod.images.length > 0 ? prod.images[0] : '/nilkanth-quartz-logo.png'} 
-                            alt={prod.name} 
+                            alt={prod.modelNo} 
                             className="max-h-full max-w-full object-contain"
                           />
                         </div>
                       </td>
-                      <td className="px-6 py-4">
-                        <span className="font-bold text-gray-900 line-clamp-1">{prod.name}</span>
-                        <span className="text-[10px] text-gray-400 block font-mono">{prod.slug}</span>
+                      <td className="px-6 py-4 font-bold text-gray-900 font-mono">
+                        {prod.modelNo}
                       </td>
                       <td className="px-6 py-4">
                         <span className="px-2.5 py-1 bg-gray-100 text-gray-700 text-xs font-semibold rounded-md">
                           {prod.category}
                         </span>
                       </td>
-                      <td className="px-6 py-4 font-bold text-gray-900">₹{prod.price}</td>
+                      <td className="px-6 py-4 text-xs text-gray-600 font-medium">
+                        {prod.colors}
+                      </td>
+                      <td className="px-6 py-4 font-bold text-gray-900">
+                        <span className="block">₹{prod.price}</span>
+                        <span className="text-[10px] text-gray-400 block font-mono font-medium">MOQ: {prod.moq || 100} pcs</span>
+                      </td>
                       <td className="px-6 py-4">
                         {prod.featured ? (
                           <span className="text-emerald-600 font-bold flex items-center gap-1 text-xs">
@@ -440,14 +462,14 @@ const AdminDashboard = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">
-                    Clock Name
+                    Available Colors
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="AQ6 - Modern Sweep"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Brown, Ivory, Wooden Gold"
+                    value={colors}
+                    onChange={(e) => setColors(e.target.value)}
                     className="w-full bg-brand-light border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-brand-red focus:bg-white"
                   />
                 </div>
@@ -505,6 +527,66 @@ const AdminDashboard = () => {
                       <ToggleLeft className="w-12 h-12 text-gray-300" />
                     )}
                   </button>
+                </div>
+              </div>
+
+              {/* Added Schema Fields: Model No, Size, Packaging, MOQ */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">
+                    Model No.
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="NK-101"
+                    value={modelNo}
+                    onChange={(e) => setModelNo(e.target.value)}
+                    className="w-full bg-brand-light border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-brand-red focus:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">
+                    Dimensions (Size)
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="300mm x 300mm"
+                    value={size}
+                    onChange={(e) => setSize(e.target.value)}
+                    className="w-full bg-brand-light border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-brand-red focus:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">
+                    Packaging (Pkg)
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="50 pcs"
+                    value={pkg}
+                    onChange={(e) => setPkg(e.target.value)}
+                    className="w-full bg-brand-light border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-brand-red focus:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">
+                    Min. Order (MOQ)
+                  </label>
+                  <input
+                    type="number"
+                    required
+                    min="1"
+                    placeholder="100"
+                    value={moq}
+                    onChange={(e) => setMoq(e.target.value)}
+                    className="w-full bg-brand-light border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-brand-red focus:bg-white"
+                  />
                 </div>
               </div>
 

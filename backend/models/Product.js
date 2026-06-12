@@ -1,11 +1,6 @@
 import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Product name is required'],
-    trim: true
-  },
   slug: {
     type: String,
     required: true,
@@ -22,6 +17,31 @@ const productSchema = new mongoose.Schema({
     required: [true, 'Product category is required'],
     trim: true,
     index: true
+  },
+  colors: {
+    type: String,
+    required: [true, 'Available colors are required'],
+    trim: true
+  },
+  modelNo: {
+    type: String,
+    required: [true, 'Model number is required'],
+    trim: true
+  },
+  size: {
+    type: String,
+    required: [true, 'Size is required'],
+    trim: true
+  },
+  pkg: {
+    type: String,
+    required: [true, 'Packaging is required'],
+    trim: true
+  },
+  moq: {
+    type: Number,
+    required: [true, 'Minimum Order Quantity is required'],
+    min: [1, 'MOQ must be at least 1']
   },
   description: {
     type: String,
@@ -53,8 +73,8 @@ const productSchema = new mongoose.Schema({
 
 // Middleware to auto-generate slug before saving if changed/new
 productSchema.pre('validate', function(next) {
-  if (this.name && (!this.slug || this.isModified('name'))) {
-    this.slug = this.name
+  if (this.modelNo && (!this.slug || this.isModified('modelNo'))) {
+    this.slug = this.modelNo
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)+/g, '');
