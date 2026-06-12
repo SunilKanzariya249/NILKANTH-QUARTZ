@@ -14,14 +14,13 @@ const Footer = () => {
           {/* Brand Info */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="bg-white p-1 rounded-lg">
+              <div className="bg-white p-1 ">
                 <img 
                   src="/nilkanth-quartz-logo.png" 
                   alt="Nilkanth Quartz logo" 
-                  className="h-8 w-auto"
+                  className="h-12 w-auto"
                 />
               </div>
-              <span className="text-lg font-bold tracking-wider">NILKANTH QUARTZ</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Pioneers in high-quality quartz wall clocks. Combining premium craftsmanship, sleek modern styling, and accurate technology to decorate your walls.
