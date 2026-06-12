@@ -102,7 +102,7 @@ Product Link: ${window.location.href}
 Please provide more details.`;
 
     const encodedText = encodeURIComponent(rawMessage);
-    const whatsappUrl = `https://wa.me/919909912186?text=${encodedText}`;
+    const whatsappUrl = `https://wa.me/919426842751?text=${encodedText}`;
     window.open(whatsappUrl, '_blank');
   };
 

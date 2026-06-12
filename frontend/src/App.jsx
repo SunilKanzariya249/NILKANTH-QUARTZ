@@ -42,7 +42,7 @@ const Layout = ({ children }) => {
       {/* Floating WhatsApp Quick Link */}
       {!isAdminPath && (
         <a
-          href="https://wa.me/919909912186?text=Hello%20Nilkanth%20Quartz,%20I%20would%20like%20to%20inquire%20about%20your%20wall%20clocks."
+          href="https://wa.me/919426842751?text=Hello%20Nilkanth%20Quartz,%20I%20would%20like%20to%20inquire%20about%20your%20wall%20clocks."
           target="_blank"
           rel="noopener noreferrer"
           className="fixed bottom-6 left-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group flex items-center gap-2"

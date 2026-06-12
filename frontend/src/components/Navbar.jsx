@@ -19,6 +19,18 @@ const Navbar = () => {
     setDropdownOpen(false);
   }, [location]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header className="sticky top-0 z-40 w-full glass-nav text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -158,7 +170,7 @@ const Navbar = () => {
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 top-20 z-50 bg-brand-dark/95 backdrop-blur-lg border-t border-white/10 flex flex-col justify-between p-6 overflow-y-auto animate-fadeIn">
+        <div className="md:hidden fixed inset-x-0 bottom-0 top-20 z-50 bg-brand-dark/95 backdrop-blur-lg border-t border-white/10 p-6 overflow-y-auto animate-fadeIn flex flex-col justify-between space-y-8 h-[calc(100vh-5rem)]">
           <div className="space-y-6">
             <div className="flex flex-col space-y-4">
               <Link 

@@ -20,7 +20,7 @@ Email: ${form.email || 'N/A'}
 Message: ${form.message}`;
 
     const encodedText = encodeURIComponent(text);
-    const url = `https://wa.me/919909912186?text=${encodedText}`;
+    const url = `https://wa.me/919426842751?text=${encodedText}`;
     window.open(url, '_blank');
 
     setSubmitted(true);
@@ -71,8 +71,8 @@ Message: ${form.message}`;
                   </div>
                   <div>
                     <span className="text-gray-400 font-bold block text-xs uppercase tracking-wider mb-0.5">WhatsApp Inquiry</span>
-                    <a href="https://wa.me/919909912186" target="_blank" rel="noopener noreferrer" className="font-semibold text-emerald-600 hover:underline">
-                      +91 99099 12186
+                    <a href="https://wa.me/919426842751" target="_blank" rel="noopener noreferrer" className="font-semibold text-emerald-600 hover:underline">
+                      +91 94268 42751
                     </a>
                   </div>
                 </div>
@@ -83,8 +83,8 @@ Message: ${form.message}`;
                   </div>
                   <div>
                     <span className="text-gray-400 font-bold block text-xs uppercase tracking-wider mb-0.5">Call Helpline</span>
-                    <a href="tel:+919909912186" className="font-semibold text-gray-900 hover:underline">
-                      +91 99099 12186
+                    <a href="tel:+919426842751" className="font-semibold text-gray-900 hover:underline">
+                      +91 94268 42751
                     </a>
                   </div>
                 </div>
@@ -154,7 +154,7 @@ Message: ${form.message}`;
                     </label>
                     <input 
                       type="tel" 
-                      placeholder="+91 99099 12186"
+                      placeholder="+91 94268 42751"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       className="w-full bg-brand-light border border-gray-200 rounded-xl px-4 py-3 text-sm"
