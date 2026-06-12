@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Tag } from 'lucide-react';
+import { Send } from 'lucide-react';
 
 const ProductCard = ({ product }) => {
   const { modelNo, slug, price, category, images, moq } = product;
@@ -33,52 +33,43 @@ Please provide more details.`;
   return (
     <Link 
       to={`/product/${slug}`}
-      className="group bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 overflow-hidden transition-all duration-300 flex flex-col h-full transform hover:-translate-y-1"
+      className="group bg-white border border-gray-200 p-4 transition-all duration-300 flex flex-col h-full hover:shadow-md"
     >
       {/* Product Image Container */}
-      <div className="relative aspect-square w-full overflow-hidden bg-gray-50 flex items-center justify-center p-6">
+      <div className="w-full aspect-square bg-[#ededed] flex items-center justify-center p-6 mb-6">
         <img
           src={mainImage}
           alt={modelNo}
-          className="max-h-full max-w-full object-contain transform group-hover:scale-105 transition-transform duration-500 ease-out drop-shadow-lg"
+          className="max-h-full max-w-full object-contain transform group-hover:scale-105 transition-transform duration-500 ease-out"
           loading="lazy"
         />
-        
-        {/* Category tag */}
-        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-brand-dark px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 border border-gray-150 shadow-sm">
-          <Tag className="w-3.5 h-3.5 text-brand-red" />
-          {category}
-        </div>
       </div>
 
       {/* Info Body */}
-      <div className="p-6 flex flex-col flex-grow justify-between">
-        <div className="space-y-3">
-          <h3 className="font-extrabold text-gray-900 group-hover:text-brand-red text-base line-clamp-1 transition-colors duration-300">
-            Model: {modelNo}
+      <div className="flex flex-col flex-grow justify-between text-center">
+        <div>
+          {/* Model No */}
+          <h3 className="text-2xl font-bold text-gray-900 tracking-wide mb-2 uppercase">
+            {modelNo}
           </h3>
           
-          {/* MOQ Field */}
-          <div className="flex items-center justify-between text-xs text-gray-500 bg-gray-50 p-2.5 rounded-xl border border-gray-100">
-            <span className="font-semibold text-gray-400">Min. Order (MOQ)</span>
-            <span className="font-bold text-brand-dark bg-white px-2 py-0.5 rounded-md border border-gray-150 shadow-sm">
-              {moq || 100} pcs
-            </span>
-          </div>
+          {/* MOQ & Price */}
+          <p className="text-[11px] sm:text-xs text-gray-700 font-semibold tracking-widest uppercase mb-4">
+            MOQ : {moq || 100}pcs <span className="text-gray-300 mx-1">||</span> Price : ₹{price}
+          </p>
         </div>
-        
-        <div className="flex items-center justify-between pt-4 mt-4 border-t border-gray-50">
-          <div>
-            <span className="text-xs text-gray-400 block font-medium">Wholesale Price</span>
-            <span className="text-xl font-extrabold text-brand-dark">₹{price}</span>
-          </div>
 
+        <div>
+          {/* Divider */}
+          <div className="border-t border-gray-200 w-full my-3" />
+
+          {/* Inquire Button */}
           <button
             onClick={handleInquireClick}
-            className="flex items-center gap-1 bg-brand-dark hover:bg-brand-red text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl shadow-md transition-all duration-300 group-hover:shadow-brand-red/10 active:scale-95"
+            className="w-full flex items-center justify-center gap-2 text-gray-900 hover:text-brand-red font-bold py-1 transition-colors duration-200"
           >
-            Inquire
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 duration-300" />
+            <Send className="w-4 h-4 fill-current transform rotate-[15deg]" />
+            <span className="text-sm font-bold tracking-wider">Inquire</span>
           </button>
         </div>
       </div>

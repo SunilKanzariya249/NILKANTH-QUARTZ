@@ -232,6 +232,8 @@ const Home = () => {
         </button>
       </section>
 
+      
+
       {/* 2. ABOUT COMPANY SECTION */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -274,7 +276,27 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+{/* INFINITE TEXT MARQUEE SLIDER */}
+      <section className="bg-[#f5f5f5] overflow-hidden py-8 select-none">
+        <div className="flex w-full overflow-hidden">
+          <div className="animate-marquee whitespace-nowrap flex items-center">
+            {/* Block 1 */}
+            {[...Array(6)].map((_, i) => (
+              <span key={`b1-${i}`} className="text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight mx-8 flex items-center">
+                <span className="text-black font-extrabold">NILKANTH</span>
+                <span className="text-stroke-black font-light ml-4">QUARTZ</span>
+              </span>
+            ))}
+            {/* Block 2 (Duplicate for seamless loop) */}
+            {[...Array(6)].map((_, i) => (
+              <span key={`b2-${i}`} className="text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight mx-8 flex items-center">
+                <span className="text-black font-extrabold">NILKANTH</span>
+                <span className="text-stroke-black font-light ml-4">QUARTZ</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
       {/* 3. WHY CHOOSE US SECTION */}
       <section className="py-24 bg-white border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

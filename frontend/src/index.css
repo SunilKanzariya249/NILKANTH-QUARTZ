@@ -69,3 +69,20 @@ input:focus, textarea:focus, select:focus {
 .animate-spin-reverse-slow {
   animation: spin-slow 120s linear infinite reverse;
 }
+
+/* Infinite Marquee Text Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 60s linear infinite;
+}
+
+.text-stroke-black {
+  color: transparent;
+  -webkit-text-stroke: 1px #000000;
+}
