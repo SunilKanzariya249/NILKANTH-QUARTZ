@@ -14,7 +14,8 @@ import {
   MessageSquare,
   Send,
   Clock,
-  ArrowUpRight
+  ArrowUpRight,
+  ArrowRight
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useProductStore } from '../store/useProductStore';
@@ -466,7 +467,7 @@ const Home = () => {
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-red block">
                Who We Are
               </span>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[70px] xl:text-[80px] font-bold text-[#1C1C1C] leading-[1.05] tracking-tighter">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[70px] xl:text-[80px] font-semibold text-[#1C1C1C] leading-[1.05] tracking-tighter">
                 Leading Wall Clock Manufacturers & Suppliers
               </h2>
             </div>
@@ -635,6 +636,59 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* DESIGNED TO REFLECT YOUR STYLE SECTION */}
+      <section className="relative w-full bg-white py-12 md:py-16 lg:py-24 border-t border-neutral-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-0">
+            {/* Left Column: Poster Image */}
+            <div className="col-span-1 lg:col-span-7 relative z-0">
+              <div className="overflow-hidden rounded-none shadow-lg h-[320px] sm:h-[450px] lg:h-[580px]">
+                <img
+                  src="/design to rys poster .png"
+                  alt="Designed to Reflect Your Style"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-102"
+                />
+              </div>
+            </div>
+
+            {/* Right Column: Overlapping Card Container */}
+            <div className="col-span-1 lg:col-span-5 relative z-10 mt-6 lg:mt-0 lg:-ml-28 px-4 sm:px-6 lg:px-0">
+              <div className="bg-[#f5f5f5] p-2 sm:p-10 lg:p-12 w-full max-w-lg rounded-none shadow-xl flex flex-col justify-between min-h-[320px] border border-white/20">
+                <div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight leading-tight">
+                    Designed to Reflect Your Style
+                  </h3>
+                  <div className="w-16 h-[2px] bg-brand-red my-5"></div>
+                  <p className="text-md sm:text-md text-neutral-600 font-light leading-relaxed mb-8">
+                    Looking for a unique timepiece that perfectly matches your style or brand? At <strong className="font-semibold text-neutral-800">Nilkanth Quartz</strong>, we offer customized designer wall clocks tailored to your preferences. Whether for corporate branding, personalized gifting, or exclusive interior designs, our custom wall clocks bring a personal touch to every space.
+                  </p>
+                </div>
+                <div>
+                  <Link
+                    to="/category/designer-clocks"
+                    className="relative inline-flex items-center h-10 rounded-full group overflow-hidden"
+                  >
+                    {/* Expanding background element */}
+                    <span className="absolute inset-y-0 left-0 w-10 bg-white rounded-full shadow-md border border-neutral-100 transition-all duration-500 ease-in-out group-hover:w-full z-0" />
+                    
+                    {/* Arrow icon */}
+                    <span className="w-10 h-10 flex items-center justify-center relative z-10 text-neutral-700 group-hover:translate-x-0.5 transition-transform duration-300">
+                      <ArrowRight size={16} />
+                    </span>
+                    
+                    {/* Button text */}
+                    <span className="pl-2 pr-6 font-semibold text-xs uppercase tracking-widest text-neutral-500 group-hover:text-neutral-800 relative z-10 transition-colors duration-300">
+                      Read More
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* 3. WHY CHOOSE US SECTION */}
       <section className="py-24 bg-white border-y border-gray-100">
