@@ -166,7 +166,7 @@ const Home = () => {
       />
 
       {/* 1. HERO SECTION */}
-      <section className="relative aspect-[16/9] md:aspect-auto md:h-screen w-full overflow-hidden bg-brand-dark">
+      <section className="relative aspect-[16/9] w-full overflow-hidden bg-brand-dark">
         {HERO_SLIDES.map((slide, idx) => (
           <Link
             key={idx}
