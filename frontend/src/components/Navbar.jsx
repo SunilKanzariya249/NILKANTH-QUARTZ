@@ -46,8 +46,8 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
-  const isHome = location.pathname === '/';
-  const isTransparent = isHome && !isScrolled;
+  const isTransparentPage = location.pathname === '/' || location.pathname === '/products';
+  const isTransparent = isTransparentPage && !isScrolled;
   const headerClass = `sticky top-0 z-40 w-full text-white transition-all duration-300 ${
     isTransparent
       ? 'navbar-transparent-desktop'

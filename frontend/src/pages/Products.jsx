@@ -74,14 +74,14 @@ const Products = () => {
   };
 
   return (
-    <div className="bg-[#FCFCFC] py-0 min-h-screen select-none border-t border-gray-100">
+    <div className="bg-[#FCFCFC] py-0 min-h-screen select-none">
       <SEO 
         title="Browse Products | Nilkanth Quartz Wall Clocks" 
         description="Search and filter our complete catalog of designer, office, promotional, acrylic, and gear wall clocks. Find the perfect fit for your home or business."
       />
 
       {/* Catalog Page Header Banner */}
-      <div className="bg-brand-dark text-white py-16 sm:py-20 border-b border-white/10 mb-12">
+      <div className="bg-brand-dark text-white pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-white/10 mb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div className="text-left space-y-3">
             <div className="flex items-center gap-2">
