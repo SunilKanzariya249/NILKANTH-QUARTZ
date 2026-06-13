@@ -15,7 +15,8 @@ import {
   Send,
   Clock,
   ArrowUpRight,
-  ArrowRight
+  ArrowRight,
+  Star
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useProductStore } from '../store/useProductStore';
@@ -77,21 +78,33 @@ const WHY_CHOOSE_US = [
 // Testimonials
 const TESTIMONIALS = [
   {
-    name: 'Rajesh Mehta',
-    role: 'Procurement Head, Synergy Corporate',
-    text: 'Nilkanth Quartz delivered 500 branded clocks for our annual gifting drive. The print clarity of our logo on the dials was immaculate, and the clocks feel extremely premium.',
+    name: 'Rahul Mehta',
+    role: 'Ahmedabad',
+    text: 'We have been sourcing wall clocks from Nilkanth Quartz for several months now. The product quality, finishing, and packaging are consistently excellent. Their designs are modern and well-received by our customers.',
     rating: 5
   },
   {
-    name: 'Sarah Dsouza',
-    role: 'Interior Designer',
-    text: 'I regularly source their Acrylic and Gear wall clocks for my villa projects. They act as absolute statement pieces on empty wall backdrops. Highly recommended!',
+    name: 'Priya Shah',
+    role: 'Surat',
+    text: 'The variety of designs offered by Nilkanth Quartz is impressive. We ordered clocks for our retail stores, and the response from customers has been very positive. The team is professional and delivery is always on schedule.',
     rating: 5
   },
   {
-    name: 'Arjun Patel',
-    role: 'Distributor, AP Electronics',
-    text: 'Direct wholesale rates and extremely quick packaging. The silent-sweep quartz motors have received zero complaints from my retail customers in the last 2 years.',
+    name: 'Vikram Patel',
+    role: 'Rajkot',
+    text: 'A trustworthy manufacturer with great attention to detail. The clocks have a premium look, accurate movement, and durable build quality. We are happy to continue our business relationship with them.',
+    rating: 5
+  },
+  {
+    name: 'Amit Joshi',
+    role: 'Mumbai',
+    text: 'We placed a bulk order for corporate gifting clocks and were highly satisfied with the results. The customization was done perfectly, and the final products exceeded our expectations in terms of quality and appearance.',
+    rating: 5
+  },
+  {
+    name: 'Karan Desai',
+    role: 'Pune',
+    text: 'Nilkanth Quartz combines quality products with excellent customer service. Their pricing is competitive, communication is smooth, and they always ensure timely dispatch of orders. Highly recommended for wholesale and bulk requirements.',
     rating: 5
   }
 ];
@@ -123,8 +136,8 @@ const Home = () => {
   const [startX, setStartX] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [openFaq, setOpenFaq] = useState(0);
+  const [reviewStartIdx, setReviewStartIdx] = useState(0);
   
   // Quick contact form state
   const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
@@ -691,7 +704,7 @@ const Home = () => {
 
 
       {/* 3. WHY CHOOSE US SECTION */}
-      <section className="py-24 bg-white border-y border-gray-100">
+      <section className="py-10 bg-white border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-red">Our Pillars</span>
@@ -750,59 +763,101 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 6. CUSTOMER REVIEWS (TESTIMONIALS SLIDER) */}
-      <section className="py-24 bg-brand-dark text-white overflow-hidden relative">
-        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-brand-red/5 blur-3xl pointer-events-none" />
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-red">Testimonials</span>
-          <h2 className="text-3xl font-extrabold tracking-tight">Delighted Customer Feedback</h2>
-          
-          <div className="relative min-h-[180px] flex items-center justify-center">
-            {TESTIMONIALS.map((t, idx) => (
-              <div
-                key={idx}
-                className={`transition-all duration-500 transform ${
-                  idx === activeTestimonial 
-                    ? 'opacity-100 scale-100 relative' 
-                    : 'opacity-0 scale-95 absolute pointer-events-none'
-                }`}
-              >
-                <p className="text-lg sm:text-xl font-medium leading-relaxed italic text-gray-200 max-w-2xl mx-auto">
-                  "{t.text}"
-                </p>
-                <div className="mt-6">
-                  <h4 className="font-bold text-brand-red">{t.name}</h4>
-                  <span className="text-xs text-gray-500">{t.role}</span>
-                </div>
-              </div>
-            ))}
+      {/* 6. CUSTOMER REVIEWS (CLEAN MOCKUP GRID LAYOUT) */}
+      <section className="py-24 bg-[#FCFCFC] border-t border-gray-100 select-none">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+          {/* Left-Aligned Header */}
+          <div className="text-left mb-12">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="inline-block w-2.5 h-2.5 bg-black"></span>
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
+                TESTIMONIALS
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#111111] tracking-tight leading-tight uppercase">
+              Delighted Customer <br /> Feedback
+            </h2>
           </div>
 
-          {/* Slider Controls */}
-          <div className="flex items-center justify-center gap-4 pt-4">
-            <button
-              onClick={() => setActiveTestimonial((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
-              className="p-2 rounded-full border border-white/10 hover:border-brand-red hover:bg-brand-red text-white transition-colors"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <div className="flex gap-1.5">
-              {TESTIMONIALS.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveTestimonial(i)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    i === activeTestimonial ? 'bg-brand-red w-4' : 'bg-white/20'
-                  }`}
-                />
-              ))}
+          {/* Slider Content */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Card 1 */}
+            <div className="bg-white p-8 sm:p-10 border border-[#EEEEEE] rounded-none shadow-sm flex flex-col justify-between min-h-[240px]">
+              <p className="text-[#666666] text-[14px] leading-relaxed font-light">
+                {TESTIMONIALS[reviewStartIdx].text}
+              </p>
+              <div>
+                <div className="w-full h-[1px] bg-[#EEEEEE] my-6"></div>
+                <div className="flex items-center gap-4">
+                  {/* Stylized Avatar Illustration */}
+                  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-[#E0EFFF] flex items-center justify-center border border-[#C5DFFF]">
+                    <svg className="w-9 h-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Hair */}
+                      <path d="M16 4C11 4 9 7 9 11C9 15 11 16 11 18C12 20 14 20 16 20C18 20 20 20 21 18C21 16 23 15 23 11C23 7 21 4 16 4Z" fill="#E11D48" />
+                      {/* Face */}
+                      <circle cx="16" cy="14" r="6" fill="#FDBA74" />
+                      {/* Suit */}
+                      <path d="M7 28C7 24 10 21 14 20L16 24L18 20C22 21 25 24 25 28H7Z" fill="#1E293B" />
+                      {/* Collar */}
+                      <path d="M14 20L16 24L18 20L16 18L14 20Z" fill="#FFFFFF" />
+                      {/* Tie */}
+                      <path d="M15 22L16 25L17 22L16 26L15 22Z" fill="#E11D48" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[#111111] text-[15px] tracking-tight">{TESTIMONIALS[reviewStartIdx].name}</h4>
+                    <p className="text-xs text-[#888888] font-medium">{TESTIMONIALS[reviewStartIdx].role}</p>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            {/* Card 2 */}
+            <div className="hidden md:flex bg-white p-8 sm:p-10 border border-[#EEEEEE] rounded-none shadow-sm flex-col justify-between min-h-[240px]">
+              <p className="text-[#666666] text-[14px] leading-relaxed font-light">
+                {TESTIMONIALS[(reviewStartIdx + 1) % TESTIMONIALS.length].text}
+              </p>
+              <div>
+                <div className="w-full h-[1px] bg-[#EEEEEE] my-6"></div>
+                <div className="flex items-center gap-4">
+                  {/* Stylized Avatar Illustration */}
+                  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-[#E0EFFF] flex items-center justify-center border border-[#C5DFFF]">
+                    <svg className="w-9 h-9" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Hair */}
+                      <path d="M16 4C11 4 9 7 9 11C9 15 11 16 11 18C12 20 14 20 16 20C18 20 20 20 21 18C21 16 23 15 23 11C23 7 21 4 16 4Z" fill="#E11D48" />
+                      {/* Face */}
+                      <circle cx="16" cy="14" r="6" fill="#FDBA74" />
+                      {/* Suit */}
+                      <path d="M7 28C7 24 10 21 14 20L16 24L18 20C22 21 25 24 25 28H7Z" fill="#1E293B" />
+                      {/* Collar */}
+                      <path d="M14 20L16 24L18 20L16 18L14 20Z" fill="#FFFFFF" />
+                      {/* Tie */}
+                      <path d="M15 22L16 25L17 22L16 26L15 22Z" fill="#E11D48" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[#111111] text-[15px] tracking-tight">{TESTIMONIALS[(reviewStartIdx + 1) % TESTIMONIALS.length].name}</h4>
+                    <p className="text-xs text-[#888888] font-medium">{TESTIMONIALS[(reviewStartIdx + 1) % TESTIMONIALS.length].role}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Dotted Navigation Controls */}
+          <div className="flex items-center justify-between mt-12 px-2">
             <button
-              onClick={() => setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS.length)}
-              className="p-2 rounded-full border border-white/10 hover:border-brand-red hover:bg-brand-red text-white transition-colors"
+              onClick={() => setReviewStartIdx((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
+              className="w-10 h-10 rounded-full border border-dashed border-[#CCCCCC] hover:border-black flex items-center justify-center text-black transition-colors"
             >
-              <ChevronRight className="w-5 h-5" />
+              <span className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[7px] border-r-black mr-[2px]"></span>
+            </button>
+
+            <button
+              onClick={() => setReviewStartIdx((prev) => (prev + 1) % TESTIMONIALS.length)}
+              className="w-10 h-10 rounded-full border border-dashed border-[#CCCCCC] hover:border-black flex items-center justify-center text-black transition-colors"
+            >
+              <span className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[7px] border-l-black ml-[2px]"></span>
             </button>
           </div>
         </div>
