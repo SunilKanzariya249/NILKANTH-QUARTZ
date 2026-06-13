@@ -6,12 +6,27 @@ import { useProductStore } from '../store/useProductStore';
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { categories, fetchCategories } = useProductStore();
   const location = useLocation();
 
   useEffect(() => {
     fetchCategories();
   }, [fetchCategories]);
+
+  // Track scroll position for transparent navbar effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Close mobile drawer on route change
   useEffect(() => {
@@ -31,8 +46,15 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
+  const isHome = location.pathname === '/';
+  const headerClass = `sticky top-0 z-40 w-full text-white transition-all duration-300 ${
+    isHome && !isScrolled
+      ? 'navbar-transparent-desktop'
+      : 'glass-nav shadow-lg'
+  }`;
+
   return (
-    <header className="sticky top-0 z-40 w-full glass-nav text-white shadow-lg">
+    <header className={headerClass}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
@@ -47,12 +69,12 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-12 lg:space-x-16">
             <NavLink 
               to="/" 
               className={({ isActive }) => 
-                `relative py-2 text-sm font-semibold tracking-wide transition-all duration-300 hover:text-brand-red ${
-                  isActive ? 'text-brand-red font-bold' : 'text-gray-300'
+                `relative py-2 text-sm md:text-lg font-bold tracking-wide transition-all duration-300 hover:text-brand-red ${
+                  isActive ? 'text-brand-red' : 'text-gray-300'
                 }`
               }
             >
@@ -70,9 +92,9 @@ const Navbar = () => {
             >
               <Link 
                 to="/products"
-                className={`flex items-center gap-1 py-2 text-sm font-semibold tracking-wide transition-colors duration-300 hover:text-brand-red ${
+                className={`flex items-center gap-1 py-2 text-sm md:text-lg font-bold tracking-wide transition-colors duration-300 hover:text-brand-red ${
                   location.pathname.startsWith('/products') || location.pathname.startsWith('/category') 
-                    ? 'text-brand-red font-bold' 
+                    ? 'text-brand-red' 
                     : 'text-gray-300'
                 }`}
               >
@@ -113,8 +135,8 @@ const Navbar = () => {
             <NavLink 
               to="/about" 
               className={({ isActive }) => 
-                `relative py-2 text-sm font-semibold tracking-wide transition-all duration-300 hover:text-brand-red ${
-                  isActive ? 'text-brand-red font-bold' : 'text-gray-300'
+                `relative py-2 text-sm md:text-lg font-bold tracking-wide transition-all duration-300 hover:text-brand-red ${
+                  isActive ? 'text-brand-red' : 'text-gray-300'
                 }`
               }
             >
@@ -127,8 +149,8 @@ const Navbar = () => {
             <NavLink 
               to="/contact" 
               className={({ isActive }) => 
-                `relative py-2 text-sm font-semibold tracking-wide transition-all duration-300 hover:text-brand-red ${
-                  isActive ? 'text-brand-red font-bold' : 'text-gray-300'
+                `relative py-2 text-sm md:text-lg font-bold tracking-wide transition-all duration-300 hover:text-brand-red ${
+                  isActive ? 'text-brand-red' : 'text-gray-300'
                 }`
               }
             >
