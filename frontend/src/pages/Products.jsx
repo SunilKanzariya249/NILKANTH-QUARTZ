@@ -81,8 +81,8 @@ const Products = () => {
       />
 
       {/* Catalog Page Header Banner */}
-      <div className="bg-brand-dark text-white pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-white/10 mb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+      <div className="bg-brand-dark text-white pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-white/10 mb-12 min-h-[340px] sm:min-h-[300px] lg:min-h-[260px] flex flex-col justify-center">
+        <div className="max-w-7xl w-full mx-auto px-4 sm:px-8 lg:px-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div className="text-left space-y-3">
             <div className="flex items-center gap-2">
               <span className="inline-block w-2.5 h-2.5 bg-brand-red"></span>

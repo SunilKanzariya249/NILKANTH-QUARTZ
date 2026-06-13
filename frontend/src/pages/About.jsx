@@ -11,8 +11,8 @@ const About = () => {
       />
 
       {/* About Page Header Banner */}
-      <div className="bg-brand-dark text-white pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-white/10 mb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+      <div className="bg-brand-dark text-white pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-white/10 mb-12 min-h-[340px] sm:min-h-[300px] lg:min-h-[260px] flex flex-col justify-center">
+        <div className="max-w-7xl w-full mx-auto px-4 sm:px-8 lg:px-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div className="text-left space-y-3">
             <div className="flex items-center gap-2">
               <span className="inline-block w-2.5 h-2.5 bg-brand-red"></span>
@@ -23,10 +23,11 @@ const About = () => {
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight leading-tight uppercase">
               CRAFTING TIME, INSPIRING SPACES
             </h1>
+            <p className="text-gray-300 text-xs font-medium uppercase tracking-wider max-w-xl">
+              Crafting Quality Timepieces with Precision, Passion, and Trust.
+            </p>
           </div>
-          <p className="text-[#AAAAAA] text-xs sm:text-sm font-medium uppercase tracking-wider max-w-sm lg:text-right leading-relaxed">
-            Crafting Quality Timepieces with Precision, Passion, and Trust.
-          </p>
+          <div className="relative max-w-md w-full hidden lg:block h-12"></div>
         </div>
       </div>
 
