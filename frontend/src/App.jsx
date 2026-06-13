@@ -25,13 +25,19 @@ const ScrollToTop = () => {
 
 // Global Layout Wrapper
 const Layout = ({ children }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const isAdminPath = location.pathname.startsWith('/admin');
+
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location]);
   
   return (
     <div className="flex flex-col min-h-screen">
       {/* Do not show standard navigation on admin dashboard */}
-      {!isAdminPath && <Navbar />}
+      {!isAdminPath && <Navbar mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />}
       
       <main className="flex-grow">
         {children}
@@ -40,7 +46,7 @@ const Layout = ({ children }) => {
       {!isAdminPath && <Footer />}
 
       {/* Floating WhatsApp Quick Link */}
-      {!isAdminPath && (
+      {!isAdminPath && !mobileMenuOpen && (
         <a
           href="https://wa.me/919426842751?text=Hello%20Nilkanth%20Quartz,%20I%20would%20like%20to%20inquire%20about%20your%20wall%20clocks."
           target="_blank"

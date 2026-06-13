@@ -889,6 +889,39 @@ const Home = () => {
         </div>
       </section>
 
+      {/* 6.5 DOWNLOAD CATALOGUE SECTION */}
+      <section className="py-20 bg-brand-dark text-white border-t border-white/10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(225,29,72,0.08),transparent_45%)]" />
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 relative z-10">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="space-y-4 max-w-2xl text-left">
+              <div className="flex items-center gap-2">
+                <span className="inline-block w-2.5 h-2.5 bg-brand-red"></span>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#AAAAAA]">
+                  OFFLINE CATALOGUE
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight leading-tight uppercase">
+                DOWNLOAD OUR COMPLETE PORTFOLIO
+              </h2>
+              <p className="text-[#CCCCCC] text-xs sm:text-sm font-medium uppercase tracking-wider leading-relaxed">
+                Explore our full line-up of designer clocks, promotional series, custom branding solutions, and wholesale technical specifications in one high-resolution PDF document.
+              </p>
+            </div>
+            <div className="shrink-0 flex items-center">
+              <a
+                href="/Nilkanth Quartz .pdf"
+                download="Nilkanth_Quartz_Catalogue.pdf"
+                className="inline-flex items-center gap-3 bg-brand-red hover:bg-brand-red/90 text-white font-bold uppercase tracking-widest text-md px-8 py-4.5 rounded-none transition-all active:scale-[0.99] duration-200 shadow-lg shadow-brand-red/10"
+              >
+                <span>Download PDF Catalogue</span>
+                
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 7. FAQ ACCORDION SECTION */}
       <section className="py-24 bg-[#FCFCFC] border-t border-[#EEEEEE] select-none">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">

@@ -210,7 +210,7 @@ Message: ${form.message}`;
                 type="submit"
                 className="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold uppercase tracking-widest text-[10px] py-4.5 rounded-none shadow-md shadow-emerald-500/10 transition-all active:scale-[0.99] duration-200"
               >
-                <WhatsAppIcon className="w-4 h-4 fill-current" />
+                <WhatsAppIcon className="w-4 h-10 fill-current" />
                 Send Message via WhatsApp
               </button>
             </form>
