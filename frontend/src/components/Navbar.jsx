@@ -47,8 +47,9 @@ const Navbar = () => {
   }, [mobileMenuOpen]);
 
   const isHome = location.pathname === '/';
+  const isTransparent = isHome && !isScrolled;
   const headerClass = `sticky top-0 z-40 w-full text-white transition-all duration-300 ${
-    isHome && !isScrolled
+    isTransparent
       ? 'navbar-transparent-desktop'
       : 'glass-nav shadow-lg'
   }`;
@@ -74,7 +75,7 @@ const Navbar = () => {
               to="/" 
               className={({ isActive }) => 
                 `relative py-2 text-sm md:text-lg font-bold tracking-wide transition-all duration-300 hover:text-brand-red ${
-                  isActive ? 'text-brand-red' : 'text-gray-300'
+                  isActive ? 'text-brand-red' : isTransparent ? 'text-white' : 'text-gray-300'
                 }`
               }
             >
@@ -95,7 +96,7 @@ const Navbar = () => {
                 className={`flex items-center gap-1 py-2 text-sm md:text-lg font-bold tracking-wide transition-colors duration-300 hover:text-brand-red ${
                   location.pathname.startsWith('/products') || location.pathname.startsWith('/category') 
                     ? 'text-brand-red' 
-                    : 'text-gray-300'
+                    : isTransparent ? 'text-white' : 'text-gray-300'
                 }`}
               >
                 Products
@@ -136,7 +137,7 @@ const Navbar = () => {
               to="/about" 
               className={({ isActive }) => 
                 `relative py-2 text-sm md:text-lg font-bold tracking-wide transition-all duration-300 hover:text-brand-red ${
-                  isActive ? 'text-brand-red' : 'text-gray-300'
+                  isActive ? 'text-brand-red' : isTransparent ? 'text-white' : 'text-gray-300'
                 }`
               }
             >
@@ -150,7 +151,7 @@ const Navbar = () => {
               to="/contact" 
               className={({ isActive }) => 
                 `relative py-2 text-sm md:text-lg font-bold tracking-wide transition-all duration-300 hover:text-brand-red ${
-                  isActive ? 'text-brand-red' : 'text-gray-300'
+                  isActive ? 'text-brand-red' : isTransparent ? 'text-white' : 'text-gray-300'
                 }`
               }
             >
