@@ -55,32 +55,32 @@ const HERO_SLIDES = [
 // Why Choose Us Info
 const WHY_CHOOSE_US = [
   {
-    icon: <Award className="w-8 h-8 text-brand-red" />,
+    icon: <Award className="w-6 h-6 text-brand-red" />,
     title: 'Premium Quality',
     desc: 'Each clock goes through rigid 24-hour timekeeping accuracy calibration and material stress tests.'
   },
   {
-    icon: <Package className="w-8 h-8 text-brand-red" />,
+    icon: <Package className="w-6 h-6 text-brand-red" />,
     title: 'Bulk Orders Available',
     desc: 'Direct-to-factory production routes allow us to deliver thousands of customized units in quick lead times.'
   },
   {
-    icon: <PiggyBank className="w-8 h-8 text-brand-red" />,
+    icon: <PiggyBank className="w-6 h-6 text-brand-red" />,
     title: 'Competitive Pricing',
     desc: 'Morbi-based manufacturing cluster benefits enable us to quote wholesale prices directly to clients.'
   },
   {
-    icon: <Truck className="w-8 h-8 text-brand-red" />,
+    icon: <Truck className="w-6 h-6 text-brand-red" />,
     title: 'Fast Delivery',
     desc: 'Partnered with reliable domestic and ocean freight carriers ensuring safely packaged door-step deliveries.'
   },
   {
-    icon: <Brush className="w-8 h-8 text-brand-red" />,
+    icon: <Brush className="w-6 h-6 text-brand-red" />,
     title: 'Custom Branding',
     desc: 'Personalize dial faces with company logos, custom graphics, colors, and promotional messages.'
   },
   {
-    icon: <ShieldCheck className="w-8 h-8 text-brand-red" />,
+    icon: <ShieldCheck className="w-6 h-6 text-brand-red" />,
     title: 'Customer Satisfaction',
     desc: 'Highly responsive client support teams to assist through order design, transport, and warranty inquiries.'
   }
@@ -736,13 +736,13 @@ const Home = () => {
             {WHY_CHOOSE_US.map((item, idx) => (
               <div 
                 key={idx} 
-                className="p-8 bg-brand-light rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100 space-y-4 flex flex-col items-start"
+                className="p-8 bg-white border border-[#EEEEEE] rounded-none hover:border-black hover:shadow-sm transition-all duration-300 space-y-4 flex flex-col items-start"
               >
-                <div className="bg-white p-3 rounded-xl shadow-sm border border-gray-50">
+                <div className="bg-[#FAFAFA] p-3 border border-[#EEEEEE] rounded-none text-black">
                   {item.icon}
                 </div>
-                <h3 className="font-bold text-lg text-gray-900">{item.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="font-bold text-xs uppercase tracking-widest text-[#111111] mt-2">{item.title}</h3>
+                <p className="text-[#555555] text-xs font-normal leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -890,80 +890,112 @@ const Home = () => {
       </section>
 
       {/* 7. FAQ ACCORDION SECTION */}
-      <section className="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-red">Got Questions?</span>
-          <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Frequently Asked Questions</h2>
-        </div>
-
-        <div className="space-y-4">
-          {FAQS.map((faq, idx) => {
-            const isOpen = idx === openFaq;
-            return (
-              <div 
-                key={idx}
-                className="bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-300"
-              >
-                <button
-                  onClick={() => setOpenFaq(isOpen ? -1 : idx)}
-                  className="w-full flex items-center justify-between p-6 font-bold text-gray-900 text-left hover:text-brand-red transition-colors"
-                >
-                  <span>{faq.q}</span>
-                  {isOpen ? (
-                    <Minus className="w-5 h-5 text-brand-red shrink-0" />
-                  ) : (
-                    <Plus className="w-5 h-5 text-gray-400 shrink-0" />
-                  )}
-                </button>
-                <div 
-                  className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                    isOpen ? 'max-h-40 border-t border-gray-50' : 'max-h-0'
-                  }`}
-                >
-                  <p className="p-6 text-sm text-gray-500 leading-relaxed bg-gray-50/50">
-                    {faq.a}
-                  </p>
-                </div>
+      <section className="py-24 bg-[#FCFCFC] border-t border-[#EEEEEE] select-none">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            {/* Left side: Heading */}
+            <div className="lg:col-span-4 space-y-4 text-left">
+              <div className="flex items-center gap-2">
+                <span className="inline-block w-2.5 h-2.5 bg-black"></span>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
+                  SUPPORT
+                </span>
               </div>
-            );
-          })}
+              <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 tracking-tight leading-tight uppercase">
+                FREQUENTLY ASKED QUESTIONS
+              </h2>
+              <p className="text-gray-500 text-xs font-medium uppercase tracking-wider leading-relaxed max-w-sm">
+                Have questions about our manufacturing process, minimum order quantities, customization, or shipping? Find the answers here.
+              </p>
+            </div>
+
+            {/* Right side: Accordion */}
+            <div className="lg:col-span-8 space-y-4">
+              {FAQS.map((faq, idx) => {
+                const isOpen = idx === openFaq;
+                return (
+                  <div 
+                    key={idx}
+                    className={`bg-white rounded-none border transition-all duration-300 ${
+                      isOpen 
+                        ? 'border-[#111111] border-l-4 border-l-brand-red' 
+                        : 'border-[#EEEEEE] hover:border-gray-400'
+                    }`}
+                  >
+                    <button
+                      onClick={() => setOpenFaq(isOpen ? -1 : idx)}
+                      className="w-full flex items-center justify-between p-6 font-bold text-gray-900 text-left text-sm uppercase tracking-wide transition-colors"
+                    >
+                      <span className="pr-4">{faq.q}</span>
+                      {isOpen ? (
+                        <Minus className="w-4 h-4 text-brand-red shrink-0" />
+                      ) : (
+                        <Plus className="w-4 h-4 text-gray-400 shrink-0" />
+                      )}
+                    </button>
+                    <div 
+                      className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                        isOpen ? 'max-h-60 border-t border-gray-100' : 'max-h-0'
+                      }`}
+                    >
+                      <p className="p-6 text-sm text-gray-600 font-normal leading-relaxed bg-[#FAFAFA]/70">
+                        {faq.a}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+          </div>
         </div>
       </section>
 
       {/* 8. QUICK CONTACT INQUIRY */}
-      <section className="py-24 bg-white border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 bg-white border-t border-[#EEEEEE]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
             <div className="lg:col-span-5 space-y-6">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-red">Let's Connect</span>
-              <h2 className="text-3xl font-extrabold text-brand-dark tracking-tight">
-                Interested in Custom Bulk Orders?
+              <div className="flex items-center gap-2">
+                <span className="inline-block w-2.5 h-2.5 bg-black"></span>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
+                  LET'S CONNECT
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 tracking-tight leading-tight uppercase">
+                INTERESTED IN CUSTOM BULK ORDERS?
               </h2>
-              <p className="text-gray-500 text-sm leading-relaxed">
+              <p className="text-[#666666] text-xs font-medium uppercase tracking-wider max-w-md leading-relaxed">
                 Whether you need promotional gifting, hotel customization, wholesale dealership contracts, or specific clock dimensions, drop your message here. We will redirect you to discuss directly on WhatsApp.
               </p>
               
-              <div className="flex items-center gap-3 text-sm font-semibold text-brand-red">
-                <MessageSquare className="w-5 h-5 animate-pulse" />
+              <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-brand-red">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-red opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-red"></span>
+                </span>
                 <span>Response Time: Usually under 15 minutes</span>
               </div>
             </div>
 
-            <div className="lg:col-span-7 bg-brand-light p-8 sm:p-10 rounded-3xl border border-gray-100 shadow-sm relative">
+            <div className="lg:col-span-7 bg-[#FAFAFA] p-8 sm:p-10 rounded-none border border-[#EEEEEE] relative shadow-sm">
               {formSent ? (
                 <div className="text-center py-12 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto text-emerald-500">
-                    <Send className="w-8 h-8" />
+                  <div className="w-16 h-16 bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto text-emerald-600 rounded-none">
+                    <Send className="w-6 h-6" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">Inquiry Redirected!</h3>
-                  <p className="text-sm text-gray-500">We opened WhatsApp web/app. Check your window to complete sending.</p>
+                  <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Inquiry Redirected!</h3>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider leading-relaxed">
+                    We opened WhatsApp web/app. Check your window to complete sending.
+                  </p>
                 </div>
               ) : (
                 <form onSubmit={handleContactSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">
+                      <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] mb-2">
                         Your Name
                       </label>
                       <input 
@@ -972,11 +1004,11 @@ const Home = () => {
                         value={contactForm.name}
                         onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
                         placeholder="John Doe"
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-brand-red"
+                        className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs font-bold uppercase tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">
+                      <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] mb-2">
                         Email Address (Optional)
                       </label>
                       <input 
@@ -984,13 +1016,13 @@ const Home = () => {
                         value={contactForm.email}
                         onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                         placeholder="john@example.com"
-                        className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-brand-red"
+                        className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs font-bold uppercase tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] mb-2">
                       Inquiry Details
                     </label>
                     <textarea 
@@ -999,15 +1031,15 @@ const Home = () => {
                       value={contactForm.message}
                       onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
                       placeholder="Hi, I am interested in ordering 200 promotional wall clocks. Please share quotes."
-                      className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-brand-red resize-none"
+                      className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs font-bold uppercase tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold uppercase tracking-wider text-xs py-4 rounded-xl shadow-lg shadow-emerald-500/10 transition-all active:scale-[0.99] duration-200"
+                    className="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold uppercase tracking-widest text-[10px] py-4 rounded-none shadow-md shadow-emerald-500/10 transition-all active:scale-[0.99] duration-200"
                   >
-                    <WhatsAppIcon className="w-5 h-5 fill-current" />
+                    <WhatsAppIcon className="w-4 h-4 fill-current" />
                     Send Inquiry via WhatsApp
                   </button>
                 </form>
@@ -1017,7 +1049,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
     </div>
   );
 };
