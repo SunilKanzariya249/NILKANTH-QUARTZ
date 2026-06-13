@@ -334,25 +334,56 @@ const Home = () => {
         </div>
       </section>
 {/* INFINITE TEXT MARQUEE SLIDER */}
-      <section className="bg-[#f5f5f5] overflow-hidden py-8 select-none">
-        <div className="flex w-full overflow-hidden">
-          <div className="animate-marquee whitespace-nowrap flex items-center">
-            {/* Block 1 */}
-            {[...Array(6)].map((_, i) => (
-              <span key={`b1-${i}`} className="text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight mx-8 flex items-center">
-                <span className="text-black font-extrabold">NILKANTH</span>
-                <span className="text-stroke-black font-light ml-4">QUARTZ</span>
-              </span>
-            ))}
-            {/* Block 2 (Duplicate for seamless loop) */}
-            {[...Array(6)].map((_, i) => (
-              <span key={`b2-${i}`} className="text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight mx-8 flex items-center">
-                <span className="text-black font-extrabold">NILKANTH</span>
-                <span className="text-stroke-black font-light ml-4">QUARTZ</span>
-              </span>
-            ))}
-          </div>
+      <section className="relative w-full  overflow-hidden bg-white/10 pt-5 mt-5 select-none">
+        {/* Infinite Scroll */}
+        <div className="flex whitespace-nowrap animate-marquee">
+          {[...Array(2)].map((_, index) => (
+            <div key={index} className="flex items-center gap-20 px-10">
+              {[...Array(10)].map((_, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-10 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold uppercase tracking-[6px]"
+                >
+                  {/* Filled Text */}
+                  <span className="text-black/90">Nilkanth</span>
+
+                  {/* Outline Text */}
+                  <span
+                    className="text-black/10"
+                    style={{
+                      WebkitTextStroke: "",
+                    }}
+                  >
+                    Quartz
+                  </span>
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
+
+        {/* Animation */}
+        <style>
+          {`
+            @keyframes marquee {
+              from {
+                transform: translateX(0%);
+              }
+              to {
+                transform: translateX(-50%);
+              }
+            }
+
+            .animate-marquee {
+              width: max-content;
+              animation: marquee 200s linear infinite;
+            }
+
+            .animate-marquee:hover {
+              animation-play-state: paused;
+            }
+          `}
+        </style>
       </section>
       {/* 3. WHY CHOOSE US SECTION */}
       <section className="py-24 bg-white border-y border-gray-100">
