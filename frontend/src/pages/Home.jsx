@@ -704,12 +704,18 @@ const Home = () => {
 
 
       {/* 3. WHY CHOOSE US SECTION */}
-      <section className="py-10 bg-white border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-red">Our Pillars</span>
-            <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Engineered for Perfection</h2>
-            <p className="text-gray-500 text-sm">Why businesses and designers choose Nilkanth Quartz timepieces worldwide.</p>
+      <section className="py-20 bg-white border-y border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+          <div className="text-left mb-12">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="inline-block w-2.5 h-2.5 bg-black"></span>
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
+                OUR PILLARS
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#111111] tracking-tight leading-tight uppercase">
+              ENGINEERED FOR PERFECTION
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -731,16 +737,22 @@ const Home = () => {
 
       {/* 5. OUR COLLECTION (FEATURED PRODUCTS) */}
       <section className="py-24 bg-white border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between mb-16 gap-6">
-            <div className="space-y-3 text-center sm:text-left">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-red">Curated Collection</span>
-              <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Featured Showpieces</h2>
-              <p className="text-gray-500 text-sm">Take a look at our highly sought after designer and office clock models.</p>
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-16 gap-6">
+            <div className="text-left">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="inline-block w-2.5 h-2.5 bg-black"></span>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
+                  CURATED COLLECTION
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#111111] tracking-tight leading-tight uppercase">
+                FEATURED SHOWPIECES
+              </h2>
             </div>
             <Link
               to="/products"
-              className="bg-brand-dark hover:bg-brand-red text-white text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 active:scale-95"
+              className="inline-flex items-center justify-center border border-black px-6 py-3 text-xs font-bold uppercase tracking-widest text-black hover:bg-black hover:text-white transition-all duration-300 rounded-none shrink-0"
             >
               View Full Catalog
             </Link>
