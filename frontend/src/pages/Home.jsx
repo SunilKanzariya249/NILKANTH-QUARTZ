@@ -13,8 +13,10 @@ import {
   Minus,
   MessageSquare,
   Send,
-  Clock
+  Clock,
+  ArrowUpRight
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useProductStore } from '../store/useProductStore';
 import ProductCard from '../components/ProductCard';
 import SkeletonLoader from '../components/SkeletonLoader';
@@ -273,45 +275,62 @@ const Home = () => {
       
 
       {/* 2. ABOUT COMPANY SECTION */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="relative group">
-            {/* Ambient visual decorations */}
-            <div className="absolute -inset-4 bg-brand-red/5 rounded-3xl blur-xl" />
-            <img 
-              src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&auto=format&fit=crop" 
-              alt="Premium Interior Wall Clock Decor" 
-              className="relative rounded-2xl shadow-xl w-full object-cover aspect-[4/3] transform group-hover:scale-[1.01] transition-transform duration-500"
-            />
-            <div className="absolute -bottom-6 -right-6 bg-brand-dark text-white p-6 rounded-2xl shadow-xl max-w-xs hidden sm:block">
-              <div className="flex items-center gap-3 mb-2">
-                <Clock className="w-6 h-6 text-brand-red animate-spin-slow" />
-                <span className="font-extrabold text-2xl">40+ Years</span>
-              </div>
-              <p className="text-xs text-gray-400">Of clock manufacturing, precision assembly, and global exporting heritage.</p>
-            </div>
-          </div>
+      <section className="relative py-20 bg-[#F7F7F5] overflow-hidden">
+        {/* Subtle decorative geometric line accents */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.04] text-brand-dark">
+          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="15%" x2="100%" y2="15%" stroke="currentColor" strokeWidth="1" />
+            <line x1="0" y1="85%" x2="100%" y2="85%" stroke="currentColor" strokeWidth="1" />
+            <line x1="30%" y1="0" x2="30%" y2="100%" stroke="currentColor" strokeWidth="1" />
+            <line x1="70%" y1="0" x2="70%" y2="100%" stroke="currentColor" strokeWidth="1" />
+          </svg>
+        </div>
 
-          <div className="space-y-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-red">Who We Are</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
-              Crafting Excellence In Every Second
-            </h2>
-            <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-              Welcome to **Nilkanth Quartz**, a premier name in modern wall clock designs. Headquartered in Morbi, Gujarat, our manufacturing operations blend traditional quality standards with avant-garde interior aesthetics.
-            </p>
-            <p className="text-gray-600 leading-relaxed text-sm">
-              We specialize in custom bulk orders for corporate gifting, brand marketing drives, and retail distribution partnerships. Every single timepiece is fitted with our signature silent sweep mechanism, ensuring your space is filled with style, not noise.
-            </p>
-            <div className="pt-4">
-              <Link 
-                to="/about" 
-                className="inline-flex items-center gap-2 text-brand-red font-bold text-sm hover:underline"
-              >
-                Read Our Story & Journey <ChevronRight className="w-4 h-4" />
-              </Link>
+        <div className="relative max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-16 z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start"
+          >
+            {/* Left Side */}
+            <div className="space-y-4">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-red block">
+               Who We Are
+              </span>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[70px] xl:text-[80px] font-bold text-[#1C1C1C] leading-[1.05] tracking-tighter">
+                Leading Wall Clock Manufacturers & Suppliers
+              </h2>
             </div>
-          </div>
+
+            {/* Right Side */}
+            <div className="space-y-8 lg:pt-8">
+              <div className="max-w-[550px] space-y-6">
+                <p className="text-[#555555] font-normal text-lg sm:text-xl leading-relaxed">
+                  Based in Morbi, Gujarat, Nilkanth Quartz is a leading manufacturer and supplier of high-quality wall clocks for homes, offices, institutions, and corporate gifting needs. We offer a wide range of innovative designs that blend style, precision, and durability.
+                </p>
+                <p className="text-[#666666] font-normal text-base sm:text-lg leading-relaxed">
+                  With a focus on quality manufacturing, competitive pricing, and dependable service, we proudly serve customers across India and continue to deliver timepieces that inspire trust and elevate every space.
+                </p>
+              </div>
+
+              {/* Bottom CTA */}
+              <div className="pt-4">
+                <Link 
+                  to="/about" 
+                  className="inline-flex items-center gap-4 group"
+                >
+                  <span className="text-sm font-bold uppercase tracking-[0.2em] text-[#1C1C1C] transition-colors group-hover:text-brand-red">
+                    About Us
+                  </span>
+                  <span className="w-12 h-12 rounded-full border border-[#1C1C1C]/20 flex items-center justify-center transition-all duration-300 group-hover:border-brand-red group-hover:bg-brand-red text-[#1C1C1C] group-hover:text-white">
+                    <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 {/* INFINITE TEXT MARQUEE SLIDER */}
