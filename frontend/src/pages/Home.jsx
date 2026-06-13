@@ -115,7 +115,8 @@ const FAQS = [
 
 const Home = () => {
   const { categories, featuredProducts, fetchCategories, fetchFeaturedProducts, loading } = useProductStore();
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(true);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [openFaq, setOpenFaq] = useState(0);
   
@@ -123,25 +124,54 @@ const Home = () => {
   const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
   const [formSent, setFormSent] = useState(false);
 
+  // Cloned slides array for infinite carousel
+  const slidesWithClones = [
+    HERO_SLIDES[HERO_SLIDES.length - 1],
+    ...HERO_SLIDES,
+    HERO_SLIDES[0]
+  ];
+
   useEffect(() => {
     fetchCategories();
     fetchFeaturedProducts();
   }, [fetchCategories, fetchFeaturedProducts]);
 
+  // Re-enable transition after snap jumps
+  useEffect(() => {
+    if (!isTransitioning) {
+      const raf = requestAnimationFrame(() => {
+        setIsTransitioning(true);
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [isTransitioning]);
+
   // Auto scroll Hero Slider
   useEffect(() => {
     const slideInterval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+      handleNextSlide();
     }, 6000);
     return () => clearInterval(slideInterval);
-  }, []);
+  }, [isTransitioning, currentSlide]);
 
   const handleNextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    if (!isTransitioning) return;
+    setCurrentSlide((prev) => prev + 1);
   };
 
   const handlePrevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+    if (!isTransitioning) return;
+    setCurrentSlide((prev) => prev - 1);
+  };
+
+  const handleTransitionEnd = () => {
+    if (currentSlide === 0) {
+      setIsTransitioning(false);
+      setCurrentSlide(HERO_SLIDES.length);
+    } else if (currentSlide === HERO_SLIDES.length + 1) {
+      setIsTransitioning(false);
+      setCurrentSlide(1);
+    }
   };
 
   const handleContactSubmit = (e) => {
@@ -167,21 +197,26 @@ const Home = () => {
 
       {/* 1. HERO SECTION */}
       <section className="relative aspect-[16/9] w-full overflow-hidden bg-brand-dark">
-        {HERO_SLIDES.map((slide, idx) => (
-          <Link
-            key={idx}
-            to={slide.link}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-              idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
-          >
-            <img 
-              src={slide.image} 
-              alt={`Hero banner ${idx + 1}`} 
-              className="w-full h-full object-cover md:object-cover object-center"
-            />
-          </Link>
-        ))}
+        {/* Sliding Track */}
+        <div 
+          className={`flex h-full ${isTransitioning ? 'transition-transform duration-1000 ease-in-out' : ''}`}
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          onTransitionEnd={handleTransitionEnd}
+        >
+          {slidesWithClones.map((slide, idx) => (
+            <Link
+              key={idx}
+              to={slide.link}
+              className="w-full h-full flex-shrink-0 block"
+            >
+              <img 
+                src={slide.image} 
+                alt={`Hero banner ${idx + 1}`} 
+                className="w-full h-full object-cover object-center"
+              />
+            </Link>
+          ))}
+        </div>
 
         {/* Navigation Arrows */}
         <button 
