@@ -23,26 +23,18 @@ import SEO from '../components/SEO';
 // Hero Slide Content
 const HERO_SLIDES = [
   {
-    title: 'Precision Timepieces For Modern Spaces',
-    subtitle: 'Designer Wall Clocks',
-    description: 'Transform your living room and office walls with handcrafted premium designs that echo luxury and quiet sophistication.',
-    image: 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=1200&auto=format&fit=crop',
+    image: '/hero banner/nilkanth quartz hero banner.png',
+    link: '/products'
+  },
+  {
+    image: '/hero banner/anchor clock banner.png',
+    link: '/products'
+  },
+  {
+    image: '/hero banner/decorative clock banner.png',
     link: '/products?category=Designer%20Clocks'
   },
-  {
-    title: 'Clean Minimalist Clocks For Productivity',
-    subtitle: 'Office & Workstation Clocks',
-    description: 'Highly visible, silent sweep movements designed to bring rhythm, focus, and corporate style to work rooms.',
-    image: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1200&auto=format&fit=crop',
-    link: '/products?category=Office%20Clocks'
-  },
-  {
-    title: 'Rustic Mechanical Vintage Masterpieces',
-    subtitle: 'Steampunk Gear Clocks',
-    description: 'Features beautiful open skeleton frames and moving cog wheels that redefine classical industrial decoration.',
-    image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&auto=format&fit=crop',
-    link: '/products?category=Gear%20Clocks'
-  }
+  
 ];
 
 // Why Choose Us Info
@@ -174,59 +166,33 @@ const Home = () => {
       />
 
       {/* 1. HERO SECTION */}
-      <section className="relative h-[75vh] min-h-[500px] w-full overflow-hidden bg-brand-dark">
+      <section className="relative aspect-[16/9] md:aspect-auto md:h-[calc(100vh-5rem)] w-full overflow-hidden bg-brand-dark">
         {HERO_SLIDES.map((slide, idx) => (
-          <div
+          <Link
             key={idx}
+            to={slide.link}
             className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
               idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
           >
-            {/* Image backdrop */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-transparent z-10" />
             <img 
               src={slide.image} 
-              alt={slide.subtitle} 
-              className="w-full h-full object-cover object-center transform scale-105 transition-transform duration-[6000ms]"
+              alt={`Hero banner ${idx + 1}`} 
+              className="w-full h-full object-cover md:object-cover object-center"
             />
-            
-            {/* Text details */}
-            <div className="absolute inset-0 z-20 flex items-center">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                <div className="max-w-xl text-white space-y-6">
-                  <span className="inline-block bg-brand-red text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md">
-                    {slide.subtitle}
-                  </span>
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-                    {slide.title}
-                  </h1>
-                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                    {slide.description}
-                  </p>
-                  <div className="pt-4">
-                    <Link
-                      to={slide.link}
-                      className="inline-block bg-brand-red hover:bg-brand-red/90 text-white font-bold uppercase tracking-wider text-xs px-8 py-4 rounded-xl shadow-lg transition-transform hover:scale-105 active:scale-95 duration-300"
-                    >
-                      Explore Collection
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </Link>
         ))}
 
         {/* Navigation Arrows */}
         <button 
           onClick={handlePrevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/10 hover:bg-brand-red text-white p-2.5 rounded-full transition-colors backdrop-blur-md"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/30 hover:bg-brand-red text-white p-2.5 rounded-full transition-colors backdrop-blur-md"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
         <button 
           onClick={handleNextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/10 hover:bg-brand-red text-white p-2.5 rounded-full transition-colors backdrop-blur-md"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/30 hover:bg-brand-red text-white p-2.5 rounded-full transition-colors backdrop-blur-md"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
