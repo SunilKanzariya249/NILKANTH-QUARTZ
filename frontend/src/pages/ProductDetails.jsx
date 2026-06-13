@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, MessageSquare, Play, Info, Video, CheckCircle } from 'lucide-react';
+import { ArrowLeft, MessageSquare, Play, Info, Video, CheckCircle, ChevronRight } from 'lucide-react';
 import { useProductStore } from '../store/useProductStore';
 import ProductCard from '../components/ProductCard';
 import SEO from '../components/SEO';
@@ -34,22 +34,22 @@ const ProductDetails = () => {
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 animate-pulse space-y-12">
-        <div className="h-6 bg-gray-200 rounded-md w-32" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-24 animate-pulse space-y-12 bg-[#FCFCFC] border-t border-gray-100">
+        <div className="h-6 bg-gray-200 rounded-none w-32" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-4">
-            <div className="aspect-square bg-gray-200 rounded-2xl" />
+            <div className="aspect-square bg-gray-200 rounded-none" />
             <div className="flex gap-4">
-              <div className="w-20 h-20 bg-gray-200 rounded-lg" />
-              <div className="w-20 h-20 bg-gray-200 rounded-lg" />
-              <div className="w-20 h-20 bg-gray-200 rounded-lg" />
+              <div className="w-20 h-20 bg-gray-200 rounded-none" />
+              <div className="w-20 h-20 bg-gray-200 rounded-none" />
+              <div className="w-20 h-20 bg-gray-200 rounded-none" />
             </div>
           </div>
           <div className="space-y-6">
-            <div className="h-10 bg-gray-200 rounded-md w-2/3" />
-            <div className="h-6 bg-gray-200 rounded-md w-1/4" />
-            <div className="h-32 bg-gray-200 rounded-md w-full" />
-            <div className="h-12 bg-gray-200 rounded-xl w-48" />
+            <div className="h-10 bg-gray-200 rounded-none w-2/3" />
+            <div className="h-6 bg-gray-200 rounded-none w-1/4" />
+            <div className="h-32 bg-gray-200 rounded-none w-full" />
+            <div className="h-12 bg-gray-200 rounded-none w-48" />
           </div>
         </div>
       </div>
@@ -58,17 +58,17 @@ const ProductDetails = () => {
 
   if (error || !currentProduct) {
     return (
-      <div className="max-w-md mx-auto py-24 px-4 text-center space-y-6">
-        <div className="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto">
+      <div className="max-w-md mx-auto py-24 px-6 text-center space-y-6 bg-[#FCFCFC] border border-[#EEEEEE] mt-12 mb-24 rounded-none shadow-sm">
+        <div className="w-16 h-16 bg-red-50 text-red-500 border border-red-100 flex items-center justify-center mx-auto rounded-none">
           <Info className="w-8 h-8" />
         </div>
-        <h2 className="text-2xl font-bold text-gray-900">Product Not Found</h2>
-        <p className="text-gray-500 text-sm">
+        <h2 className="text-lg font-bold text-gray-900 uppercase tracking-widest">Product Not Found</h2>
+        <p className="text-gray-500 text-xs font-semibold uppercase tracking-wider leading-relaxed">
           {error || "The clock you are searching for might have been moved or deleted by admin."}
         </p>
         <Link
           to="/products"
-          className="inline-block bg-brand-dark hover:bg-brand-red text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-xl transition-all"
+          className="inline-block bg-brand-dark hover:bg-brand-red text-white text-[10px] font-bold uppercase tracking-widest px-6 py-3.5 rounded-none transition-all duration-200 active:scale-95"
         >
           Return to Catalog
         </Link>
@@ -81,12 +81,13 @@ const ProductDetails = () => {
 
   // Handle Zoom Hover Move
   const handleMouseMove = (e) => {
+    if (window.innerWidth < 768) return; // Disable zoom feature on mobile size
     if (!containerRef.current) return;
     const { left, top, width, height } = containerRef.current.getBoundingClientRect();
     
     // Calculate cursor percentage coordinates
     const x = ((e.clientX - left) / width) * 100;
-    const y = ((e.clientY - top) / height) * 100;
+    const y = ((e.clientY - top) / height) * 105; // Adjust slightly for height alignment
 
     setZoomStyle({
       display: 'block',
@@ -138,39 +139,39 @@ Please provide more details.`;
   };
 
   return (
-    <div className="bg-brand-light py-12">
+    <div className="bg-[#FCFCFC] py-2 border-t border-gray-100">
       <SEO 
-        title={`${name} | Nilkanth Quartz Wall Clocks`} 
+        title={`Model ${modelNo} | Nilkanth Quartz Wall Clocks`} 
         description={description.substring(0, 155)} 
         image={currentImage}
         schemaData={productSchema}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
         
         {/* Navigation Breadcrumb */}
-        <div className="mb-8">
+        <div className="mb-10">
           <Link
             to="/products"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-brand-red font-semibold transition-colors group"
+            className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#888888] hover:text-brand-red transition-colors duration-250 group"
           >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft className="w-3.5 h-3.5 transition-transform duration-250 group-hover:-translate-x-1" />
             Back to Catalog
           </Link>
         </div>
 
         {/* Product Details Split Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 bg-white rounded-none p-6 sm:p-10 border border-[#EEEEEE] shadow-sm mb-20">
           
           {/* Left Column: Visual Media (Gallery + Zoom) */}
           <div className="md:col-span-6 space-y-6">
             
             {/* View Tab Selector (if Video exists) */}
             {video && (
-              <div className="flex gap-2 border-b border-gray-100 pb-4">
+              <div className="flex gap-2 border-b border-gray-150 pb-4">
                 <button
                   onClick={() => setActiveTab('image')}
-                  className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                  className={`flex items-center gap-1.5 px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider transition-all duration-200 ${
                     activeTab === 'image' 
                       ? 'bg-brand-dark text-white' 
                       : 'bg-gray-50 text-gray-500 hover:bg-gray-100'
@@ -180,60 +181,63 @@ Please provide more details.`;
                 </button>
                 <button
                   onClick={() => setActiveTab('video')}
-                  className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                  className={`flex items-center gap-1.5 px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider transition-all duration-200 ${
                     activeTab === 'video' 
                       ? 'bg-brand-dark text-white' 
                       : 'bg-gray-50 text-gray-500 hover:bg-gray-100'
                   }`}
                 >
-                  <Video className="w-4 h-4 text-brand-red animate-pulse" />
+                  <Video className="w-3.5 h-3.5 text-brand-red animate-pulse" />
                   Product Video
                 </button>
               </div>
             )}
 
             {activeTab === 'image' ? (
-              <div className="space-y-4">
+              <div className="flex flex-col md:flex-row-reverse gap-4 w-full">
                 {/* Large Main Display Frame with Zoom */}
-                <div 
-                  ref={containerRef}
-                  onMouseMove={handleMouseMove}
-                  onMouseLeave={handleMouseLeave}
-                  className="relative aspect-square w-full rounded-2xl bg-gray-50 border border-gray-100 overflow-hidden flex items-center justify-center p-8 cursor-zoom-in"
-                >
-                  <img
-                    src={currentImage}
-                    alt={name}
-                    className="max-h-full max-w-full object-contain drop-shadow-xl"
-                  />
-                  
-                  {/* Floating Magnified Lens Div */}
-                  <div
-                    style={{
-                      ...zoomStyle,
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      pointerEvents: 'none',
-                      backgroundColor: 'rgba(255,255,255,0.2)',
-                      backgroundRepeat: 'no-repeat'
-                    }}
-                  />
+                <div className="flex-grow w-full">
+                  <div 
+                    ref={containerRef}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                    className="relative aspect-square w-full rounded-none bg-[#FAFAFA] border border-[#EEEEEE] overflow-hidden flex items-center justify-center p-4 sm:p-8 cursor-default md:cursor-zoom-in"
+                  >
+                    <img
+                      src={currentImage}
+                      alt={`Model ${modelNo}`}
+                      className="max-h-full max-w-full object-contain drop-shadow-md"
+                    />
+                    
+                    {/* Floating Magnified Lens Div */}
+                    <div
+                      style={{
+                        ...zoomStyle,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        pointerEvents: 'none',
+                        backgroundColor: 'rgba(255,255,255,0.2)',
+                        backgroundRepeat: 'no-repeat'
+                      }}
+                      className="hidden md:block"
+                    />
+                  </div>
                 </div>
 
-                {/* Gallery Thumbnail Strip */}
+                {/* Gallery Thumbnail Strip (Left side of main image on desktop, below on mobile) */}
                 {images && images.length > 1 && (
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-row md:flex-col gap-3 shrink-0 overflow-x-auto md:overflow-x-visible md:w-20 md:max-h-[500px]">
                     {images.map((img, idx) => (
                       <button
                         key={idx}
                         onClick={() => setActiveImageIdx(idx)}
-                        className={`w-20 h-20 rounded-xl bg-gray-50 border overflow-hidden p-2 flex items-center justify-center transition-all ${
+                        className={`w-16 h-16 sm:w-20 sm:h-20 rounded-none bg-white border overflow-hidden p-2 flex items-center justify-center transition-all duration-200 shrink-0 ${
                           idx === activeImageIdx 
-                            ? 'border-brand-red ring-2 ring-brand-red/10 scale-95' 
-                            : 'border-gray-200 hover:border-brand-dark'
+                            ? 'border-brand-red ring-0 scale-95 shadow-sm' 
+                            : 'border-[#EEEEEE] hover:border-brand-dark'
                         }`}
                       >
                         <img 
@@ -248,7 +252,7 @@ Please provide more details.`;
               </div>
             ) : (
               /* Video Clip Player Frame */
-              <div className="aspect-square w-full rounded-2xl bg-brand-dark border border-gray-800 overflow-hidden relative flex items-center justify-center">
+              <div className="aspect-square w-full rounded-none bg-brand-dark border border-gray-800 overflow-hidden relative flex items-center justify-center">
                 <video
                   src={video}
                   controls
@@ -260,62 +264,64 @@ Please provide more details.`;
               </div>
             )}
 
-          </div>          {/* Right Column: Spec Info & Call to Actions */}
-          <div className="md:col-span-6 space-y-6 flex flex-col justify-center">
+          </div>
+
+          {/* Right Column: Spec Info & Call to Actions */}
+          <div className="md:col-span-6 space-y-6 flex flex-col justify-center text-left">
             
             {/* Category badge */}
-            <span className="inline-block bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md w-fit">
+            <span className="inline-block border border-brand-red/25 text-brand-red text-[10px] font-bold uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-none w-fit">
               {category}
             </span>
             
             {/* Primary Header: Model No */}
-            <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight leading-tight">
-              Model: {modelNo}
+            <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight leading-tight uppercase">
+              Model No: {modelNo}
             </h1>
 
             {/* List all details one by one in a stack */}
-            <div className="border border-gray-150 rounded-2xl bg-white divide-y divide-gray-150 overflow-hidden shadow-sm">
-              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
-                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Model Number</span>
-                <span className="font-extrabold text-brand-red bg-brand-red/5 px-2.5 py-1 rounded-lg border border-brand-red/10">{modelNo}</span>
+            <div className="border border-[#EEEEEE] rounded-none bg-white divide-y divide-[#EEEEEE] overflow-hidden">
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Model Number</span>
+                <span className="font-extrabold text-brand-red bg-brand-red/5 px-3 py-1.5 rounded-none border border-brand-red/10 text-sm">{modelNo}</span>
               </div>
 
-              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
-                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Wholesale Price (FOB)</span>
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Wholesale Price (FOB)</span>
                 <div className="flex items-baseline gap-1.5">
-                  <span className="font-black text-brand-dark text-lg">₹{price}</span>
-                  <span className="text-xs text-gray-400">/ piece</span>
+                  <span className="font-black text-black text-base sm:text-lg">₹{price}</span>
+                  <span className="text-[11px] sm:text-xs text-black font-semibold uppercase tracking-wider">/ piece</span>
                 </div>
               </div>
 
-              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
-                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Category Range</span>
-                <span className="font-bold text-gray-900">{category}</span>
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Category Range</span>
+                <span className="font-bold text-black uppercase tracking-wide text-xs sm:text-sm">{category}</span>
               </div>
 
-              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
-                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Available Colors</span>
-                <span className="font-bold text-gray-900 bg-brand-light px-2.5 py-1 rounded-lg border border-gray-200">{colors}</span>
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Available Colors</span>
+                <span className="font-bold text-black bg-[#FAFAFA] px-3 py-1.5 rounded-none border border-[#EEEEEE] uppercase tracking-wide text-xs sm:text-sm">{colors}</span>
               </div>
 
-              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
-                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Minimum Order (MOQ)</span>
-                <span className="font-bold text-brand-dark">{moq || 100} pcs</span>
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Minimum Order (MOQ)</span>
+                <span className="font-bold text-black uppercase tracking-wider text-xs sm:text-sm">{moq || 100} PCS</span>
               </div>
 
-              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
-                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Dimensions (Size)</span>
-                <span className="font-bold text-gray-900">{size}</span>
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Dimensions (Size)</span>
+                <span className="font-bold text-black uppercase tracking-wide text-xs sm:text-sm">{size}</span>
               </div>
 
-              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
-                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Packaging (Pkg)</span>
-                <span className="font-bold text-gray-900">{pkg}</span>
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Packaging (Pkg)</span>
+                <span className="font-bold text-black uppercase tracking-wide text-xs sm:text-sm">{pkg}</span>
               </div>
 
               <div className="p-4 sm:p-5 flex flex-col gap-2 text-sm">
-                <span className="text-gray-400 font-bold uppercase tracking-wider text-xs">Description</span>
-                <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Description</span>
+                <p className="text-black text-xs sm:text-sm font-semibold uppercase tracking-wider leading-relaxed whitespace-pre-line">
                   {description}
                 </p>
               </div>
@@ -325,9 +331,9 @@ Please provide more details.`;
             <div className="pt-2">
               <button
                 onClick={handleWhatsAppInquiry}
-                className="w-full sm:w-auto flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold uppercase tracking-wider text-xs py-4 px-8 rounded-xl shadow-lg shadow-emerald-500/10 transition-transform active:scale-95 duration-200"
+                className="w-full sm:w-auto flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold uppercase tracking-widest text-[11px] py-4.5 px-8 rounded-none transition-all active:scale-[0.99] duration-200 shadow-md shadow-emerald-500/10"
               >
-                <WhatsAppIcon className="w-5 h-5 fill-current" />
+                <WhatsAppIcon className="w-4 h-9 fill-current" />
                 Inquire via WhatsApp
               </button>
             </div>
@@ -338,9 +344,12 @@ Please provide more details.`;
         {/* RELATED PRODUCTS SECTION */}
         {relatedProducts && relatedProducts.length > 0 && (
           <div className="border-t border-gray-200 pt-16 space-y-8">
-            <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight text-center sm:text-left">
-              Related Clocks You May Like
-            </h2>
+            <div className="flex items-center justify-center sm:justify-start gap-2 mb-8">
+              <span className="w-2.5 h-2.5 bg-black inline-block"></span>
+              <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-[0.2em] text-gray-900">
+                Related Clocks You May Like
+              </h2>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
               {relatedProducts.map((prod) => (
                 <ProductCard key={prod._id} product={prod} />
