@@ -45,7 +45,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
     };
   }, [mobileMenuOpen]);
 
-  const isTransparentPage = location.pathname === '/' || location.pathname === '/products' || location.pathname === '/contact' || location.pathname === '/about';
+  const isTransparentPage = location.pathname === '/' || location.pathname === '/products' || location.pathname === '/contact' || location.pathname === '/about' || location.pathname.startsWith('/category/');
   const isTransparent = isTransparentPage && !isScrolled;
   const headerClass = `sticky top-0 z-40 w-full text-white transition-all duration-300 ${
     isTransparent
