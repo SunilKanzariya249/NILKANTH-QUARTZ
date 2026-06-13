@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Award, 
@@ -217,6 +217,173 @@ const Home = () => {
     setDragOffset(0);
   };
 
+  // Category Slider State & Refs
+  const categoryPosters = [
+    { src: "/category poster/anchor clock poster .png", link: "/category/anchor-clocks" },
+    { src: "/category poster/antique clock poster.png", link: "/category/antique-clocks" },
+    { src: "/category poster/corporate clock poster.png", link: "/category/corporate-clocks" },
+    { src: "/category poster/designer clock poster.png", link: "/category/designer-clocks" },
+    { src: "/category poster/office clock poster.png", link: "/category/office-clocks" },
+  ];
+  const trackPosters = [...categoryPosters, ...categoryPosters, ...categoryPosters];
+
+  const [catIndex, setCatIndex] = useState(5);
+  const [catTransition, setCatTransition] = useState(true);
+  const [catItemsPerPage, setCatItemsPerPage] = useState(4);
+  const [catIsInteracting, setCatIsInteracting] = useState(false);
+
+  const catTrackRef = useRef(null);
+  const catIsAnimating = useRef(false);
+  const catIsDownRef = useRef(false);
+  const catInteractionTimeoutRef = useRef(null);
+  const catStartX = useRef(0);
+  const catHasDragged = useRef(false);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth >= 1280) {
+        setCatItemsPerPage(4);
+      } else if (window.innerWidth >= 1024) {
+        setCatItemsPerPage(3);
+      } else if (window.innerWidth >= 768) {
+        setCatItemsPerPage(2);
+      } else {
+        setCatItemsPerPage(1);
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
+
+  const startCatInteraction = () => {
+    setCatIsInteracting(true);
+    if (catInteractionTimeoutRef.current) {
+      clearTimeout(catInteractionTimeoutRef.current);
+    }
+  };
+
+  const endCatInteraction = () => {
+    if (catInteractionTimeoutRef.current) {
+      clearTimeout(catInteractionTimeoutRef.current);
+    }
+    catInteractionTimeoutRef.current = setTimeout(() => {
+      setCatIsInteracting(false);
+    }, 4000);
+  };
+
+  const nextCatSlide = () => {
+    if (catIsAnimating.current) return;
+    catIsAnimating.current = true;
+    setCatTransition(true);
+    setCatIndex((p) => p + 1);
+  };
+
+  const prevCatSlide = () => {
+    if (catIsAnimating.current) return;
+    catIsAnimating.current = true;
+    setCatTransition(true);
+    setCatIndex((p) => p - 1);
+  };
+
+  const handleCatTouchStart = (e) => {
+    startCatInteraction();
+    catStartX.current = e.touches[0].clientX;
+    catHasDragged.current = false;
+  };
+
+  const handleCatTouchMove = (e) => {
+    const diff = Math.abs(catStartX.current - e.touches[0].clientX);
+    if (diff > 10) {
+      catHasDragged.current = true;
+    }
+  };
+
+  const handleCatTouchEnd = (e) => {
+    const diff = catStartX.current - e.changedTouches[0].clientX;
+    if (diff > 50) nextCatSlide();
+    else if (diff < -50) prevCatSlide();
+    endCatInteraction();
+  };
+
+  const handleCatMouseDown = (e) => {
+    if (e.button !== 0) return;
+    startCatInteraction();
+    catIsDownRef.current = true;
+    catStartX.current = e.clientX;
+    catHasDragged.current = false;
+  };
+
+  const handleCatMouseMove = (e) => {
+    if (!catIsDownRef.current) return;
+    e.preventDefault();
+    const diff = Math.abs(catStartX.current - e.clientX);
+    if (diff > 10) {
+      catHasDragged.current = true;
+    }
+  };
+
+  const handleCatMouseUpOrLeave = (e) => {
+    if (catIsDownRef.current) {
+      catIsDownRef.current = false;
+      const diff = catStartX.current - e.clientX;
+      if (diff > 50) nextCatSlide();
+      else if (diff < -50) prevCatSlide();
+      endCatInteraction();
+    }
+  };
+
+  useEffect(() => {
+    if (catIsInteracting) return;
+
+    const interval = setInterval(() => {
+      if (!catIsAnimating.current) {
+        catIsAnimating.current = true;
+        setCatTransition(true);
+        setCatIndex((p) => p + 1);
+      }
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [catIsInteracting]);
+
+  useEffect(() => {
+    const track = catTrackRef.current;
+    if (!track) return;
+
+    const handleEnd = () => {
+      catIsAnimating.current = false;
+      if (catIndex >= categoryPosters.length * 2) {
+        setCatTransition(false);
+        setCatIndex(categoryPosters.length);
+      }
+      if (catIndex <= 0) {
+        setCatTransition(false);
+        setCatIndex(categoryPosters.length);
+      }
+    };
+
+    track.addEventListener("transitionend", handleEnd);
+    return () => track.removeEventListener("transitionend", handleEnd);
+  }, [catIndex]);
+
+  useEffect(() => {
+    if (!catTransition) {
+      catIsAnimating.current = false;
+      requestAnimationFrame(() => {
+        setCatTransition(true);
+      });
+    }
+  }, [catTransition]);
+
+  const handleCatLinkClick = (e) => {
+    if (catHasDragged.current) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
   const handleContactSubmit = (e) => {
     e.preventDefault();
     if (!contactForm.name || !contactForm.message) return;
@@ -385,6 +552,90 @@ const Home = () => {
           `}
         </style>
       </section>
+
+      {/* CATEGORY POSTER SLIDER SECTION */}
+      <section className="relative bg-[#F3F4F6] py-20 overflow-hidden select-none">
+        {/* Subtle decorative geometric line accents */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03] text-brand-dark">
+          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="20%" x2="100%" y2="20%" stroke="currentColor" strokeWidth="1" />
+            <line x1="0" y1="80%" x2="100%" y2="80%" stroke="currentColor" strokeWidth="1" />
+            <line x1="20%" y1="0" x2="20%" y2="100%" stroke="currentColor" strokeWidth="1" />
+            <line x1="80%" y1="0" x2="80%" y2="100%" stroke="currentColor" strokeWidth="1" />
+          </svg>
+        </div>
+
+        <div className="relative max-w-full mx-auto px-0 sm:px-8 lg:px-1 z-10">
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="space-y-3 pl-5 md:pl-40">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#666666]">
+                COLLECTION
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#1E293B] tracking-tight leading-tight max-w-2xl">
+                Exploring the Craftsmanship of Luxury Clocks
+              </h2>
+            </div>
+            <div className=' pl-5 md:pr-16 '>
+              <Link 
+                to="/products"
+                className="inline-block px-6 py-3 text-xs font-bold uppercase tracking-widest text-[#1E293B] border border-[#1E293B]/20 rounded-md hover:bg-[#1E293B] hover:text-white hover:border-[#1E293B] transition-all duration-300 active:scale-95"
+              >
+                MORE COLLECTION
+              </Link>
+            </div>
+          </div>
+
+          {/* Carousel Viewport Container */}
+          <div
+            className="relative overflow-hidden w-full cursor-grab active:cursor-grabbing"
+            onTouchStart={handleCatTouchStart}
+            onTouchMove={handleCatTouchMove}
+            onTouchEnd={handleCatTouchEnd}
+            onMouseDown={handleCatMouseDown}
+            onMouseMove={handleCatMouseMove}
+            onMouseUp={handleCatMouseUpOrLeave}
+            onMouseLeave={handleCatMouseUpOrLeave}
+          >
+            {/* Translate Track */}
+            <div
+              ref={catTrackRef}
+              className={`flex w-full ${
+                catTransition ? "transition-transform duration-700 ease-in-out" : ""
+              }`}
+              style={{
+                transform: `translate3d(calc(-${catIndex} * 100% / ${catItemsPerPage}), 0, 0)`,
+              }}
+            >
+              {trackPosters.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-2 select-none"
+                >
+                  <div className="relative group overflow-hidden bg-neutral-50  shadow-md transition-all duration-300 hover:shadow-xl">
+                    <Link
+                      to={item.link}
+                      onClick={handleCatLinkClick}
+                      onDragStart={(e) => e.preventDefault()}
+                      draggable="false"
+                      className="block w-full h-auto cursor-pointer select-none"
+                    >
+                      <img
+                        src={item.src}
+                        alt={`Category Poster ${(idx % categoryPosters.length) + 1}`}
+                        className="w-full h-auto aspect-[3/4] object-cover pointer-events-none block rounded-none select-none transform transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        draggable="false"
+                      />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 3. WHY CHOOSE US SECTION */}
       <section className="py-24 bg-white border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -409,37 +660,6 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* 4. OUR CATEGORIES SECTION */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-red">Collections</span>
-          <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Explore Dynamic Categories</h2>
-          <p className="text-gray-500 text-sm">Browse our wide variety of industrial and domestic wall clock models.</p>
-        </div>
-
-        {categories.length === 0 ? (
-          <SkeletonLoader type="categories" />
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {categories.map((cat) => (
-              <Link
-                key={cat}
-                to={`/category/${cat.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                state={{ categoryName: cat }}
-                className="bg-white rounded-2xl p-6 text-center border border-gray-100 hover:border-brand-red shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center group"
-              >
-                <div className="w-16 h-16 rounded-full bg-brand-light flex items-center justify-center mb-4 group-hover:bg-brand-red/10 transition-colors">
-                  <Clock className="w-7 h-7 text-brand-dark group-hover:text-brand-red transition-colors" />
-                </div>
-                <span className="font-bold text-gray-900 group-hover:text-brand-red text-sm transition-colors line-clamp-1">
-                  {cat}
-                </span>
-              </Link>
-            ))}
-          </div>
-        )}
       </section>
 
       {/* 5. OUR COLLECTION (FEATURED PRODUCTS) */}
