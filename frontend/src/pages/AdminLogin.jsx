@@ -45,29 +45,29 @@ const AdminLogin = () => {
         <div>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-white font-bold uppercase tracking-wider transition-colors group"
+            className="inline-flex items-center gap-2 text-[10px] text-[#AAAAAA] hover:text-white font-bold uppercase tracking-[0.25em] transition-colors group"
           >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+            <ArrowLeft className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-x-0.5" />
             Back to Website
           </Link>
         </div>
 
         {/* Login Card */}
-        <div className="bg-gray-900/60 backdrop-blur-xl border border-white/5 rounded-3xl p-8 sm:p-10 shadow-2xl space-y-6">
+        <div className="bg-[#111111] border border-white/10 rounded-none p-8 sm:p-10 shadow-2xl space-y-6">
           <div className="text-center space-y-3">
-            <div className="bg-white p-1 rounded-xl w-fit mx-auto">
+            <div className="bg-white p-2.5 rounded-none w-fit mx-auto">
               <img 
                 src="/nilkanth-quartz-logo.png" 
                 alt="Nilkanth Logo" 
                 className="h-10 w-auto object-contain"
               />
             </div>
-            <h1 className="text-2xl font-extrabold text-white tracking-tight">Admin Portal</h1>
-            <p className="text-gray-400 text-xs tracking-wider uppercase">Nilkanth Quartz Management Desk</p>
+            <h1 className="text-2xl font-bold uppercase tracking-widest text-white">Admin Portal</h1>
+            <p className="text-[#AAAAAA] text-[10px] tracking-[0.2em] font-semibold uppercase">Nilkanth Quartz Management Desk</p>
           </div>
 
           {error && (
-            <div className="bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl p-4 flex items-start gap-3 text-sm">
+            <div className="bg-red-500/10 border border-red-500/20 text-red-400 rounded-none p-4 flex items-start gap-3 text-xs">
               <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -75,7 +75,7 @@ const AdminLogin = () => {
 
           <form onSubmit={handleLoginSubmit} className="space-y-6">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">
+              <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#AAAAAA] mb-2">
                 Administrator Email
               </label>
               <div className="relative">
@@ -85,7 +85,7 @@ const AdminLogin = () => {
                   placeholder="admin@nilkanthquartz.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 text-sm text-white focus:border-brand-red focus:bg-white/[0.08]"
+                  className="w-full bg-white/5 border border-white/10 rounded-none pl-11 pr-4 py-3.5 text-xs text-white focus:border-brand-red focus:bg-white/[0.08] focus:outline-none transition-all duration-200"
                 />
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-500" />
               </div>
@@ -93,7 +93,7 @@ const AdminLogin = () => {
 
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400">
+                <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#AAAAAA]">
                   Password
                 </label>
               </div>
@@ -104,7 +104,7 @@ const AdminLogin = () => {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 text-sm text-white focus:border-brand-red focus:bg-white/[0.08]"
+                  className="w-full bg-white/5 border border-white/10 rounded-none pl-11 pr-4 py-3.5 text-xs text-white focus:border-brand-red focus:bg-white/[0.08] focus:outline-none transition-all duration-200"
                 />
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-500" />
               </div>
@@ -113,7 +113,7 @@ const AdminLogin = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-brand-red hover:bg-brand-red/90 disabled:bg-gray-800 text-white font-bold uppercase tracking-wider text-xs py-4 rounded-xl shadow-lg transition-transform active:scale-[0.98] disabled:scale-100"
+              className="w-full bg-brand-red hover:bg-brand-red/90 disabled:bg-gray-800 text-white font-bold uppercase tracking-widest text-[15px] py-4.5 rounded-none shadow-lg transition-all active:scale-[0.98] disabled:scale-100 duration-200"
             >
               {loading ? 'Authenticating...' : 'Sign In To Panel'}
             </button>
@@ -121,7 +121,7 @@ const AdminLogin = () => {
 
           {/* Setup seed reminder */}
           <div className="text-center pt-2">
-            <span className="text-[10px] text-gray-600 block">
+            <span className="text-[10px] text-gray-600 block uppercase tracking-wider">
               Default Seeding: admin@nilkanthquartz.com / NilkanthAdmin2026!
             </span>
           </div>
