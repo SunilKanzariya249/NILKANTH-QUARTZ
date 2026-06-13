@@ -117,6 +117,9 @@ const Home = () => {
   const { categories, featuredProducts, fetchCategories, fetchFeaturedProducts, loading } = useProductStore();
   const [currentSlide, setCurrentSlide] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(true);
+  const [startX, setStartX] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [openFaq, setOpenFaq] = useState(0);
   
@@ -139,28 +142,31 @@ const Home = () => {
   // Re-enable transition after snap jumps
   useEffect(() => {
     if (!isTransitioning) {
-      const raf = requestAnimationFrame(() => {
+      const timer = setTimeout(() => {
         setIsTransitioning(true);
-      });
-      return () => cancelAnimationFrame(raf);
+      }, 50);
+      return () => clearTimeout(timer);
     }
   }, [isTransitioning]);
 
-  // Auto scroll Hero Slider
+  // Auto scroll Hero Slider (only auto scroll when not dragging)
   useEffect(() => {
+    if (isDragging) return;
     const slideInterval = setInterval(() => {
       handleNextSlide();
     }, 6000);
     return () => clearInterval(slideInterval);
-  }, [isTransitioning, currentSlide]);
+  }, [isTransitioning, currentSlide, isDragging]);
 
   const handleNextSlide = () => {
     if (!isTransitioning) return;
+    if (currentSlide >= HERO_SLIDES.length + 1) return;
     setCurrentSlide((prev) => prev + 1);
   };
 
   const handlePrevSlide = () => {
     if (!isTransitioning) return;
+    if (currentSlide <= 0) return;
     setCurrentSlide((prev) => prev - 1);
   };
 
@@ -172,6 +178,41 @@ const Home = () => {
       setIsTransitioning(false);
       setCurrentSlide(1);
     }
+  };
+
+  const handleDragStart = (clientX) => {
+    if (!isTransitioning) return;
+
+    // Safety snap if dragging starts directly on a boundary
+    if (currentSlide === 0) {
+      setIsTransitioning(false);
+      setCurrentSlide(HERO_SLIDES.length);
+    } else if (currentSlide === HERO_SLIDES.length + 1) {
+      setIsTransitioning(false);
+      setCurrentSlide(1);
+    }
+
+    setStartX(clientX);
+    setIsDragging(true);
+    setDragOffset(0);
+  };
+
+  const handleDragMove = (clientX) => {
+    if (!isDragging) return;
+    setDragOffset(clientX - startX);
+  };
+
+  const handleDragEnd = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    
+    const threshold = 80; // pixels to trigger slide change
+    if (dragOffset < -threshold) {
+      handleNextSlide();
+    } else if (dragOffset > threshold) {
+      handlePrevSlide();
+    }
+    setDragOffset(0);
   };
 
   const handleContactSubmit = (e) => {
@@ -196,41 +237,37 @@ const Home = () => {
       />
 
       {/* 1. HERO SECTION */}
-      <section className="relative aspect-[16/9] w-full overflow-hidden bg-brand-dark">
+      <section 
+        className="relative aspect-[16/9] w-full overflow-hidden bg-brand-dark cursor-grab active:cursor-grabbing select-none"
+        onMouseDown={(e) => handleDragStart(e.clientX)}
+        onMouseMove={(e) => handleDragMove(e.clientX)}
+        onMouseUp={handleDragEnd}
+        onMouseLeave={handleDragEnd}
+        onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
+        onTouchMove={(e) => handleDragMove(e.touches[0].clientX)}
+        onTouchEnd={handleDragEnd}
+      >
         {/* Sliding Track */}
         <div 
-          className={`flex h-full ${isTransitioning ? 'transition-transform duration-1000 ease-in-out' : ''}`}
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          className={`flex h-full ${isTransitioning && !isDragging ? 'transition-transform duration-1000 ease-in-out' : ''}`}
+          style={{ transform: `translateX(calc(-${currentSlide * 100}% + ${dragOffset}px))` }}
           onTransitionEnd={handleTransitionEnd}
         >
           {slidesWithClones.map((slide, idx) => (
-            <Link
+            <div
               key={idx}
-              to={slide.link}
-              className="w-full h-full flex-shrink-0 block"
+              className="w-full h-full flex-shrink-0 block select-none"
+              draggable="false"
             >
               <img 
                 src={slide.image} 
                 alt={`Hero banner ${idx + 1}`} 
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover object-center select-none pointer-events-none"
+                draggable="false"
               />
-            </Link>
+            </div>
           ))}
         </div>
-
-        {/* Navigation Arrows */}
-        <button 
-          onClick={handlePrevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/30 hover:bg-brand-red text-white p-2.5 rounded-full transition-colors backdrop-blur-md"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button 
-          onClick={handleNextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/30 hover:bg-brand-red text-white p-2.5 rounded-full transition-colors backdrop-blur-md"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
       </section>
 
       
