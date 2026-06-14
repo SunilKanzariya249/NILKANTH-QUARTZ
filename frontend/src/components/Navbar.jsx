@@ -187,7 +187,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 bottom-0 top-20 z-50 bg-brand-dark/95 backdrop-blur-lg border-t border-white/10 p-6 overflow-y-auto animate-fadeIn flex flex-col justify-between space-y-8 h-[calc(100vh-5rem)] rounded-none">
+        <div className="md:hidden fixed inset-x-0 bottom-0 top-20 z-50 bg-brand-dark/95 backdrop-blur-lg border-t border-white/10 p-6 pb-16 overflow-y-auto animate-fadeIn flex flex-col justify-between space-y-8 h-[calc(100dvh-5rem)] rounded-none">
           <div className="space-y-6">
             <div className="flex flex-col space-y-5">
               <Link 
