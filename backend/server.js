@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import path from 'path';
 import fs from 'fs';
 import rateLimit from 'express-rate-limit';
+import compression from 'compression';
 
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
@@ -16,6 +17,9 @@ import Product from './models/Product.js';
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+// Gzip Compression
+app.use(compression());
+
 // Security Middlewares
 // Customize Helmet content security policy to allow serving images locally
 app.use(helmet({
@@ -24,9 +28,16 @@ app.use(helmet({
 
 // CORS Configuration
 app.use(cors({
-  origin: '*',
+  origin: [
+    "http://localhost:5173",
+    "https://nilkanthquartz.com",
+    "https://www.nilkanthquartz.com",
+    "https://nilkanth-quartz-frontend.onrender.com",
+    "https://nilkanth-quartz-backend.onrender.com"
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
 
 // Body Parsers
