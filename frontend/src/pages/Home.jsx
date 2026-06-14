@@ -1028,7 +1028,7 @@ const Home = () => {
                 <form onSubmit={handleContactSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] mb-2">
+                      <label className="block text-[14px] font-bold  tracking-widest  mb-2">
                         Your Name
                       </label>
                       <input 
@@ -1036,26 +1036,26 @@ const Home = () => {
                         required
                         value={contactForm.name}
                         onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                        placeholder="John Doe"
-                        className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs font-bold uppercase tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
+                        placeholder="Enter Name..."
+                        className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs   tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] mb-2">
+                      <label className="block text-[14px] font-bold  tracking-widest  mb-2">
                         Email Address (Optional)
                       </label>
                       <input 
                         type="email" 
                         value={contactForm.email}
                         onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                        placeholder="john@example.com"
-                        className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs font-bold uppercase tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
+                        placeholder="example@gmail.com"
+                        className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs   tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] mb-2">
+                    <label className="block text-[14px] font-bold  tracking-widest  mb-2">
                       Inquiry Details
                     </label>
                     <textarea 
@@ -1063,8 +1063,8 @@ const Home = () => {
                       required
                       value={contactForm.message}
                       onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                      placeholder="Hi, I am interested in ordering 200 promotional wall clocks. Please share quotes."
-                      className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs font-bold uppercase tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors resize-none"
+                      placeholder="Enter Message..."
+                      className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs   tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors resize-none"
                     />
                   </div>
 

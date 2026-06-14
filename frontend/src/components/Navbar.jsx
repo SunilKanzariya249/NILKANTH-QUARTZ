@@ -73,7 +73,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
             <NavLink 
               to="/" 
               className={({ isActive }) => 
-                `relative py-2 text-xs md:text-sm lg:text-base font-bold uppercase tracking-[0.25em] transition-all duration-300 hover:text-brand-red ${
+                `relative py-2 text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[0.25em] transition-all duration-300 hover:text-brand-red ${
                   isActive ? 'text-brand-red' : isTransparent ? 'text-white' : 'text-gray-300'
                 }`
               }
@@ -92,7 +92,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
             >
               <Link 
                 to="/products"
-                className={`flex items-center gap-1.5 py-2 text-xs md:text-sm lg:text-base font-bold uppercase tracking-[0.25em] transition-colors duration-300 hover:text-brand-red ${
+                className={`flex items-center gap-1.5 py-2 text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[0.25em] transition-colors duration-300 hover:text-brand-red ${
                   location.pathname.startsWith('/products') || location.pathname.startsWith('/category') 
                     ? 'text-brand-red' 
                     : isTransparent ? 'text-white' : 'text-gray-300'
@@ -107,7 +107,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
                 <div className="absolute left-0 mt-0 w-64 rounded-none shadow-2xl bg-brand-dark border border-white/10 backdrop-blur-xl overflow-hidden py-1 transition-all duration-300 transform origin-top">
                   <Link 
                     to="/products"
-                    className="flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-200 hover:bg-brand-red hover:text-white transition-all"
+                    className="flex items-center gap-3 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-gray-200 hover:bg-brand-red hover:text-white transition-all"
                   >
                     <Clock className="w-3.5 h-3.5 text-brand-red group-hover:text-white" />
                     <span>All Collections</span>
@@ -115,7 +115,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
                   <hr className="border-white/5 my-1" />
                   
                   {categories.length === 0 ? (
-                    <div className="px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest text-gray-500">Loading categories...</div>
+                    <div className="px-4 py-2.5 text-[10px] font-semibold uppercase tracking-widest text-gray-500">Loading categories...</div>
                   ) : (
                     categories.map((cat) => (
                       <Link
@@ -135,7 +135,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
             <NavLink 
               to="/about" 
               className={({ isActive }) => 
-                `relative py-2 text-xs md:text-sm lg:text-base font-bold uppercase tracking-[0.25em] transition-all duration-300 hover:text-brand-red ${
+                `relative py-2 text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[0.25em] transition-all duration-300 hover:text-brand-red ${
                   isActive ? 'text-brand-red' : isTransparent ? 'text-white' : 'text-gray-300'
                 }`
               }
@@ -149,7 +149,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
             <NavLink 
               to="/contact" 
               className={({ isActive }) => 
-                `relative py-2 text-xs md:text-sm lg:text-base font-bold uppercase tracking-[0.25em] transition-all duration-300 hover:text-brand-red ${
+                `relative py-2 text-xs md:text-sm lg:text-base font-semibold uppercase tracking-[0.25em] transition-all duration-300 hover:text-brand-red ${
                   isActive ? 'text-brand-red' : isTransparent ? 'text-white' : 'text-gray-300'
                 }`
               }
@@ -165,7 +165,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
           <div className="hidden md:flex items-center space-x-4">
             <Link 
               to="/admin/login" 
-              className="px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest rounded-none border border-white/20 hover:border-brand-red hover:bg-brand-red text-white transition-all duration-300 active:scale-95"
+              className="px-5 py-2.5 text-[10px] font-semibold uppercase tracking-widest rounded-none border border-white/20 hover:border-brand-red hover:bg-brand-red text-white transition-all duration-300 active:scale-95"
             >
               Admin Login
             </Link>

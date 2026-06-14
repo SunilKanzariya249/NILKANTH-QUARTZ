@@ -275,19 +275,19 @@ Please provide more details.`;
             </span>
             
             {/* Primary Header: Model No */}
-            <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight leading-tight uppercase">
+            <h1 className="text-4xl font-bold text-gray-900 tracking-tight leading-tight ">
               Model No: {modelNo}
             </h1>
 
             {/* List all details one by one in a stack */}
             <div className="border border-[#EEEEEE] rounded-none bg-white divide-y divide-[#EEEEEE] overflow-hidden">
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Model Number</span>
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Model Number:</span>
                 <span className="font-extrabold text-brand-red bg-brand-red/5 px-3 py-1.5 rounded-none border border-brand-red/10 text-sm">{modelNo}</span>
               </div>
 
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Wholesale Price (FOB)</span>
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Price:</span>
                 <div className="flex items-baseline gap-1.5">
                   <span className="font-black text-black text-base sm:text-lg">₹{price}</span>
                   <span className="text-[11px] sm:text-xs text-black font-semibold uppercase tracking-wider">/ piece</span>
@@ -295,32 +295,32 @@ Please provide more details.`;
               </div>
 
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Category Range</span>
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Category Range:</span>
                 <span className="font-bold text-black uppercase tracking-wide text-xs sm:text-sm">{category}</span>
               </div>
 
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Available Colors</span>
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Available Colors:</span>
                 <span className="font-bold text-black bg-[#FAFAFA] px-3 py-1.5 rounded-none border border-[#EEEEEE] uppercase tracking-wide text-xs sm:text-sm">{colors}</span>
               </div>
 
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Minimum Order (MOQ)</span>
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Minimum Order (MOQ):</span>
                 <span className="font-bold text-black uppercase tracking-wider text-xs sm:text-sm">{moq || 100} PCS</span>
               </div>
 
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Dimensions (Size)</span>
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Dimensions (Size):</span>
                 <span className="font-bold text-black uppercase tracking-wide text-xs sm:text-sm">{size}</span>
               </div>
 
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Packaging (Pkg)</span>
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Packaging (Pkg):</span>
                 <span className="font-bold text-black uppercase tracking-wide text-xs sm:text-sm">{pkg}</span>
               </div>
 
               <div className="p-4 sm:p-5 flex flex-col gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Description</span>
+                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Description:</span>
                 <p className="text-black text-xs sm:text-sm font-semibold uppercase tracking-wider leading-relaxed whitespace-pre-line">
                   {description}
                 </p>

@@ -91,8 +91,8 @@ Message: ${form.message}`;
         <div>
           <div className="flex items-center gap-2 mb-6">
             <span className="inline-block w-2.5 h-2.5 bg-black"></span>
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
-              REACH OUT TO US
+            <span className="text-xl font-semibold  tracking-[0.25em] ">
+             Reach Out to Us
             </span>
           </div>
           
@@ -148,25 +148,25 @@ Message: ${form.message}`;
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="flex items-center gap-2 mb-2">
                 <span className="inline-block w-2.5 h-2.5 bg-brand-red"></span>
-                <h2 className="font-bold text-xs uppercase tracking-widest text-[#111111]">Send Factory Inquiry</h2>
+                <h2 className="font-bold text-md uppercase tracking-widest text-[#111111]">Send Factory Inquiry</h2>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] mb-2">
+                  <label className="block text-[14px] font-bold  tracking-widest  mb-2">
                     Full Name
                   </label>
                   <input 
                     type="text" 
                     required
-                    placeholder="Jane Doe"
+                    placeholder="Enter Name.."
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs font-bold uppercase tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
+                    className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-md   tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] mb-2">
+                  <label className="block text-[14px] font-bold  tracking-widest  mb-2">
                     Phone Number
                   </label>
                   <input 
@@ -174,13 +174,13 @@ Message: ${form.message}`;
                     placeholder="+91 94268 42751"
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs font-bold uppercase tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
+                    className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-md uppercase tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] mb-2">
+                <label className="block text-[14px] font-bold  tracking-widest  mb-2">
                   Email Address
                 </label>
                 <input 
@@ -188,12 +188,12 @@ Message: ${form.message}`;
                   placeholder="jane@example.com"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs font-bold uppercase tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
+                  className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-md   tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-[#888888] mb-2">
+                <label className="block text-[14px] font-bold  tracking-widest mb-2">
                   Message Details
                 </label>
                 <textarea 
@@ -202,15 +202,15 @@ Message: ${form.message}`;
                   placeholder="Describe your design customisation, dimensions, color preferences, or bulk order quantity inquiries here."
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-xs font-bold uppercase tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors resize-none"
+                  className="w-full bg-white border border-[#CCCCCC] rounded-none px-4 py-3.5 text-md  tracking-wider placeholder-gray-400 focus:border-black focus:outline-none transition-colors resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold uppercase tracking-widest text-[10px] py-4.5 rounded-none shadow-md shadow-emerald-500/10 transition-all active:scale-[0.99] duration-200"
+                className="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold uppercase tracking-widest text-[14px] py-4.5 rounded-none shadow-md shadow-emerald-500/10 transition-all active:scale-[0.99] duration-200"
               >
-                <WhatsAppIcon className="w-4 h-10 fill-current" />
+                <WhatsAppIcon className="w-4 h-10  fill-current" />
                 Send Message via WhatsApp
               </button>
             </form>
@@ -224,7 +224,7 @@ Message: ${form.message}`;
             <div className="space-y-6">
               <div className="flex items-center gap-2">
                 <span className="inline-block w-2.5 h-2.5 bg-black"></span>
-                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
+                <span className="text-xs font-semibold uppercase tracking-[0.25em] ">
                   FACTORY LOCATION
                 </span>
               </div>
@@ -237,7 +237,7 @@ Message: ${form.message}`;
                   OUR MANUFACTURING PLANT
                 </h3>
                 <p className="text-[#555555] text-sm font-medium uppercase tracking-wider leading-relaxed">
-                  Lati Road, Near Railway Crossing, Morbi - 363641, Gujarat, India.
+                  5, Lati Plot, Near Tarun Oil Mills, Morbi - 363641, Gujarat, India.
                 </p>
               </div>
             </div>
