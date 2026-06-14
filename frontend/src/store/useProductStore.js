@@ -56,14 +56,15 @@ export const useProductStore = create((set, get) => ({
       });
 
       set({
-        products: response.data.products,
-        totalPages: response.data.totalPages,
-        currentPage: response.data.currentPage,
-        totalProductsCount: response.data.totalProducts,
+        products: Array.isArray(response.data?.products) ? response.data.products : [],
+        totalPages: response.data?.totalPages || 1,
+        currentPage: response.data?.currentPage || 1,
+        totalProductsCount: response.data?.totalProducts || 0,
         loading: false
       });
     } catch (err) {
       set({
+        products: [],
         error: err.response?.data?.message || 'Error fetching products',
         loading: false
       });
@@ -77,19 +78,21 @@ export const useProductStore = create((set, get) => ({
       const response = await axios.get('/api/products', {
         params: { limit: 100 } // Get all to filter or let server handle
       });
-      const featured = response.data.products.filter(p => p.featured === true);
+      const prods = Array.isArray(response.data?.products) ? response.data.products : [];
+      const featured = prods.filter(p => p.featured === true);
       set({ featuredProducts: featured, loading: false });
     } catch (err) {
-      set({ error: 'Error fetching featured products', loading: false });
+      set({ featuredProducts: [], error: 'Error fetching featured products', loading: false });
     }
   },
 
   fetchCategories: async () => {
     try {
       const response = await axios.get('/api/categories');
-      set({ categories: response.data });
+      set({ categories: Array.isArray(response.data) ? response.data : [] });
     } catch (err) {
       console.error('Error fetching categories:', err.message);
+      set({ categories: [] });
     }
   },
 
@@ -98,14 +101,14 @@ export const useProductStore = create((set, get) => ({
     try {
       const response = await axios.get(`/api/products/${slug}`);
       set({
-        currentProduct: response.data.product,
-        relatedProducts: response.data.relatedProducts,
+        currentProduct: response.data?.product || null,
+        relatedProducts: Array.isArray(response.data?.relatedProducts) ? response.data.relatedProducts : [],
         loading: false
       });
-      return response.data.product;
+      return response.data?.product || null;
     } catch (err) {
       const errMsg = err.response?.data?.message || 'Error fetching product details';
-      set({ error: errMsg, loading: false });
+      set({ error: errMsg, loading: false, currentProduct: null, relatedProducts: [] });
       return null;
     }
   },
