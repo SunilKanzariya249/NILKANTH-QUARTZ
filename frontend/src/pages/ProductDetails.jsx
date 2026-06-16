@@ -267,68 +267,59 @@ Please provide more details.`;
           </div>
 
           {/* Right Column: Spec Info & Call to Actions */}
-          <div className="md:col-span-6 space-y-6 flex flex-col justify-center text-left">
+          <div className="md:col-span-6 space-y-5 flex flex-col justify-center text-left">
             
-            {/* Category badge */}
-            <span className="inline-block border border-brand-red/25 text-brand-red text-[10px] font-bold uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-none w-fit">
-              {category}
-            </span>
+            {/* Category badge - Bullet styling matching the reference image */}
+            <div className="flex items-center gap-2 mb-1">
+              <span className="w-2.5 h-2.5 bg-black rounded-full shrink-0"></span>
+              <span className="text-gray-500 font-bold uppercase tracking-[0.2em] text-xs sm:text-sm">
+                {category}
+              </span>
+            </div>
             
-            {/* Primary Header: Model No */}
-            <h1 className="text-4xl font-bold text-gray-900 tracking-tight leading-tight ">
-              Model No: {modelNo}
+            {/* Primary Header: Model No - Large normal-to-bold font styling */}
+            <h1 className="text-3xl sm:text-4xl md:text-4xl text-black tracking-tight leading-tight font-normal">
+              MODEL NO: <span className="font-bold">{modelNo}</span>
             </h1>
 
-            {/* List all details one by one in a stack */}
-            <div className="border border-[#EEEEEE] rounded-none bg-white divide-y divide-[#EEEEEE] overflow-hidden">
+            {/* Product Description */}
+            <p className="text-gray-650 text-sm sm:text-base leading-relaxed tracking-normal">
+              {description}
+            </p>
+
+            {/* Price & MOQ Banner - Bordered row block */}
+            <div className="border-t border-b border-[#E5E7EB] py-4 my-2 flex items-center justify-between text-black text-sm sm:text-base font-semibold tracking-wide">
+              <span>₹{price} / Piece</span>
+             
+            </div>
+
+            {/* Specifications Table - Keeping layout, updating order & typography */}
+            <div className="border border-[#EEEEEE] rounded-none bg-white divide-y divide-[#EEEEEE] overflow-hidden mt-2">
+              
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Model Number:</span>
-                <span className="font-extrabold text-brand-red bg-brand-red/5 px-3 py-1.5 rounded-none border border-brand-red/10 text-sm">{modelNo}</span>
+                <span className="text-black font-bold uppercase tracking-wider text-[11px] sm:text-xs">Avail. Color:</span>
+                <span className="text-gray-700 font-medium uppercase tracking-normal text-xs sm:text-sm">{colors}</span>
               </div>
 
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Price:</span>
-                <div className="flex items-baseline gap-1.5">
-                  <span className="font-black text-black text-base sm:text-lg">₹{price}</span>
-                  <span className="text-[11px] sm:text-xs text-black font-semibold uppercase tracking-wider">/ piece</span>
-                </div>
+                <span className="text-black font-bold uppercase tracking-wider text-[11px] sm:text-xs">Size:</span>
+                <span className="text-gray-700 font-medium tracking-normal text-xs sm:text-sm">{size}</span>
               </div>
 
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Category Range:</span>
-                <span className="font-bold text-black uppercase tracking-wide text-xs sm:text-sm">{category}</span>
+                <span className="text-black font-bold uppercase tracking-wider text-[11px] sm:text-xs">Min. Order (MOQ):</span>
+                <span className="text-gray-700 font-medium tracking-normal text-xs sm:text-sm">{moq || 100} Pieces</span>
               </div>
 
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Available Colors:</span>
-                <span className="font-bold text-black bg-[#FAFAFA] px-3 py-1.5 rounded-none border border-[#EEEEEE] uppercase tracking-wide text-xs sm:text-sm">{colors}</span>
+                <span className="text-black font-bold uppercase tracking-wider text-[11px] sm:text-xs">Packaging (Pkg):</span>
+                <span className="text-gray-700 font-medium tracking-normal text-xs sm:text-sm">{pkg}</span>
               </div>
 
-              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Minimum Order (MOQ):</span>
-                <span className="font-bold text-black uppercase tracking-wider text-xs sm:text-sm">{moq || 100} PCS</span>
-              </div>
-
-              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Dimensions (Size):</span>
-                <span className="font-bold text-black uppercase tracking-wide text-xs sm:text-sm">{size}</span>
-              </div>
-
-              <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Packaging (Pkg):</span>
-                <span className="font-bold text-black uppercase tracking-wide text-xs sm:text-sm">{pkg}</span>
-              </div>
-
-              <div className="p-4 sm:p-5 flex flex-col gap-2 text-sm">
-                <span className="text-black font-bold uppercase tracking-[0.2em] text-[11px] sm:text-xs">Description:</span>
-                <p className="text-black text-xs sm:text-sm font-semibold uppercase tracking-wider leading-relaxed whitespace-pre-line">
-                  {description}
-                </p>
-              </div>
             </div>
 
             {/* WhatsApp CTA Button */}
-            <div className="pt-2">
+            <div className="pt-4">
               <button
                 onClick={handleWhatsAppInquiry}
                 className="w-full sm:w-auto flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold uppercase tracking-widest text-[11px] py-4.5 px-8 rounded-none transition-all active:scale-[0.99] duration-200 shadow-md shadow-emerald-500/10"
