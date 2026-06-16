@@ -150,7 +150,7 @@ Please provide more details.`;
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
         
         {/* Navigation Breadcrumb */}
-        <div className="mb-10">
+        <div className="my-2">
           <Link
             to="/products"
             className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#888888] hover:text-brand-red transition-colors duration-250 group"
@@ -201,12 +201,12 @@ Please provide more details.`;
                     ref={containerRef}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
-                    className="relative aspect-square w-full rounded-none bg-[#FAFAFA] border border-[#EEEEEE] overflow-hidden flex items-center justify-center p-4 sm:p-8 cursor-default md:cursor-zoom-in"
+                    className="relative aspect-square w-full rounded-none bg-[#FAFAFA] border border-[#EEEEEE] overflow-hidden flex items-center justify-center cursor-default md:cursor-zoom-in"
                   >
                     <img
                       src={currentImage}
                       alt={`Model ${modelNo}`}
-                      className="max-h-full max-w-full object-contain drop-shadow-md"
+                      className="w-full h-full object-contain drop-shadow-md"
                     />
                     
                     {/* Floating Magnified Lens Div */}
@@ -267,7 +267,7 @@ Please provide more details.`;
           </div>
 
           {/* Right Column: Spec Info & Call to Actions */}
-          <div className="md:col-span-6 space-y-5 flex flex-col justify-center text-left">
+          <div className="md:col-span-6 space-y-5 flex flex-col justify-center text-left max-w-full overflow-hidden">
             
             {/* Category badge - Bullet styling matching the reference image */}
             <div className="flex items-center gap-2 mb-1">
@@ -283,7 +283,7 @@ Please provide more details.`;
             </h1>
 
             {/* Product Description */}
-            <p className="text-gray-650 text-sm sm:text-base leading-relaxed tracking-normal">
+            <p className="text-gray-600 text-sm sm:text-base leading-relaxed tracking-normal break-words whitespace-pre-wrap max-w-full">
               {description}
             </p>
 
