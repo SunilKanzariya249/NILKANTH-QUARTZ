@@ -7,8 +7,15 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const { categories, fetchCategories } = useProductStore();
   const location = useLocation();
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     fetchCategories();
@@ -47,12 +54,19 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
     };
   }, [mobileMenuOpen]);
 
+  const isHomePage = location.pathname === '/';
   const isTransparentPage = location.pathname === '/' || location.pathname === '/products' || location.pathname === '/contact' || location.pathname === '/about' || location.pathname.startsWith('/category/');
-  const isTransparent = isTransparentPage && !isScrolled;
-  const headerClass = `sticky top-0 z-40 w-full text-white transition-all duration-300 ${
-    isTransparent
-      ? 'navbar-transparent-desktop'
-      : 'bg-black/95 backdrop-blur-md shadow-lg border-b border-white/10'
+  const isAtTop = !isScrolled;
+
+  const showWhiteNavbar = isMobile && isHomePage && isAtTop && !mobileMenuOpen;
+  const isTransparent = isAtTop && isTransparentPage && !(isMobile && isHomePage) && !mobileMenuOpen;
+
+  const headerClass = `sticky top-0 z-40 w-full transition-all duration-300 ${
+    showWhiteNavbar
+      ? 'bg-white text-black border-b border-gray-200'
+      : isTransparent
+      ? 'navbar-transparent-active text-white'
+      : 'bg-black/95 backdrop-blur-md shadow-lg border-b border-white/10 text-white'
   }`;
 
   return (
@@ -177,7 +191,11 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
           <div className="md:hidden">
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-none text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+              className={`p-2 rounded-none transition-all duration-300 ${
+                showWhiteNavbar 
+                  ? 'text-gray-800 hover:text-black hover:bg-gray-100' 
+                  : 'text-gray-400 hover:text-white hover:bg-white/10'
+              }`}
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -189,7 +207,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 bottom-0 top-20 z-50 bg-brand-dark/95 backdrop-blur-lg border-t border-white/10 p-6 pb-16 overflow-y-auto animate-fadeIn flex flex-col justify-between h-[calc(100dvh-5rem)] rounded-none">
+        <div className="md:hidden fixed inset-x-0 bottom-0 top-20 z-50 bg-brand-dark/95 backdrop-blur-lg border-t border-white/10 p-6 pb-4 overflow-y-auto animate-fadeIn flex flex-col justify-between h-[calc(100dvh-5rem)] rounded-none">
           <div className="flex flex-col items-center flex-grow pt-12 pb-8 w-full">
             <div className="flex flex-col items-center space-y-9 w-full max-w-sm">
               
@@ -263,10 +281,10 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
             </div>
           </div>
 
-          <div className="pt-6 border-t border-white/10 w-full">
+          <div className="pt-4 border-t border-white/10 w-full">
             <Link 
               to="/admin/login" 
-              className="block w-full py-4 text-center text-xs  tracking-widest rounded-none bg-brand-red hover:bg-brand-red/90 text-white shadow-lg transition-all"
+              className="block w-full py-3.5 text-center text-xs  tracking-widest rounded-none bg-brand-red hover:bg-brand-red/90 text-white shadow-lg transition-all"
             >
               Admin Portal Login
             </Link>

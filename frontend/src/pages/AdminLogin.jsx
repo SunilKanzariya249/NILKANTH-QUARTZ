@@ -113,18 +113,13 @@ const AdminLogin = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-brand-red hover:bg-brand-red/90 disabled:bg-gray-800 text-white font-bold uppercase tracking-widest text-[15px] py-4.5 rounded-none shadow-lg transition-all active:scale-[0.98] disabled:scale-100 duration-200"
+              className="w-full bg-brand-red hover:bg-brand-red/90 disabled:bg-gray-800 text-white font-bold uppercase tracking-widest text-[15px] py-[10px] rounded-none shadow-lg transition-all active:scale-[0.98] disabled:scale-100 duration-200"
             >
               {loading ? 'Authenticating...' : 'Sign In To Panel'}
             </button>
           </form>
 
-          {/* Setup seed reminder */}
-          <div className="text-center pt-2">
-            <span className="text-[10px] text-gray-600 block uppercase tracking-wider">
-              Default Seeding: admin@nilkanthquartz.com / NilkanthAdmin2026!
-            </span>
-          </div>
+          
         </div>
 
       </div>

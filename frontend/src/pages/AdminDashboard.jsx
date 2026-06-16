@@ -14,8 +14,7 @@ import {
   Upload, 
   CheckCircle, 
   Video,
-  FileVideo,
-  Image as ImageIcon
+  FileVideo
 } from 'lucide-react';
 import { useAuthStore } from '../store/useAuthStore';
 import { useProductStore } from '../store/useProductStore';
@@ -71,6 +70,17 @@ const AdminDashboard = () => {
     fetchProducts({ limit: 1000 });
     fetchDashboardStats();
   }, [fetchProducts, fetchDashboardStats]);
+
+  useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [modalOpen]);
 
   const triggerToast = (message, type = 'success') => {
     setToast({ show: true, message, type });
@@ -248,33 +258,32 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0B0B] flex flex-col text-white">
+    <div className="min-h-screen bg-[#F9FAFB] flex flex-col text-[#1A1A1A]">
       <SEO title="Admin Dashboard | Nilkanth Quartz" description="Manage Nilkanth Quartz wall clock catalog products, categories, features, and upload media files." />
 
       {/* Toast Alert Widget */}
       {toast.show && (
-        <div className={`fixed top-6 right-6 z-50 px-6 py-4 rounded-none shadow-2xl flex items-center gap-3 text-xs font-bold uppercase tracking-widest border text-white animate-fadeIn ${
-          toast.type === 'error' ? 'bg-red-600 border-red-700' : 'bg-emerald-600 border-emerald-700'
+        <div className={`fixed top-6 right-6 z-50 px-6 py-4 rounded-none shadow-2xl flex items-center gap-3 text-xs font-semibold border animate-fadeIn ${
+          toast.type === 'error' ? 'bg-red-50 border-red-200 text-red-800' : 'bg-emerald-50 border-emerald-200 text-emerald-800'
         }`}>
-          <CheckCircle className="w-5 h-5 shrink-0" />
+          <CheckCircle className={`w-5 h-5 shrink-0 ${toast.type === 'error' ? 'text-red-600' : 'text-emerald-600'}`} />
           <span>{toast.message}</span>
         </div>
       )}
 
       {/* Header bar */}
-      <header className="bg-[#121212] text-white px-6 sm:px-8 py-5 border-b border-white/10 flex items-center justify-between sticky top-0 z-30">
+      <header className="bg-white text-black px-6 sm:px-8 py-5 border-b border-[#E5E7EB] flex items-center justify-between sticky top-0 z-30 shadow-sm">
         <div className="flex items-center gap-3.5">
-          <div className="bg-white p-2 rounded-none">
+          <div className="bg-white p-1 rounded-none border border-[#E5E7EB] shadow-sm">
             <img src="/nilkanth-quartz-logo.png" alt="Nilkanth Logo" className="h-8 w-auto object-contain" />
           </div>
-          
         </div>
 
         <div className="flex items-center gap-4">
           <span className="text-[10px] text-gray-500 hidden md:inline-block font-bold uppercase tracking-widest">Logged: {admin?.email || 'admin'}</span>
           <button 
             onClick={handleLogout}
-            className="flex items-center gap-2 bg-transparent hover:bg-brand-red border border-white/10 hover:border-brand-red px-5 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-widest transition-all duration-300"
+            className="flex items-center gap-2 bg-[#F3F4F6] hover:bg-brand-red text-[#374151] hover:text-white border border-[#D1D5DB] hover:border-brand-red px-5 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-widest transition-all duration-300"
           >
             <LogOut className="w-3.5 h-3.5" />
             Logout
@@ -286,46 +295,46 @@ const AdminDashboard = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow space-y-10">
         
         {/* Statistics KPIs Grid */}
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="bg-[#121212] p-6 rounded-none border border-white/10 shadow-sm flex items-center justify-between">
+        <section className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="bg-white p-2 rounded-none border border-[#E5E7EB] shadow-sm flex items-center justify-between">
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888] block">Total Clocks</span>
-              <span className="text-3xl font-black text-white">{stats?.totalProducts || 0}</span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">Total Clocks</span>
+              <span className="text-3xl font-semibold text-black tracking-tight">{stats?.totalProducts || 0}</span>
             </div>
-            <div className="bg-white/5 border border-white/10 p-3.5 rounded-none text-white">
+            <div className="bg-[#F9FAFB] border border-[#E5E7EB] p-3.5 rounded-none text-[#374151]">
               <Clock className="w-6 h-6" />
             </div>
           </div>
 
-          <div className="bg-[#121212] p-6 rounded-none border border-white/10 shadow-sm flex items-center justify-between">
+          <div className="bg-white p-2 rounded-none border border-[#E5E7EB] shadow-sm flex items-center justify-between">
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888] block">Total Categories</span>
-              <span className="text-3xl font-black text-white">{stats?.totalCategories || 0}</span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">Total Categories</span>
+              <span className="text-3xl font-semibold text-black tracking-tight">{stats?.totalCategories || 0}</span>
             </div>
-            <div className="bg-white/5 border border-white/10 p-3.5 rounded-none text-white">
+            <div className="bg-[#F9FAFB] border border-[#E5E7EB] p-3.5 rounded-none text-[#374151]">
               <Tag className="w-6 h-6" />
             </div>
           </div>
 
-          <div className="bg-[#121212] p-6 rounded-none border border-white/10 shadow-sm flex items-center justify-between">
+          <div className="bg-white p-2 rounded-none border border-[#E5E7EB] shadow-sm flex items-center justify-between">
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888] block">Featured Items</span>
-              <span className="text-3xl font-black text-white">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">Featured Items</span>
+              <span className="text-3xl font-semibold text-black tracking-tight">
                 {products.filter(p => p.featured).length}
               </span>
             </div>
-            <div className="bg-white/5 border border-white/10 p-3.5 rounded-none text-white">
+            <div className="bg-[#F9FAFB] border border-[#E5E7EB] p-3.5 rounded-none text-[#374151]">
               <TrendingUp className="w-6 h-6" />
             </div>
           </div>
         </section>
 
         {/* Product Management Area */}
-        <section className="bg-[#121212] rounded-none border border-white/10 shadow-sm overflow-hidden flex flex-col">
-          <div className="p-6 border-b border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/[0.02]">
+        <section className="bg-white rounded-none border border-[#E5E7EB] shadow-sm overflow-hidden flex flex-col">
+          <div className="p-6 border-b border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#F9FAFB]">
             <div className="text-left">
-              <h2 className="font-extrabold text-white text-base uppercase tracking-widest">Product Registry</h2>
-              <p className="text-[10px] text-[#888888] tracking-wider uppercase mt-1">Add, edit, modify catalog records, and upload images/videos.</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-black tracking-tight uppercase">Product Registry</h2>
+              <p className="text-[11px] text-gray-500 tracking-normal uppercase mt-1">Add, edit, modify catalog records, and upload images/videos.</p>
             </div>
             <button
               onClick={handleOpenAddModal}
@@ -337,12 +346,12 @@ const AdminDashboard = () => {
           </div>
 
           {loading ? (
-            <div className="p-12 text-center text-[#888888] uppercase tracking-widest text-xs animate-pulse">Loading catalog list...</div>
+            <div className="p-12 text-center text-gray-400 uppercase tracking-widest text-xs animate-pulse">Loading catalog list...</div>
           ) : (
             <div className="overflow-x-auto w-full max-w-full">
               <table className="w-full text-left border-collapse text-sm">
                 <thead>
-                  <tr className="bg-white/[0.02] border-b border-white/10 text-[#888888] font-bold text-[10px] uppercase tracking-[0.25em]">
+                  <tr className="bg-[#F9FAFB] border-b border-[#E5E7EB] text-gray-500 font-bold text-[11px] uppercase tracking-wider">
                     <th className="px-3 sm:px-6 py-3.5">Image</th>
                     <th className="px-3 sm:px-6 py-3.5">Model No.</th>
                     <th className="px-3 sm:px-6 py-3.5 hidden md:table-cell">Category</th>
@@ -352,11 +361,11 @@ const AdminDashboard = () => {
                     <th className="px-3 sm:px-6 py-3.5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-[#E5E7EB]">
                   {products.map((prod) => (
-                    <tr key={prod._id} className="hover:bg-white/[0.03] transition-colors">
+                    <tr key={prod._id} className="hover:bg-gray-50/50 transition-colors">
                       <td className="px-3 sm:px-6 py-3.5">
-                        <div className="w-14 h-14 rounded-none bg-white/5 border border-white/10 overflow-hidden p-1 flex items-center justify-center shadow-sm">
+                        <div className="w-14 h-14 rounded-none bg-white border border-[#E5E7EB] overflow-hidden p-1 flex items-center justify-center shadow-sm">
                           <img 
                             src={prod.images && prod.images.length > 0 ? prod.images[0] : '/nilkanth-quartz-logo.png'} 
                             alt={prod.modelNo} 
@@ -364,20 +373,20 @@ const AdminDashboard = () => {
                           />
                         </div>
                       </td>
-                      <td className="px-3 sm:px-6 py-3.5 font-bold text-white font-mono text-xs tracking-wider uppercase">
+                      <td className="px-3 sm:px-6 py-3.5 font-bold text-black font-mono text-sm tracking-tight uppercase">
                         {prod.modelNo}
                       </td>
                       <td className="px-3 sm:px-6 py-3.5 hidden md:table-cell">
-                        <span className="px-3 py-1 bg-white/5 text-white text-[10px] font-bold uppercase tracking-wider rounded-none border border-white/10">
+                        <span className="px-3 py-1 bg-[#F3F4F6] text-black text-[11px] font-bold uppercase tracking-normal rounded-none border border-[#E5E7EB]">
                           {prod.category}
                         </span>
                       </td>
-                      <td className="px-3 sm:px-6 py-3.5 hidden md:table-cell text-xs text-gray-400 font-semibold uppercase tracking-wider">
+                      <td className="px-3 sm:px-6 py-3.5 hidden md:table-cell text-xs text-gray-700 font-medium uppercase tracking-normal">
                         {prod.colors}
                       </td>
-                      <td className="px-3 sm:px-6 py-3.5 hidden md:table-cell font-bold text-white">
-                        <span className="block">₹{prod.price}</span>
-                        <span className="text-[10px] text-gray-500 block font-mono font-medium mt-0.5">MOQ: {prod.moq || 100} pcs</span>
+                      <td className="px-3 sm:px-6 py-3.5 hidden md:table-cell font-bold text-black">
+                        <span className="block text-sm font-extrabold text-black tracking-tight">₹{prod.price}</span>
+                        <span className="text-[10px] text-gray-400 block font-mono font-medium mt-0.5">MOQ: {prod.moq || 100} pcs</span>
                       </td>
                       <td className="px-3 sm:px-6 py-3.5 hidden md:table-cell">
                         {prod.featured ? (
@@ -385,7 +394,7 @@ const AdminDashboard = () => {
                             <CheckCircle className="w-4 h-4 shrink-0 text-brand-red" /> Yes
                           </span>
                         ) : (
-                          <span className="text-gray-600 text-xs font-semibold uppercase tracking-wider">No</span>
+                          <span className="text-gray-400 text-xs font-semibold uppercase tracking-wider">No</span>
                         )}
                       </td>
                       <td className="px-3 sm:px-6 py-3.5 text-right">
@@ -393,14 +402,14 @@ const AdminDashboard = () => {
                           <button
                             onClick={() => handleOpenEditModal(prod)}
                             title="Edit Clock details"
-                            className="p-2 sm:p-2.5 bg-white/5 hover:bg-brand-red hover:text-white text-gray-400 hover:border-brand-red rounded-none border border-white/10 transition-colors duration-200"
+                            className="p-2 sm:p-2.5 bg-white hover:bg-brand-red hover:text-white text-gray-500 hover:border-brand-red rounded-none border border-[#D1D5DB] transition-colors duration-200"
                           >
                             <Edit className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDeleteProduct(prod._id)}
                             title="Delete Clock"
-                            className="p-2 sm:p-2.5 bg-red-500/5 hover:bg-red-600 text-red-500 hover:text-white rounded-none border border-red-500/10 hover:border-red-600 transition-colors duration-200"
+                            className="p-2 sm:p-2.5 bg-red-50 hover:bg-red-600 text-red-600 hover:text-white rounded-none border border-red-200 hover:border-red-600 transition-colors duration-200"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -411,7 +420,7 @@ const AdminDashboard = () => {
                   
                   {products.length === 0 && (
                     <tr>
-                      <td colSpan="7" className="px-3 sm:px-6 py-16 text-center text-gray-500 uppercase tracking-widest text-xs">
+                      <td colSpan="7" className="px-3 sm:px-6 py-16 text-center text-gray-400 uppercase tracking-widest text-xs">
                         No product listings found in database registry. Click "Add New Clock" to get started.
                       </td>
                     </tr>
@@ -426,20 +435,20 @@ const AdminDashboard = () => {
 
       {/* CRUD Product Modal Dialog Overlay */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
-          <div className="bg-[#121212] border border-white/10 rounded-none w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col text-white">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
+          <div className="bg-white border border-[#E5E7EB] rounded-none w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col text-black">
             
             {/* Modal Header */}
-            <div className="p-6 border-b border-white/10 flex items-center justify-between bg-white/[0.02] sticky top-0 z-10">
+            <div className="p-6 border-b border-[#E5E7EB] flex items-center justify-between bg-[#F9FAFB] sticky top-0 z-10">
               <div className="text-left">
-                <h3 className="font-extrabold text-white text-base uppercase tracking-widest">
+                <h3 className="text-xl font-bold text-black tracking-tight uppercase">
                   {editProduct ? 'Modify Wall Clock Records' : 'Add New Wall Clock'}
                 </h3>
-                <p className="text-[10px] text-[#888888] tracking-wider uppercase mt-1">Complete standard fields below to update catalogue.</p>
+                <p className="text-[11px] text-gray-500 tracking-normal uppercase mt-1">Complete standard fields below to update catalogue.</p>
               </div>
               <button 
                 onClick={() => setModalOpen(false)}
-                className="p-2 rounded-none text-gray-400 hover:bg-white/5 hover:text-white border border-transparent hover:border-white/10 transition-colors"
+                className="p-2 rounded-none text-gray-500 hover:bg-gray-100 hover:text-black border border-transparent hover:border-[#D1D5DB] transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -450,7 +459,7 @@ const AdminDashboard = () => {
               
               {/* Form Warning Prompt */}
               {formValidationWarning && (
-                <div className="bg-red-500/10 text-red-400 text-xs font-semibold p-4 rounded-none border border-red-500/20 flex items-center gap-2">
+                <div className="bg-red-55 border-red-200 text-red-700 text-xs font-semibold p-4 rounded-none border flex items-center gap-2">
                   <X className="w-4 h-4 shrink-0" />
                   <span>{formValidationWarning}</span>
                 </div>
@@ -458,7 +467,7 @@ const AdminDashboard = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888] mb-2">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600 mb-2">
                     Available Colors
                   </label>
                   <input
@@ -467,12 +476,12 @@ const AdminDashboard = () => {
                     placeholder="Brown, Ivory, Wooden Gold"
                     value={colors}
                     onChange={(e) => setColors(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3.5 text-xs text-white focus:border-brand-red focus:bg-white/10 focus:outline-none transition-all duration-200"
+                    className="w-full bg-[#F9FAFB] border border-[#D1D5DB] rounded-none px-4 py-3.5 text-xs text-black focus:border-brand-red focus:bg-white focus:outline-none transition-all duration-200"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888] mb-2">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600 mb-2">
                     Wholesale Price (₹)
                   </label>
                   <input
@@ -482,14 +491,14 @@ const AdminDashboard = () => {
                     placeholder="450"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3.5 text-xs text-white focus:border-brand-red focus:bg-white/10 focus:outline-none transition-all duration-200"
+                    className="w-full bg-[#F9FAFB] border border-[#D1D5DB] rounded-none px-4 py-3.5 text-xs text-black focus:border-brand-red focus:bg-white focus:outline-none transition-all duration-200"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888] mb-2">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600 mb-2">
                     Category Range
                   </label>
                   <input
@@ -498,7 +507,7 @@ const AdminDashboard = () => {
                     placeholder="Designer Clocks"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3.5 text-xs text-white focus:border-brand-red focus:bg-white/10 focus:outline-none transition-all duration-200"
+                    className="w-full bg-[#F9FAFB] border border-[#D1D5DB] rounded-none px-4 py-3.5 text-xs text-black focus:border-brand-red focus:bg-white focus:outline-none transition-all duration-200"
                     list="categories-list"
                   />
                   {/* Category suggestions */}
@@ -512,16 +521,16 @@ const AdminDashboard = () => {
                 </div>
 
                 <div className="flex items-center justify-between sm:pt-6">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888]">Featured Placement</span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-gray-600">Featured Placement</span>
                   <button
                     type="button"
                     onClick={() => setFeatured(!featured)}
-                    className="text-white focus:outline-none transition-colors"
+                    className="text-black focus:outline-none transition-colors"
                   >
                     {featured ? (
                       <ToggleRight className="w-12 h-12 text-brand-red" />
                     ) : (
-                      <ToggleLeft className="w-12 h-12 text-white/20" />
+                      <ToggleLeft className="w-12 h-12 text-gray-300" />
                     )}
                   </button>
                 </div>
@@ -530,7 +539,7 @@ const AdminDashboard = () => {
               {/* Added Schema Fields: Model No, Size, Packaging, MOQ */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888] mb-2">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600 mb-2">
                     Model No.
                   </label>
                   <input
@@ -539,12 +548,12 @@ const AdminDashboard = () => {
                     placeholder="NK-101"
                     value={modelNo}
                     onChange={(e) => setModelNo(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-none px-3 py-3.5 text-xs text-white focus:border-brand-red focus:bg-white/10 focus:outline-none transition-all duration-200"
+                    className="w-full bg-[#F9FAFB] border border-[#D1D5DB] rounded-none px-3 py-3.5 text-xs text-black focus:border-brand-red focus:bg-white focus:outline-none transition-all duration-200"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888] mb-2">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600 mb-2">
                     Dimensions (Size)
                   </label>
                   <input
@@ -553,12 +562,12 @@ const AdminDashboard = () => {
                     placeholder="300mm x 300mm"
                     value={size}
                     onChange={(e) => setSize(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-none px-3 py-3.5 text-xs text-white focus:border-brand-red focus:bg-white/10 focus:outline-none transition-all duration-200"
+                    className="w-full bg-[#F9FAFB] border border-[#D1D5DB] rounded-none px-3 py-3.5 text-xs text-black focus:border-brand-red focus:bg-white focus:outline-none transition-all duration-200"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888] mb-2">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600 mb-2">
                     Packaging (Pkg)
                   </label>
                   <input
@@ -567,12 +576,12 @@ const AdminDashboard = () => {
                     placeholder="50 pcs"
                     value={pkg}
                     onChange={(e) => setPkg(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-none px-3 py-3.5 text-xs text-white focus:border-brand-red focus:bg-white/10 focus:outline-none transition-all duration-200"
+                    className="w-full bg-[#F9FAFB] border border-[#D1D5DB] rounded-none px-3 py-3.5 text-xs text-black focus:border-brand-red focus:bg-white focus:outline-none transition-all duration-200"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888] mb-2">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600 mb-2">
                     Min. Order (MOQ)
                   </label>
                   <input
@@ -582,13 +591,13 @@ const AdminDashboard = () => {
                     placeholder="100"
                     value={moq}
                     onChange={(e) => setMoq(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-none px-3 py-3.5 text-xs text-white focus:border-brand-red focus:bg-white/10 focus:outline-none transition-all duration-200"
+                    className="w-full bg-[#F9FAFB] border border-[#D1D5DB] rounded-none px-3 py-3.5 text-xs text-black focus:border-brand-red focus:bg-white focus:outline-none transition-all duration-200"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888] mb-2">
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600 mb-2">
                   Catalogue Description
                 </label>
                 <textarea
@@ -597,13 +606,13 @@ const AdminDashboard = () => {
                   placeholder="ABS structural back shell with glass protection dial..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3.5 text-xs text-white focus:border-brand-red focus:bg-white/10 focus:outline-none resize-none transition-all duration-200"
+                  className="w-full bg-[#F9FAFB] border border-[#D1D5DB] rounded-none px-4 py-3.5 text-xs text-black focus:border-brand-red focus:bg-white focus:outline-none resize-none transition-all duration-200"
                 />
               </div>
 
               {/* 5-Images upload strip manager */}
               <div className="space-y-3">
-                <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888]">
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600">
                   Product Images (Maximum 5)
                 </label>
                 
@@ -611,12 +620,12 @@ const AdminDashboard = () => {
                   
                   {/* Existing Images to Keep List */}
                   {existingImagesToKeep.map((imgUrl, idx) => (
-                    <div key={`exist-${idx}`} className="relative aspect-square rounded-none bg-white/5 border border-white/10 overflow-hidden p-2 flex items-center justify-center">
+                    <div key={`exist-${idx}`} className="relative aspect-square rounded-none bg-white border border-[#E5E7EB] overflow-hidden p-2 flex items-center justify-center shadow-sm">
                       <img src={imgUrl} alt="catalog preview" className="max-h-full max-w-full object-contain" />
                       <button
                         type="button"
                         onClick={() => removeExistingCatalogImage(imgUrl)}
-                        className="absolute top-1 right-1 bg-brand-red hover:bg-brand-red/90 text-white rounded-none p-1 shadow-md border border-white/10"
+                        className="absolute top-1 right-1 bg-brand-red hover:bg-brand-red/90 text-white rounded-none p-1 shadow-md border border-[#E5E7EB]"
                       >
                         <X className="w-3.5 h-3.5" />
                       </button>
@@ -627,12 +636,12 @@ const AdminDashboard = () => {
                   {newImageFiles.map((file, idx) => {
                     const localUrl = URL.createObjectURL(file);
                     return (
-                      <div key={`new-${idx}`} className="relative aspect-square rounded-none bg-white/5 border border-brand-red/40 overflow-hidden p-2 flex items-center justify-center">
+                      <div key={`new-${idx}`} className="relative aspect-square rounded-none bg-white border border-brand-red/40 overflow-hidden p-2 flex items-center justify-center shadow-sm">
                         <img src={localUrl} alt="upload preview" className="max-h-full max-w-full object-contain" />
                         <button
                           type="button"
                           onClick={() => removeSelectedNewImage(idx)}
-                          className="absolute top-1 right-1 bg-brand-red hover:bg-brand-red/90 text-white rounded-none p-1 shadow-md border border-white/10"
+                          className="absolute top-1 right-1 bg-brand-red hover:bg-brand-red/90 text-white rounded-none p-1 shadow-md border border-[#E5E7EB]"
                         >
                           <X className="w-3.5 h-3.5" />
                         </button>
@@ -642,7 +651,7 @@ const AdminDashboard = () => {
 
                   {/* Add Image File Selector Card */}
                   {existingImagesToKeep.length + newImageFiles.length < 5 && (
-                    <label className="aspect-square rounded-none border-2 border-dashed border-white/15 hover:border-brand-red flex flex-col items-center justify-center cursor-pointer hover:bg-white/5 transition-colors p-4">
+                    <label className="aspect-square rounded-none border-2 border-dashed border-gray-300 hover:border-brand-red flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors p-4">
                       <input
                         type="file"
                         multiple
@@ -662,19 +671,19 @@ const AdminDashboard = () => {
 
               {/* Video upload input */}
               <div className="space-y-3 pt-2">
-                <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#888888]">
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600">
                   Product Video (Max 1)
                 </label>
 
                 {existingVideo && !removeExistingVideo ? (
-                  <div className="bg-white/5 rounded-none p-4 border border-white/10 flex items-center justify-between">
+                  <div className="bg-[#F9FAFB] rounded-none p-4 border border-[#E5E7EB] flex items-center justify-between shadow-sm">
                     <div className="flex items-center gap-3">
-                      <div className="bg-white/5 p-2.5 rounded-none text-brand-red shadow-sm border border-white/10">
+                      <div className="bg-white p-2.5 rounded-none text-brand-red shadow-sm border border-[#E5E7EB]">
                         <FileVideo className="w-5 h-5 text-brand-red" />
                       </div>
                       <div className="text-left">
-                        <span className="text-xs font-bold text-white block uppercase tracking-wider">Existing Video File</span>
-                        <a href={existingVideo} target="_blank" rel="noreferrer" className="text-[10px] text-[#888888] hover:text-white hover:underline line-clamp-1 mt-1 block">
+                        <span className="text-xs font-bold text-black block uppercase tracking-wider">Existing Video File</span>
+                        <a href={existingVideo} target="_blank" rel="noreferrer" className="text-[10px] text-gray-500 hover:text-black hover:underline line-clamp-1 mt-1 block">
                           Play Attached Video
                         </a>
                       </div>
@@ -689,7 +698,7 @@ const AdminDashboard = () => {
                   </div>
                 ) : (
                   <div className="flex items-center gap-4">
-                    <label className="flex items-center gap-2 px-4 py-3 border border-white/10 hover:border-brand-red rounded-none cursor-pointer bg-white/5 hover:bg-white/10 text-[10px] font-bold uppercase tracking-wider text-[#AAAAAA] hover:text-white transition-colors duration-200">
+                    <label className="flex items-center gap-2 px-4 py-3 border border-[#D1D5DB] hover:border-brand-red rounded-none cursor-pointer bg-[#F9FAFB] hover:bg-gray-50 text-[10px] font-bold uppercase tracking-wider text-gray-500 hover:text-black transition-colors duration-200">
                       <input
                         type="file"
                         accept="video/*"
@@ -700,7 +709,7 @@ const AdminDashboard = () => {
                       {newVideoFile ? 'Change Video File' : 'Upload Video clip'}
                     </label>
                     {newVideoFile && (
-                      <span className="text-xs text-gray-400 font-semibold truncate max-w-xs uppercase tracking-wider font-mono">
+                      <span className="text-xs text-gray-500 font-semibold truncate max-w-xs uppercase tracking-wider font-mono">
                         {newVideoFile.name}
                       </span>
                     )}
@@ -709,18 +718,18 @@ const AdminDashboard = () => {
               </div>
 
               {/* Action Buttons sticky footer */}
-              <div className="pt-6 border-t border-white/10 flex items-center justify-end gap-3 sticky bottom-0 bg-[#121212]">
+              <div className="pt-6 border-t border-[#E5E7EB] flex items-center justify-end gap-3 sticky bottom-0 bg-white">
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="px-6 py-3.5 border border-white/10 hover:bg-white/5 text-[#AAAAAA] hover:text-white text-[11px] font-bold uppercase tracking-widest rounded-none transition-colors"
+                  className="px-6 py-3.5 border border-[#D1D5DB] hover:bg-gray-50 text-gray-500 hover:text-black text-[11px] font-bold uppercase tracking-widest rounded-none transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={actionLoading}
-                  className="px-8 py-3.5 bg-brand-red hover:bg-brand-red/90 disabled:bg-gray-800 text-white text-[11px] font-bold uppercase tracking-widest rounded-none shadow-md transition-all active:scale-[0.98] flex items-center gap-2"
+                  className="px-8 py-3.5 bg-brand-red hover:bg-brand-red/90 disabled:bg-gray-200 text-white text-[11px] font-bold uppercase tracking-widest rounded-none shadow-md transition-all active:scale-[0.98] flex items-center gap-2"
                 >
                   {actionLoading ? 'Saving changes...' : editProduct ? 'Save Updates' : 'Add Product'}
                 </button>

@@ -494,8 +494,8 @@ const Home = () => {
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-red block">
                Who We Are
               </span>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[70px] xl:text-[80px] font-semibold text-[#1C1C1C] leading-[1.05] tracking-tighter">
-                Leading Wall Clock Manufacturers & Suppliers
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[60px] xl:text-[70px] font-semibold text-[#1C1C1C] leading-[1.05] tracking-[0.5px]">
+              Trusted <br /> Wall Clock Manufacturers & Suppliers
               </h2>
             </div>
 
@@ -536,17 +536,18 @@ const Home = () => {
             <div key={index} className="flex items-center gap-20 px-10">
               {[...Array(10)].map((_, i) => (
                 <div
+                style={{ fontFamily: " 'Sora', sans-serif" }}
                   key={i}
-                  className="flex items-center gap-10 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold uppercase tracking-[6px]"
+                  className="flex items-center  gap-10 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-[1px] "
                 >
                   {/* Filled Text */}
                   <span className="text-black/90">Nilkanth</span>
 
                   {/* Outline Text */}
                   <span
-                    className="text-black/10"
+                    className="text-transparent"
                     style={{
-                      WebkitTextStroke: "",
+                      WebkitTextStroke: "1px  rgba(0,0,0,0.25)",
                     }}
                   >
                     Quartz
@@ -571,7 +572,7 @@ const Home = () => {
 
             .animate-marquee {
               width: max-content;
-              animation: marquee 200s linear infinite;
+              animation: marquee 450s linear infinite;
             }
 
             .animate-marquee:hover {
@@ -596,12 +597,12 @@ const Home = () => {
         <div className="relative max-w-full mx-auto px-0 sm:px-8 lg:px-1 z-10">
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <div className="space-y-3 pl-5 md:pl-40">
+            <div className="space-y-6 pl-5 md:pl-40">
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#666666]">
                 COLLECTION
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#1E293B] tracking-tight leading-tight max-w-2xl">
-                Exploring the Craftsmanship of Luxury Clocks
+                Find the Perfect Timepiece for Your Space
               </h2>
             </div>
             <div className=' pl-5 md:pr-16 '>
@@ -904,7 +905,7 @@ const Home = () => {
               <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight leading-tight uppercase">
                 DOWNLOAD OUR COMPLETE PORTFOLIO
               </h2>
-              <p className="text-[#CCCCCC] text-xs sm:text-sm font-medium uppercase tracking-wider leading-relaxed">
+              <p className="text-[#CCCCCC] text-xs sm:text-sm font-medium  tracking-wider leading-relaxed">
                 Explore our full line-up of designer clocks, promotional series, custom branding solutions, and wholesale technical specifications in one high-resolution PDF document.
               </p>
             </div>
@@ -912,9 +913,9 @@ const Home = () => {
               <a
                 href="/Nilkanth Quartz .pdf"
                 download="Nilkanth_Quartz_Catalogue.pdf"
-                className="inline-flex items-center gap-3 bg-brand-red hover:bg-brand-red/90 text-white font-bold uppercase tracking-widest text-md px-8 py-4.5 rounded-none transition-all active:scale-[0.99] duration-200 shadow-lg shadow-brand-red/10"
+                className="inline-flex items-center gap-3 bg-brand-red hover:bg-brand-red/90 text-white font-semibold uppercase tracking-widest text-lg px-8 py-4.9 rounded-none transition-all active:scale-[0.99] duration-200 shadow-lg shadow-brand-red/10"
               >
-                <span>Download PDF Catalogue</span>
+                <span>Download PDF</span>
                 
               </a>
             </div>
@@ -1070,10 +1071,10 @@ const Home = () => {
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold uppercase tracking-widest text-[10px] py-4 rounded-none shadow-md shadow-emerald-500/10 transition-all active:scale-[0.99] duration-200"
+                    className="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-semibold  tracking-widest text-[15px] py-[11px] rounded-none shadow-md shadow-emerald-500/10 transition-all active:scale-[0.99] duration-200"
                   >
                     <WhatsAppIcon className="w-4 h-4 fill-current" />
-                    Send Inquiry via WhatsApp
+                    Send Inquiry
                   </button>
                 </form>
               )}
