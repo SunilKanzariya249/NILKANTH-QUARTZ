@@ -47,7 +47,7 @@ const About = () => {
               <h2 className="text-3xl font-extrabold uppercase tracking-tight text-gray-950">
                 Nilkanth Quartz
               </h2>
-              <p className="text-gray-800 text-base sm:text-lg leading-relaxed font-semibold uppercase tracking-wide">
+              <p className="text-gray-800 text-base sm:text-lg leading-relaxed font-semibold  tracking-wide">
                 Nilkanth Quartz is a trusted manufacturer and supplier of premium wall clocks based in the renowned manufacturing hub of Morbi, Gujarat, India. With a passion for quality craftsmanship and innovative design, we specialize in creating wall clocks that combine functionality, durability, and aesthetic appeal.
               </p>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">

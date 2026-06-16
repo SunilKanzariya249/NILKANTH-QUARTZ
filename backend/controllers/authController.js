@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 const getAdminCredentials = () => {
   const email = process.env.ADMIN_EMAIL || 'admin@gmail.com';
   // If no password is set, use the secure default: "NilkanthAdmin2026!"
-  const password = process.env.ADMIN_PASSWORD || 'sunil';
+  const password = process.env.ADMIN_PASSWORD || 'admin';
   return { email, password };
 };
 
