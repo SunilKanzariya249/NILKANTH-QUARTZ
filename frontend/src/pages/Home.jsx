@@ -418,7 +418,7 @@ const Home = () => {
     
     // Redirect to WhatsApp
     const whatsappMessage = `Hello Nilkanth Quartz,\nMy Name: ${contactForm.name}\nEmail: ${contactForm.email || 'N/A'}\nMessage: ${contactForm.message}`;
-    const url = `https://wa.me/919426842751?text=${encodeURIComponent(whatsappMessage)}`;
+    const url = `https://wa.me/919898693626?text=${encodeURIComponent(whatsappMessage)}`;
     window.open(url, '_blank');
     
     setFormSent(true);

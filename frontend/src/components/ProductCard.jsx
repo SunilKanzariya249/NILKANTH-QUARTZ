@@ -36,7 +36,7 @@ Product Link: ${productUrl}
 Please provide more details.`;
 
     const encodedText = encodeURIComponent(rawMessage);
-    const whatsappUrl = `https://wa.me/919426842751?text=${encodedText}`;
+    const whatsappUrl = `https://wa.me/919898693626?text=${encodedText}`;
     window.open(whatsappUrl, '_blank');
   };
 
