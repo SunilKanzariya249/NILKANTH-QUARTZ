@@ -159,7 +159,7 @@ const Products = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
           {/* Left Sidebar Filters - Desktop */}
-          <aside className={`lg:col-span-3 space-y-6 ${showMobileFilters ? 'block' : 'hidden lg:block'}`}>
+          <aside className={`lg:col-span-3 mb-12 space-y-6 ${showMobileFilters ? 'block' : 'hidden lg:block'}`}>
             <div className="bg-white p-6 border border-[#EEEEEE] rounded-none shadow-sm space-y-6 sticky top-28">
               <div>
                 <h3 className="font-bold text-[#111111] text-xs uppercase tracking-widest border-b border-[#EEEEEE] pb-3 mb-4">
@@ -205,7 +205,7 @@ const Products = () => {
           </aside>
 
           {/* Right Product Grid */}
-          <main className="lg:col-span-9 space-y-12">
+          <main className="lg:col-span-9 space-y-12 mb-12">
             {loading ? (
               <SkeletonLoader />
             ) : (

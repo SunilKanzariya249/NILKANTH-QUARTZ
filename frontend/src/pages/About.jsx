@@ -1,10 +1,11 @@
 import React from 'react';
 import { Target, Eye, Clock, ShieldCheck, Award, Layers, Zap, Gift, Building2, Palette, CheckCircle2, Factory, Handshake } from 'lucide-react';
+import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
 
 const About = () => {
   return (
-    <div className="bg-[#FCFCFC] py-0 min-h-screen select-none">
+    <div className="bg-[#FCFCFC] py-0 min-h-screen select-none overflow-hidden">
       <SEO 
         title="About Us | Nilkanth Quartz Wall Clocks" 
         description="Learn about Nilkanth Quartz wall clock manufacturing history, our corporate mission, vision, core values, and our wide range of custom commercial clocks."
@@ -13,7 +14,12 @@ const About = () => {
       {/* About Page Header Banner */}
       <div className="bg-brand-dark text-white pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-white/10 mb-12 min-h-[340px] sm:min-h-[300px] lg:min-h-[260px] flex flex-col justify-center">
         <div className="max-w-7xl w-full mx-auto px-4 sm:px-8 lg:px-16 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-          <div className="text-left space-y-3">
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-left space-y-3"
+          >
             <div className="flex items-center gap-2">
               <span className="inline-block w-2.5 h-2.5 bg-brand-red"></span>
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#AAAAAA]">
@@ -26,7 +32,7 @@ const About = () => {
             <p className="text-gray-300 text-xs font-medium uppercase tracking-wider max-w-xl">
               Crafting Quality Timepieces with Precision, Passion, and Trust.
             </p>
-          </div>
+          </motion.div>
           <div className="relative max-w-md w-full hidden lg:block h-12"></div>
         </div>
       </div>
@@ -34,7 +40,12 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 pb-24 space-y-20">
         
         {/* Section 1: Who We Are / Profile Story */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <div className="flex items-center gap-2 mb-6">
             <span className="inline-block w-2.5 h-2.5 bg-black"></span>
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
@@ -47,7 +58,7 @@ const About = () => {
               <h2 className="text-3xl font-extrabold uppercase tracking-tight text-gray-950">
                 Nilkanth Quartz
               </h2>
-              <p className="text-gray-800 text-base sm:text-lg leading-relaxed font-semibold  tracking-wide">
+              <p className="text-gray-800 text-base sm:text-lg leading-relaxed font-semibold tracking-wide">
                 Nilkanth Quartz is a trusted manufacturer and supplier of premium wall clocks based in the renowned manufacturing hub of Morbi, Gujarat, India. With a passion for quality craftsmanship and innovative design, we specialize in creating wall clocks that combine functionality, durability, and aesthetic appeal.
               </p>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
@@ -55,8 +66,8 @@ const About = () => {
               </p>
             </div>
             <div className="space-y-6">
-              <div className="bg-[#FAFAFA] border border-[#EEEEEE] p-8 rounded-none relative">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-brand-red/5 blur-xl pointer-events-none" />
+              <div className="bg-[#FAFAFA] border border-[#EEEEEE] p-8 rounded-none relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-brand-red/5 blur-xl pointer-events-none transition-transform duration-700 group-hover:scale-150" />
                 <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-6">
                   At Nilkanth Quartz, every clock is designed with precision and manufactured using quality materials to ensure long-lasting performance. Whether for homes, offices, hotels, schools, hospitals, showrooms, or corporate spaces, our products are crafted to enhance every environment while delivering accurate timekeeping.
                 </p>
@@ -66,41 +77,59 @@ const About = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Section 2: Mission & Vision */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Mission */}
-          <div className="bg-white p-8 sm:p-10 border border-[#EEEEEE] border-l-4 border-l-brand-red rounded-none shadow-sm space-y-4 flex flex-col items-start">
-            <div className="bg-[#FAFAFA] p-3 border border-[#EEEEEE] text-brand-red">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="group bg-white p-8 sm:p-10 border border-[#EEEEEE] border-l-4 border-l-brand-red rounded-none shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] space-y-4 flex flex-col items-start cursor-pointer"
+          >
+            <div className="bg-[#FAFAFA] p-3 border border-[#EEEEEE] text-brand-red transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-brand-red group-hover:text-white group-hover:border-brand-red">
               <Target className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold uppercase tracking-wider text-gray-900">Our Mission</h3>
             <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
               To manufacture and deliver high-quality wall clocks that combine innovative design, reliable performance, and exceptional value while maintaining the highest standards of customer satisfaction and business integrity.
             </p>
-          </div>
+          </motion.div>
 
           {/* Vision */}
-          <div className="bg-white p-8 sm:p-10 border border-[#EEEEEE] border-l-4 border-l-black rounded-none shadow-sm space-y-4 flex flex-col items-start">
-            <div className="bg-[#FAFAFA] p-3 border border-[#EEEEEE] text-black">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="group bg-white p-8 sm:p-10 border border-[#EEEEEE] border-l-4 border-l-black rounded-none shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] space-y-4 flex flex-col items-start cursor-pointer"
+          >
+            <div className="bg-[#FAFAFA] p-3 border border-[#EEEEEE] text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-black group-hover:text-white group-hover:border-black">
               <Eye className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold uppercase tracking-wider text-gray-900">Our Vision</h3>
             <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
               To become one of India's most trusted and recognized wall clock manufacturers by continuously innovating, expanding our product range, and building lasting relationships with customers worldwide.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Section 3: What We Manufacture */}
         <div>
-          <div className="flex items-center gap-2 mb-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex items-center gap-2 mb-6"
+          >
             <span className="inline-block w-2.5 h-2.5 bg-black"></span>
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
               WHAT WE MANUFACTURE
             </span>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
@@ -115,12 +144,16 @@ const About = () => {
             ].map((cat, idx) => {
               const Icon = cat.icon;
               return (
-                <div 
+                <motion.div 
                   key={idx}
-                  className="bg-white border border-[#EEEEEE] p-6 rounded-none hover:border-black hover:shadow-sm transition-all duration-300 flex flex-col justify-between group space-y-4"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  className="bg-[#FCFCFC] border border-[#EEEEEE] p-6 rounded-none hover:bg-white hover:border-black hover:shadow-lg hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between group space-y-4 cursor-pointer"
                 >
                   <div className="space-y-3">
-                    <div className="bg-[#FAFAFA] p-3 border border-[#EEEEEE] text-black w-fit group-hover:bg-brand-red group-hover:text-white group-hover:border-brand-red transition-all duration-300">
+                    <div className="bg-[#FAFAFA] p-3 border border-[#EEEEEE] text-black w-fit group-hover:bg-brand-red group-hover:text-white group-hover:border-brand-red transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
                       <Icon className="w-5 h-5" />
                     </div>
                     <h4 className="font-bold text-sm uppercase tracking-wider text-gray-900">
@@ -130,7 +163,7 @@ const About = () => {
                       {cat.desc}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -138,12 +171,18 @@ const About = () => {
 
         {/* Section 4: Why Choose Nilkanth Quartz */}
         <div>
-          <div className="flex items-center gap-2 mb-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex items-center gap-2 mb-6"
+          >
             <span className="inline-block w-2.5 h-2.5 bg-black"></span>
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
               WHY CHOOSE US
             </span>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -155,12 +194,16 @@ const About = () => {
               { title: "Bulk Order Capability", desc: "Capable of handling large-scale wholesale and corporate orders with consistency and reliability." },
               { title: "Customer-Centric Approach", desc: "Dedicated support and personalized service for every client." }
             ].map((pillar, idx) => (
-              <div 
+              <motion.div 
                 key={idx}
-                className="bg-white border border-[#EEEEEE] p-6 rounded-none hover:border-black hover:shadow-sm transition-all duration-300 space-y-2"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-[#FCFCFC] border border-[#EEEEEE] p-6 rounded-none hover:bg-white hover:border-black hover:shadow-lg hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] space-y-2 cursor-pointer group"
               >
                 <div className="flex items-center gap-2 text-brand-red">
-                  <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 flex-shrink-0 transition-transform duration-500 group-hover:scale-110" />
                   <h4 className="font-bold text-sm uppercase tracking-wider text-gray-900">
                     {pillar.title}
                   </h4>
@@ -168,21 +211,33 @@ const About = () => {
                 <p className="text-gray-500 text-xs sm:text-sm leading-relaxed pl-6">
                   {pillar.desc}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
         {/* Section 5: Industries We Serve */}
         <div>
-          <div className="flex items-center gap-2 mb-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex items-center gap-2 mb-6"
+          >
             <span className="inline-block w-2.5 h-2.5 bg-black"></span>
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
               INDUSTRIES WE SERVE
             </span>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-wrap gap-3">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="flex flex-wrap gap-3"
+          >
             {[
               "Retail Stores", "Wholesale Dealers", "Distributors", "Corporate Offices", 
               "Educational Institutions", "Hotels & Hospitality", "Interior Designers", 
@@ -191,22 +246,28 @@ const About = () => {
             ].map((ind, idx) => (
               <span 
                 key={idx}
-                className="bg-white border border-[#EEEEEE] hover:border-black px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-gray-800 transition-colors"
+                className="bg-white border border-[#EEEEEE] hover:bg-black hover:text-white hover:border-black hover:shadow-md hover:-translate-y-0.5 px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-gray-800 transition-all duration-300 ease-out cursor-pointer"
               >
                 {ind}
               </span>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Section 6: Our Core Values */}
         <div>
-          <div className="flex items-center gap-2 mb-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex items-center gap-2 mb-6"
+          >
             <span className="inline-block w-2.5 h-2.5 bg-black"></span>
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
               OUR CORE VALUES
             </span>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
@@ -218,11 +279,15 @@ const About = () => {
             ].map((val, idx) => {
               const Icon = val.icon;
               return (
-                <div 
+                <motion.div 
                   key={idx}
-                  className="bg-white border border-[#EEEEEE] p-6 rounded-none text-center hover:border-black hover:shadow-sm transition-all duration-300 flex flex-col items-center space-y-3"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  className="bg-[#FCFCFC] border border-[#EEEEEE] p-6 rounded-none text-center hover:bg-white hover:border-black hover:shadow-lg hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col items-center space-y-3 cursor-pointer group"
                 >
-                  <div className="bg-[#FAFAFA] p-3.5 border border-[#EEEEEE] text-black rounded-none">
+                  <div className="bg-[#FAFAFA] p-3.5 border border-[#EEEEEE] text-black rounded-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-brand-red group-hover:text-white group-hover:border-brand-red">
                     <Icon className="w-5 h-5" />
                   </div>
                   <h4 className="font-bold text-sm uppercase tracking-wider text-gray-900">
@@ -231,15 +296,21 @@ const About = () => {
                   <p className="text-gray-500 text-xs leading-relaxed">
                     {val.desc}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
 
         {/* Section 7: Our Commitment */}
-        <div className="bg-brand-dark text-white p-8 sm:p-12 rounded-none relative overflow-hidden border border-white/10">
-          <div className="absolute right-0 bottom-0 w-80 h-80 bg-brand-red/5 blur-3xl pointer-events-none" />
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="bg-brand-dark text-white p-8 sm:p-12 rounded-none relative overflow-hidden border border-white/10 group"
+        >
+          <div className="absolute right-0 bottom-0 w-80 h-80 bg-brand-red/5 blur-3xl pointer-events-none transition-transform duration-[1500ms] group-hover:scale-125" />
           <div className="max-w-3xl space-y-4 relative z-10">
             <div className="flex items-center gap-2">
               <span className="inline-block w-2.5 h-2.5 bg-brand-red"></span>
@@ -254,9 +325,62 @@ const About = () => {
               "Crafting Quality Timepieces with Precision, Passion, and Trust."
             </div>
           </div>
-        </div>
+        </motion.div>
 
       </div>
+      {/* INFINITE TEXT MARQUEE SLIDER */}
+      <section className="relative w-full  overflow-hidden bg-white/10 pt-5 mt-5 select-none">
+        {/* Infinite Scroll */}
+        <div className="flex whitespace-nowrap animate-marquee">
+          {[...Array(2)].map((_, index) => (
+            <div key={index} className="flex items-center gap-20 px-10">
+              {[...Array(10)].map((_, i) => (
+                <div
+                style={{ fontFamily: " 'Sora', sans-serif" }}
+                  key={i}
+                  className="flex items-center  gap-10 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-[1px] "
+                >
+                  {/* Filled Text */}
+                  <span className="text-black/90">Nilkanth</span>
+
+                  {/* Outline Text */}
+                  <span
+                    className="text-transparent"
+                    style={{
+                      WebkitTextStroke: "1px  rgba(0,0,0,0.25)",
+                    }}
+                  >
+                    Quartz
+                  </span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Animation */}
+        <style>
+          {`
+            @keyframes marquee {
+              from {
+                transform: translateX(0%);
+              }
+              to {
+                transform: translateX(-50%);
+              }
+            }
+
+            .animate-marquee {
+              width: max-content;
+              animation: marquee 450s linear infinite;
+            }
+
+            .animate-marquee:hover {
+              animation-play-state: paused;
+            }
+          `}
+        </style>
+      </section>
     </div>
   );
 };

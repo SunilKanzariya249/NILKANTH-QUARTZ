@@ -18,7 +18,7 @@ import {
   ArrowRight,
   Star
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useProductStore } from '../store/useProductStore';
 import ProductCard from '../components/ProductCard';
 import SkeletonLoader from '../components/SkeletonLoader';
@@ -57,32 +57,32 @@ const WHY_CHOOSE_US = [
   {
     icon: <Award className="w-6 h-6 text-brand-red" />,
     title: 'Premium Quality',
-    desc: 'Each clock goes through rigid 24-hour timekeeping accuracy calibration and material stress tests.'
+    desc: 'We use high-quality materials, reliable quartz movements, and strict quality checks to ensure durability, accurate timekeeping, and a premium finish in every clock.'
   },
   {
     icon: <Package className="w-6 h-6 text-brand-red" />,
     title: 'Bulk Orders Available',
-    desc: 'Direct-to-factory production routes allow us to deliver thousands of customized units in quick lead times.'
+    desc: 'From small business requirements to large corporate and promotional orders, we efficiently handle bulk production while maintaining consistent quality standards.'
   },
   {
     icon: <PiggyBank className="w-6 h-6 text-brand-red" />,
     title: 'Competitive Pricing',
-    desc: 'Morbi-based manufacturing cluster benefits enable us to quote wholesale prices directly to clients.'
+    desc: 'As a direct manufacturer from Morbi, Gujarat, we offer factory-direct pricing that delivers excellent value without compromising on quality.'
   },
   {
     icon: <Truck className="w-6 h-6 text-brand-red" />,
     title: 'Fast Delivery',
-    desc: 'Partnered with reliable domestic and ocean freight carriers ensuring safely packaged door-step deliveries.'
+    desc: 'Our streamlined manufacturing and logistics network helps us process orders quickly and deliver products safely across India.'
   },
   {
     icon: <Brush className="w-6 h-6 text-brand-red" />,
     title: 'Custom Branding',
-    desc: 'Personalize dial faces with company logos, custom graphics, colors, and promotional messages.'
+    desc: 'We provide customized clock solutions with company logos, brand colors, promotional artwork, and personalized designs to meet your specific requirements.'
   },
   {
     icon: <ShieldCheck className="w-6 h-6 text-brand-red" />,
     title: 'Customer Satisfaction',
-    desc: 'Highly responsive client support teams to assist through order design, transport, and warranty inquiries.'
+    desc: 'Customer trust is our priority. We focus on responsive support, transparent communication, and reliable service from inquiry to final delivery.'
   }
 ];
 
@@ -671,13 +671,21 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-0">
             {/* Left Column: Poster Image */}
             <div className="col-span-1 lg:col-span-7 relative z-0">
-              <div className="overflow-hidden rounded-none shadow-lg h-[320px] sm:h-[450px] lg:h-[580px]">
+              <motion.div 
+                initial={{ opacity: 0, scale: 1.06 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 3.5, ease: [0.16, 1, 0.3, 1] }}
+                className="group/poster overflow-hidden rounded-none shadow-lg h-[320px] sm:h-[450px] lg:h-[580px] w-full relative"
+              >
                 <img
                   src="/design to rys poster .png"
                   alt="Designed to Reflect Your Style"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-102"
+                  className="w-full h-full object-cover object-center transition-transform duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/poster:scale-106"
                 />
-              </div>
+                {/* Elegant premium white sweep sheen effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover/poster:translate-x-full transition-transform duration-[1000ms] ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none" />
+              </motion.div>
             </div>
 
             {/* Right Column: Overlapping Card Container */}
@@ -721,7 +729,13 @@ const Home = () => {
       {/* 3. WHY CHOOSE US SECTION */}
       <section className="py-20 bg-white border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
-          <div className="text-left mb-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-left mb-12"
+          >
             <div className="flex items-center gap-2 mb-4">
               <span className="inline-block w-2.5 h-2.5 bg-black"></span>
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
@@ -731,20 +745,24 @@ const Home = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#111111] tracking-tight leading-tight uppercase">
               ENGINEERED FOR PERFECTION
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {WHY_CHOOSE_US.map((item, idx) => (
-              <div 
-                key={idx} 
-                className="p-8 bg-white border border-[#EEEEEE] rounded-none hover:border-black hover:shadow-sm transition-all duration-300 space-y-4 flex flex-col items-start"
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="group p-8 bg-[#FCFCFC] border border-[#EEEEEE] rounded-none hover:bg-white hover:border-black hover:shadow-lg hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] space-y-4 flex flex-col items-start cursor-pointer"
               >
-                <div className="bg-[#FAFAFA] p-3 border border-[#EEEEEE] rounded-none text-black">
+                <div className="bg-[#FAFAFA] p-3 border border-[#EEEEEE] rounded-none text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-black group-hover:text-white group-hover:border-black">
                   {item.icon}
                 </div>
-                <h3 className="font-bold text-xs uppercase tracking-widest text-[#111111] mt-2">{item.title}</h3>
-                <p className="text-[#555555] text-xs font-normal leading-relaxed">{item.desc}</p>
-              </div>
+                <h3 className="font-bold text-lg uppercase tracking-widest text-[#111111] mt-2">{item.title}</h3>
+                <p className="text-[#555555] text-md font-normal leading-relaxed">{item.desc}</p>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -794,7 +812,13 @@ const Home = () => {
       <section className="py-24 bg-[#FCFCFC] border-t border-gray-100 select-none">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
           {/* Left-Aligned Header */}
-          <div className="text-left mb-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-left mb-12"
+          >
             <div className="flex items-center gap-2 mb-4">
               <span className="inline-block w-2.5 h-2.5 bg-black"></span>
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
@@ -804,12 +828,18 @@ const Home = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#111111] tracking-tight leading-tight uppercase">
               Delighted Customer <br /> Feedback
             </h2>
-          </div>
+          </motion.div>
 
           {/* Slider Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Card 1 */}
-            <div className="bg-white p-8 sm:p-10 border border-[#EEEEEE] rounded-none shadow-sm flex flex-col justify-between min-h-[240px]">
+            <motion.div 
+              key={`review-1-${reviewStartIdx}`}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="group bg-white p-8 sm:p-10 border border-[#EEEEEE] rounded-none shadow-sm flex flex-col justify-between min-h-[240px] hover:-translate-y-1 hover:shadow-md hover:border-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            >
               <p className="text-[#666666] text-[14px] leading-relaxed font-light">
                 {TESTIMONIALS[reviewStartIdx].text}
               </p>
@@ -837,10 +867,16 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Card 2 */}
-            <div className="hidden md:flex bg-white p-8 sm:p-10 border border-[#EEEEEE] rounded-none shadow-sm flex-col justify-between min-h-[240px]">
+            <motion.div 
+              key={`review-2-${reviewStartIdx}`}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="group hidden md:flex bg-white p-8 sm:p-10 border border-[#EEEEEE] rounded-none shadow-sm flex-col justify-between min-h-[240px] hover:-translate-y-1 hover:shadow-md hover:border-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            >
               <p className="text-[#666666] text-[14px] leading-relaxed font-light">
                 {TESTIMONIALS[(reviewStartIdx + 1) % TESTIMONIALS.length].text}
               </p>
@@ -868,23 +904,23 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Dotted Navigation Controls */}
           <div className="flex items-center justify-between mt-12 px-2">
             <button
               onClick={() => setReviewStartIdx((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
-              className="w-10 h-10 rounded-full border border-dashed border-[#CCCCCC] hover:border-black flex items-center justify-center text-black transition-colors"
+              className="group w-10 h-10 rounded-full border border-dashed border-[#CCCCCC] hover:border-black  flex items-center justify-center transition-all duration-300"
             >
-              <span className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[7px] border-r-black mr-[2px]"></span>
+              <span className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[7px] border-r-black group-hover:border-r-white mr-[2px] transition-colors duration-300"></span>
             </button>
 
             <button
               onClick={() => setReviewStartIdx((prev) => (prev + 1) % TESTIMONIALS.length)}
-              className="w-10 h-10 rounded-full border border-dashed border-[#CCCCCC] hover:border-black flex items-center justify-center text-black transition-colors"
+              className="group w-10 h-10 rounded-full border border-dashed border-[#CCCCCC] hover:border-black  flex items-center justify-center transition-all duration-300"
             >
-              <span className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[7px] border-l-black ml-[2px]"></span>
+              <span className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[7px] border-l-black ml-[2px] transition-colors duration-300"></span>
             </button>
           </div>
         </div>
@@ -929,7 +965,13 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             
             {/* Left side: Heading */}
-            <div className="lg:col-span-4 space-y-4 text-left">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="lg:col-span-4 space-y-4 text-left"
+            >
               <div className="flex items-center gap-2">
                 <span className="inline-block w-2.5 h-2.5 bg-black"></span>
                 <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
@@ -942,19 +984,23 @@ const Home = () => {
               <p className="text-gray-500 text-xs font-medium uppercase tracking-wider leading-relaxed max-w-sm">
                 Have questions about our manufacturing process, minimum order quantities, customization, or shipping? Find the answers here.
               </p>
-            </div>
+            </motion.div>
 
             {/* Right side: Accordion */}
             <div className="lg:col-span-8 space-y-4">
               {FAQS.map((faq, idx) => {
                 const isOpen = idx === openFaq;
                 return (
-                  <div 
+                  <motion.div 
                     key={idx}
-                    className={`bg-white rounded-none border transition-all duration-300 ${
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    className={`bg-white rounded-none border transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       isOpen 
-                        ? 'border-[#111111] border-l-4 border-l-brand-red' 
-                        : 'border-[#EEEEEE] hover:border-gray-400'
+                        ? 'border-[#111111] border-l-4 border-l-brand-red shadow-sm' 
+                        : 'border-[#EEEEEE] hover:border-black hover:-translate-y-0.5 hover:shadow-sm'
                     }`}
                   >
                     <button
@@ -968,16 +1014,23 @@ const Home = () => {
                         <Plus className="w-4 h-4 text-gray-400 shrink-0" />
                       )}
                     </button>
-                    <div 
-                      className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                        isOpen ? 'max-h-60 border-t border-gray-100' : 'max-h-0'
-                      }`}
-                    >
-                      <p className="p-6 text-sm text-gray-600 font-normal leading-relaxed bg-[#FAFAFA]/70">
-                        {faq.a}
-                      </p>
-                    </div>
-                  </div>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div 
+                          key="content"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden border-t border-gray-100"
+                        >
+                          <p className="p-6 text-sm text-gray-600 font-normal leading-relaxed bg-[#FAFAFA]/70">
+                            {faq.a}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
                 );
               })}
             </div>

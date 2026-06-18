@@ -33,7 +33,7 @@ const Footer = () => {
                 />
               </div>
             </div>
-            <p className="text-gray-400 text-md  leading-relaxed  tracking-wider">
+            <p className="text-gray-400 text-sm  leading-relaxed  tracking-wider">
 At Nilkanth Quartz, we craft exceptional wall clocks that combine elegant design, precise timekeeping, and enduring quality for spaces that value both style and functionality.            </p>
             <div className="flex items-center gap-3">
               <a 
@@ -69,8 +69,8 @@ At Nilkanth Quartz, we craft exceptional wall clocks that combine elegant design
           {/* Quick Links */}
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <span className="w-1.5 h-1.5 bg-brand-red inline-block"></span>
-              <h4 className="text-md font-semibold uppercase tracking-[0.20em] text-white">Quick Links</h4>
+              <span className="w-1 h-5 bg-brand-red inline-block"></span>
+              <h4 className="text-md font-semibold uppercase tracking-[0.10em] text-white">Quick Links</h4>
             </div>
             <ul className="space-y-3.5">
               <li>
@@ -108,8 +108,8 @@ At Nilkanth Quartz, we craft exceptional wall clocks that combine elegant design
           {/* Categories */}
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <span className="w-1.5 h-1.5 bg-brand-red inline-block"></span>
-              <h4 className="text-md font-semibold uppercase tracking-[0.20em] text-white">Collections</h4>
+              <span className="w-1 h-5 bg-brand-red inline-block"></span>
+              <h4 className="text-md font-semibold uppercase tracking-[0.10em] text-white">Collections</h4>
             </div>
             <ul className="space-y-3.5">
               {categories.slice(0, 5).map((cat) => (
@@ -132,10 +132,10 @@ At Nilkanth Quartz, we craft exceptional wall clocks that combine elegant design
           {/* Contact Details */}
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <span className="w-1.5 h-1.5 bg-brand-red inline-block"></span>
-              <h4 className="text-md font-semibold uppercase tracking-[0.20em] text-white">Contact Info</h4>
+              <span className="w-1 h-5 bg-brand-red inline-block"></span>
+              <h4 className="text-md font-semibold uppercase tracking-[0.10em] text-white">Contact Info</h4>
             </div>
-            <ul className="space-y-4 text-md tracking-wider text-gray-400">
+            <ul className="space-y-4 text-sm tracking-wider text-gray-400">
               <li className="flex items-start gap-3 leading-relaxed">
                 <MapPin className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
                 <span>
@@ -161,7 +161,7 @@ At Nilkanth Quartz, we craft exceptional wall clocks that combine elegant design
         </div>
 
         {/* Copyright divider */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[10px] font-semibold uppercase tracking-widest text-gray-500 gap-4">
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[10px] font-semibold  tracking-widest text-gray-500 gap-4">
           <p>© {new Date().getFullYear()} Nilkanth Quartz. All Rights Reserved.</p>
           <p className="text-gray-500 transition-colors duration-200">
             Designed & Developed by <span className="font-bold text-gray-400">DotEye Infotech</span>
