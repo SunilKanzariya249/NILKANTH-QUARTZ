@@ -338,7 +338,7 @@ const About = () => {
                 <div
                 style={{ fontFamily: " 'Sora', sans-serif" }}
                   key={i}
-                  className="flex items-center  gap-10 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-[1px] "
+                  className="flex items-center  gap-10 text-6xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-[1px] "
                 >
                   {/* Filled Text */}
                   <span className="text-black/90">Nilkanth</span>
