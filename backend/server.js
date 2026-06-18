@@ -10,7 +10,7 @@ import compression from 'compression';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
-import { getCategories, getDashboardStats } from './controllers/productController.js';
+import { getCategories, getDashboardStats, normalizeCategory } from './controllers/productController.js';
 import protect from './middleware/auth.js';
 import Product from './models/Product.js';
 
@@ -83,11 +83,37 @@ app.use((err, req, res, next) => {
   });
 });
 
+const normalizeExistingProducts = async () => {
+  try {
+    const products = await Product.find({});
+    let count = 0;
+    for (const product of products) {
+      const normalized = normalizeCategory(product.category);
+      if (product.category !== normalized) {
+        const oldCategory = product.category;
+        product.category = normalized;
+        await product.save();
+        console.log(`Normalized product ${product.modelNo} category from "${oldCategory}" to "${normalized}"`);
+        count++;
+      }
+    }
+    if (count > 0) {
+      console.log(`Successfully normalized ${count} products in database.`);
+    } else {
+      console.log("All products already have normalized category names in database.");
+    }
+  } catch (error) {
+    console.error('Error normalizing existing products:', error.message);
+  }
+};
+
 // Database and Server Start
 const startServer = async () => {
   // Connect to DB
   await connectDB();
 
+  // Run database migration to normalize category names case-sensitively and format-sensitively
+  await normalizeExistingProducts();
 
   app.listen(PORT, () => {
     console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);

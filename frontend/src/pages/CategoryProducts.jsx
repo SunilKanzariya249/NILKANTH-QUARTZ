@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Inbox } from 'lucide-react';
 import { useProductStore } from '../store/useProductStore';
 import ProductCard from '../components/ProductCard';
 import SkeletonLoader from '../components/SkeletonLoader';
 import SEO from '../components/SEO';
 
+const getCategorySlug = (catName) => {
+  let name = catName.toLowerCase().trim();
+  name = name.replace(/(?:wall\s*)?clocks?$/, '').trim();
+  return `${name}-wall-clocks`.replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-');
+};
+
 const CategoryProducts = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const { 
     products, 
     categories, 
@@ -21,9 +28,37 @@ const CategoryProducts = () => {
     fetchCategories();
   }, [fetchCategories]);
 
+  // Redirect corporate/promotional clock slug variations to the dedicated CorporateClocks page
+  useEffect(() => {
+    if (slug === 'corporate-clocks' || slug === 'promotional-wall-clocks') {
+      navigate('/category/corporate-wall-clocks', { replace: true });
+    } else if (slug === 'designer-clocks') {
+      navigate('/category/designer-wall-clocks', { replace: true });
+    } else if (slug === 'office-clocks') {
+      navigate('/category/office-wall-clocks', { replace: true });
+    } else if (slug === 'antique-clocks') {
+      navigate('/category/antique-wall-clocks', { replace: true });
+    }
+  }, [slug, navigate]);
+
+  // Automatically redirect old category slug style (e.g. /category/office-clocks) to the new style (/category/office-wall-clocks)
+  useEffect(() => {
+    if (categories.length > 0) {
+      const matchedCat = categories.find(
+        (cat) => cat.toLowerCase().replace(/[^a-z0-9]+/g, '-') === slug
+      );
+      if (matchedCat) {
+        const newSlug = getCategorySlug(matchedCat);
+        if (newSlug !== slug) {
+          navigate(`/category/${newSlug}`, { replace: true });
+        }
+      }
+    }
+  }, [slug, categories, navigate]);
+
   // Find category matching the URL slug
   const activeCategory = categories.find(
-    (cat) => cat.toLowerCase().replace(/[^a-z0-9]+/g, '-') === slug
+    (cat) => getCategorySlug(cat) === slug
   ) || '';
 
   useEffect(() => {

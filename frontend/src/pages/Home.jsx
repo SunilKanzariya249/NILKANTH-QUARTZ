@@ -247,11 +247,11 @@ const Home = () => {
 
   // Category Slider State & Refs
   const categoryPosters = [
-    { src: "/category poster/anchor clock poster .png", link: "/category/anchor-clocks" },
-    { src: "/category poster/antique clock poster.png", link: "/category/antique-clocks" },
-    { src: "/category poster/corporate clock poster.png", link: "/category/corporate-clocks" },
-    { src: "/category poster/designer clock poster.png", link: "/category/designer-clocks" },
-    { src: "/category poster/office clock poster.png", link: "/category/office-clocks" },
+    { src: "/category poster/anchor clock poster .png", link: "/category/anchor-wall-clocks" },
+    { src: "/category poster/antique clock poster.png", link: "/category/antique-wall-clocks" },
+    { src: "/category poster/corporate clock poster.png", link: "/category/corporate-wall-clocks" },
+    { src: "/category poster/designer clock poster.png", link: "/category/designer-wall-clocks" },
+    { src: "/category poster/office clock poster.png", link: "/category/office-wall-clocks" },
   ];
   const trackPosters = [...categoryPosters, ...categoryPosters, ...categoryPosters];
 
@@ -536,7 +536,7 @@ const Home = () => {
             <div key={index} className="flex items-center gap-20 px-10">
               {[...Array(10)].map((_, i) => (
                 <div
-                style={{ fontFamily: " 'Sora', sans-serif" }}
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
                   key={i}
                   className="flex items-center  gap-10 text-6xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-[1px] "
                 >
@@ -760,7 +760,7 @@ const Home = () => {
                 <div className="bg-[#FAFAFA] p-3 border border-[#EEEEEE] rounded-none text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-black group-hover:text-white group-hover:border-black">
                   {item.icon}
                 </div>
-                <h3 className="font-bold text-lg uppercase tracking-widest text-[#111111] mt-2">{item.title}</h3>
+                <h3 className="font-bold text-md uppercase  text-[#111111] mt-2">{item.title}</h3>
                 <p className="text-[#555555] text-md font-normal leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}

@@ -3,6 +3,32 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Clock } from 'lucide-react';
 import { useProductStore } from '../store/useProductStore';
 
+const getCategorySlug = (catName) => {
+  let name = catName.toLowerCase().trim();
+  name = name.replace(/(?:wall\s*)?clocks?$/, '').trim();
+  return `${name}-wall-clocks`.replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-');
+};
+
+const getCategoryLink = (catName) => {
+  const name = catName.toLowerCase();
+  if (name.includes('anchor')) {
+    return '/category/anchor-wall-clocks';
+  }
+  if (name.includes('corporate') || name.includes('promotional')) {
+    return '/category/corporate-wall-clocks';
+  }
+  if (name.includes('designer')) {
+    return '/category/designer-wall-clocks';
+  }
+  if (name.includes('office')) {
+    return '/category/office-wall-clocks';
+  }
+  if (name.includes('antique') || name.includes('vintage')) {
+    return '/category/antique-wall-clocks';
+  }
+  return `/category/${getCategorySlug(catName)}`;
+};
+
 const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
@@ -136,7 +162,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
                     categories.map((cat) => (
                       <Link
                         key={cat}
-                        to={`/category/${cat.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                        to={getCategoryLink(cat)}
                         state={{ categoryName: cat }}
                         className="block px-4 py-2.5 text-[11px] font-bold uppercase tracking-widest text-gray-300 hover:bg-brand-red hover:text-white transition-all duration-200"
                       >
@@ -251,9 +277,9 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
                     {categories.map((cat) => (
                       <Link
                         key={cat}
-                        to={`/category/${cat.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                        to={getCategoryLink(cat)}
                         state={{ categoryName: cat }}
-                        className={`text-sm sm:text-base  tracking-wider transition-colors duration-200 ${location.pathname.includes(cat.toLowerCase().replace(/[^a-z0-9]+/g, '-')) ? 'text-brand-red' : 'text-gray-400'}`}
+                        className={`text-sm sm:text-base  tracking-wider transition-colors duration-200 ${location.pathname === getCategoryLink(cat) ? 'text-brand-red' : 'text-gray-400'}`}
                       >
                         {cat}
                       </Link>

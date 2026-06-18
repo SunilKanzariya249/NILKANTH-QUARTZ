@@ -512,11 +512,11 @@ const AdminDashboard = () => {
                   />
                   {/* Category suggestions */}
                   <datalist id="categories-list">
-                    <option value="Designer Clocks" />
-                    <option value="Office Clocks" />
-                    <option value="Promotional Clocks" />
-                    <option value="Acrylic Clocks" />
-                    <option value="Gear Clocks" />
+                    <option value="Designer Wall Clock" />
+                    <option value="Office Wall Clock" />
+                    <option value="Corporate Wall Clock" />
+                    <option value="Antique Wall Clock" />
+                    <option value="Anchor Wall Clock" />
                   </datalist>
                 </div>
 

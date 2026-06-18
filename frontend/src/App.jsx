@@ -10,6 +10,11 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetails from './pages/ProductDetails';
 import CategoryProducts from './pages/CategoryProducts';
+import AnchorClocks from './pages/AnchorClocks';
+import AntiqueClocks from './pages/AntiqueClocks';
+import CorporateClocks from './pages/CorporateClocks';
+import DesignerClocks from './pages/DesignerClocks';
+import OfficeClocks from './pages/OfficeClocks';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import AdminLogin from './pages/AdminLogin';
@@ -63,6 +68,11 @@ function App() {
           {/* Public Page Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/category/anchor-wall-clocks" element={<AnchorClocks />} />
+          <Route path="/category/antique-wall-clocks" element={<AntiqueClocks />} />
+          <Route path="/category/corporate-wall-clocks" element={<CorporateClocks />} />
+          <Route path="/category/designer-wall-clocks" element={<DesignerClocks />} />
+          <Route path="/category/office-wall-clocks" element={<OfficeClocks />} />
           <Route path="/category/:slug" element={<CategoryProducts />} />
           <Route path="/product/:slug" element={<ProductDetails />} />
           <Route path="/about" element={<About />} />

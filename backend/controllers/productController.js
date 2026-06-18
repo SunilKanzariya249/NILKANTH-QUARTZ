@@ -2,6 +2,43 @@ import Product from '../models/Product.js';
 import { uploadToCloudinaryOrLocal, deleteFromCloudinaryOrLocal } from '../config/cloudinary.js';
 import fs from 'fs';
 
+const escapeRegex = (string) => {
+  return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+};
+
+export const normalizeCategory = (catName) => {
+  if (!catName) return catName;
+  const name = catName.trim().toLowerCase();
+  
+  if (name.includes('anchor')) {
+    return 'Anchor Wall Clock';
+  }
+  if (name.includes('corporate') || name.includes('promotional')) {
+    return 'Corporate Wall Clock';
+  }
+  if (name.includes('designer')) {
+    return 'Designer Wall Clock';
+  }
+  if (name.includes('office')) {
+    return 'Office Wall Clock';
+  }
+  if (name.includes('antique') || name.includes('vintage')) {
+    return 'Antique Wall Clock';
+  }
+  if (name.includes('acrylic')) {
+    return 'Acrylic Clocks';
+  }
+  if (name.includes('gear')) {
+    return 'Gear Clocks';
+  }
+  
+  return catName
+    .trim()
+    .split(/\s+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+};
+
 // @desc    Get all products (with search, category filter, sort, pagination)
 // @route   GET /api/products
 // @access  Public
@@ -21,7 +58,7 @@ export const getProducts = async (req, res) => {
 
     // Category filter
     if (category) {
-      query.category = category;
+      query.category = { $regex: new RegExp(`^${escapeRegex(category)}$`, 'i') };
     }
 
     // Determine sorting
@@ -71,7 +108,7 @@ export const getProductBySlug = async (req, res) => {
 
     // Fetch related products (same category, excluding current one)
     const relatedProducts = await Product.find({
-      category: product.category,
+      category: { $regex: new RegExp(`^${escapeRegex(product.category)}$`, 'i') },
       _id: { $ne: product._id }
     }).limit(4);
 
@@ -114,7 +151,7 @@ export const createProduct = async (req, res) => {
 
     const product = new Product({
       price: parseFloat(price),
-      category,
+      category: normalizeCategory(category),
       modelNo,
       size,
       pkg,
@@ -201,7 +238,7 @@ export const updateProduct = async (req, res) => {
 
     // Update fields
     product.price = price ? parseFloat(price) : product.price;
-    product.category = category || product.category;
+    product.category = category ? normalizeCategory(category) : product.category;
     product.modelNo = modelNo || product.modelNo;
     product.size = size || product.size;
     product.pkg = pkg || product.pkg;
@@ -254,8 +291,20 @@ export const deleteProduct = async (req, res) => {
 // @access  Public
 export const getCategories = async (req, res) => {
   try {
-    const categories = await Product.distinct('category');
-    res.status(200).json(categories);
+    const rawCategories = await Product.distinct('category');
+    const uniqueCategories = [];
+    const seen = new Set();
+    for (const cat of rawCategories) {
+      if (cat) {
+        const trimmed = cat.trim();
+        const lower = trimmed.toLowerCase();
+        if (!seen.has(lower)) {
+          seen.add(lower);
+          uniqueCategories.push(trimmed);
+        }
+      }
+    }
+    res.status(200).json(uniqueCategories);
   } catch (error) {
     console.error('Get Categories Error:', error.message);
     res.status(500).json({ message: 'Error retrieving categories' });
@@ -268,14 +317,20 @@ export const getCategories = async (req, res) => {
 export const getDashboardStats = async (req, res) => {
   try {
     const totalProducts = await Product.countDocuments();
-    const categories = await Product.distinct('category');
+    const rawCategories = await Product.distinct('category');
+    const seen = new Set();
+    for (const cat of rawCategories) {
+      if (cat) {
+        seen.add(cat.trim().toLowerCase());
+      }
+    }
     const recentProducts = await Product.find()
       .sort({ createdAt: -1 })
       .limit(5);
 
     res.status(200).json({
       totalProducts,
-      totalCategories: categories.length,
+      totalCategories: seen.size,
       recentProducts
     });
   } catch (error) {

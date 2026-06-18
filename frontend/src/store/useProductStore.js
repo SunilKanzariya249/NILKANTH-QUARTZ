@@ -89,7 +89,19 @@ export const useProductStore = create((set, get) => ({
   fetchCategories: async () => {
     try {
       const response = await axios.get('/api/categories');
-      set({ categories: Array.isArray(response.data) ? response.data : [] });
+      const rawCategories = Array.isArray(response.data) ? response.data : [];
+      const uniqueCategories = [];
+      const seen = new Set();
+      for (const cat of rawCategories) {
+        if (cat) {
+          const lower = cat.trim().toLowerCase();
+          if (!seen.has(lower)) {
+            seen.add(lower);
+            uniqueCategories.push(cat.trim());
+          }
+        }
+      }
+      set({ categories: uniqueCategories });
     } catch (err) {
       console.error('Error fetching categories:', err.message);
       set({ categories: [] });
