@@ -435,7 +435,7 @@ const Home = () => {
 
       {/* 1. HERO SECTION */}
       <section 
-        className="relative aspect-[16/9] w-full overflow-hidden bg-brand-dark cursor-grab active:cursor-grabbing select-none"
+        className="relative aspect-[16/9] w-full overflow-hidden bg-brand-dark cursor-grab active:cursor-grabbing select-none mt-20 md:mt-0"
         onMouseDown={(e) => handleDragStart(e.clientX)}
         onMouseMove={(e) => handleDragMove(e.clientX)}
         onMouseUp={handleDragEnd}
@@ -503,7 +503,7 @@ const Home = () => {
             <div className="space-y-8 lg:pt-8">
               <div className="max-w-[550px] space-y-6">
                 <p className="text-[#555555] font-normal text-lg sm:text-xl leading-relaxed">
-                  Based in Morbi, Gujarat, Nilkanth Quartz is a leading manufacturer and supplier of high-quality wall clocks for homes, offices, institutions, and corporate gifting needs. We offer a wide range of innovative designs that blend style, precision, and durability.
+                  Based in Morbi, Gujrat, Nilkanth Quartz is a leading manufacturer and supplier of high-quality wall clocks for homes, offices, institutions, and corporate gifting needs. We offer a wide range of innovative designs that blend style, precision, and durability.
                 </p>
                 <p className="text-[#666666] font-normal text-base sm:text-lg leading-relaxed">
                   With a focus on quality manufacturing, competitive pricing, and dependable service, we proudly serve customers across India and continue to deliver timepieces that inspire trust and elevate every space.

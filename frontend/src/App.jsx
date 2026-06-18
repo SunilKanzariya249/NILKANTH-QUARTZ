@@ -30,6 +30,8 @@ const Layout = ({ children }) => {
   const location = useLocation();
   const isAdminPath = location.pathname.startsWith('/admin');
 
+  const isTransparentPage = location.pathname === '/' || location.pathname === '/products' || location.pathname === '/contact' || location.pathname === '/about' || location.pathname.startsWith('/category/');
+
   // Close mobile drawer on route change
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -40,7 +42,7 @@ const Layout = ({ children }) => {
       {/* Do not show standard navigation on admin dashboard */}
       {!isAdminPath && <Navbar mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />}
       
-      <main className="flex-grow">
+      <main className={`flex-grow ${!isTransparentPage && !isAdminPath ? 'pt-20' : ''}`}>
         {children}
       </main>
 

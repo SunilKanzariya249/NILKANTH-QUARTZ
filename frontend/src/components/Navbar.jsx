@@ -61,7 +61,7 @@ const Navbar = ({ mobileMenuOpen, setMobileMenuOpen }) => {
   const showWhiteNavbar = isMobile && isHomePage && isAtTop && !mobileMenuOpen;
   const isTransparent = isAtTop && isTransparentPage && !(isMobile && isHomePage) && !mobileMenuOpen;
 
-  const headerClass = `sticky top-0 z-40 w-full transition-all duration-300 ${
+  const headerClass = `fixed top-0 left-0 z-40 w-full transition-all duration-300 ${
     showWhiteNavbar
       ? 'bg-white text-black border-b border-gray-200'
       : isTransparent
