@@ -201,12 +201,12 @@ Please provide more details.`;
                     ref={containerRef}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
-                    className="relative aspect-square w-full rounded-none bg-[#FAFAFA] border border-[#EEEEEE] overflow-hidden flex items-center justify-center cursor-default md:cursor-zoom-in"
+                    className="relative aspect-square w-full rounded-none bg-white border border-[#EEEEEE] overflow-hidden flex items-center justify-center cursor-default md:cursor-zoom-in"
                   >
                     <img
                       src={currentImage}
                       alt={`Model ${modelNo}`}
-                      className="w-full h-full object-contain drop-shadow-md"
+                      className="w-full h-full object-contain "
                     />
                     
                     {/* Floating Magnified Lens Div */}

@@ -46,7 +46,7 @@ Please provide more details.`;
       className="group bg-white border border-gray-200 p-4 transition-all duration-300 flex flex-col h-full hover:shadow-md"
     >
       {/* Product Image Container */}
-      <div className="w-full aspect-square bg-[#ededed] flex items-center justify-center p-6 mb-6">
+      <div className="w-full aspect-square bg-white flex items-center justify-center  mb-6">
         <img
           src={mainImage}
           alt={modelNo}

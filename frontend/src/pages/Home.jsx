@@ -536,18 +536,17 @@ const Home = () => {
             <div key={index} className="flex items-center gap-20 px-10">
               {[...Array(10)].map((_, i) => (
                 <div
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
                   key={i}
-                  className="flex items-center  gap-10 text-6xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-[1px] "
+                  className="flex items-center gap-10 text-6xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-[1px] marquee-text"
                 >
                   {/* Filled Text */}
-                  <span className="text-black/90">Nilkanth</span>
+                  <span className="text-black/90 marquee-text">Nilkanth</span>
 
                   {/* Outline Text */}
                   <span
-                    className="text-transparent"
+                    className="text-transparent marquee-text"
                     style={{
-                      WebkitTextStroke: "1px  rgba(0,0,0,0.25)",
+                      WebkitTextStroke: "1px rgba(0,0,0,0.25)",
                     }}
                   >
                     Quartz

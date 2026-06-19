@@ -96,3 +96,10 @@ input:focus, textarea:focus, select:focus {
   border-bottom: 1px solid transparent !important;
   box-shadow: none !important;
 }
+
+/* Marquee Text styling to ensure Montserrat bold matches perfectly across all screen sizes */
+.marquee-text {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+}
+
