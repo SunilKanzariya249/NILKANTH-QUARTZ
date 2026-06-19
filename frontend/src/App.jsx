@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import StickyContactButtons from './components/StickyContactButtons';
+import { useProductStore } from './store/useProductStore';
 
 // Pages
 import Home from './pages/Home';
@@ -60,6 +61,12 @@ const Layout = ({ children }) => {
 };
 
 function App() {
+  const fetchAllProducts = useProductStore((state) => state.fetchAllProducts);
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, [fetchAllProducts]);
+
   return (
     <Router>
       <ScrollToTop />

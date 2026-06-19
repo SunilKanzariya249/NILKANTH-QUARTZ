@@ -9,6 +9,10 @@ export const useProductStore = create((set, get) => ({
   relatedProducts: [],
   stats: null,
   
+  // Cache of all products for background loading
+  allProducts: [],
+  allProductsFetched: false,
+
   // Pagination & Filtering state
   totalPages: 1,
   currentPage: 1,
@@ -19,7 +23,7 @@ export const useProductStore = create((set, get) => ({
     category: '',
     sort: 'newest', // newest, price_asc, price_desc, name_asc, name_desc
     page: 1,
-    limit: 8
+    limit: 1000
   },
 
   loading: false,
@@ -40,32 +44,94 @@ export const useProductStore = create((set, get) => ({
         category: '',
         sort: 'newest',
         page: 1,
-        limit: 8
+        limit: 1000
       }
     });
     get().fetchProducts();
   },
 
+  fetchAllProducts: async () => {
+    if (get().allProductsFetched && get().allProducts.length > 0) return;
+    try {
+      const response = await axios.get('/api/products', {
+        params: { limit: 10000 }
+      });
+      const fetchedProducts = Array.isArray(response.data?.products) ? response.data.products : [];
+      set({
+        allProducts: fetchedProducts,
+        allProductsFetched: true
+      });
+    } catch (err) {
+      console.error('Error prefetching all products:', err.message);
+    }
+  },
+
   fetchProducts: async (customParams = null) => {
     set({ loading: true, error: null });
     try {
+      // Ensure products are pre-fetched
+      if (!get().allProductsFetched || get().allProducts.length === 0) {
+        await get().fetchAllProducts();
+      }
+
       const params = customParams || get().filters;
-      
-      const response = await axios.get('/api/products', {
-        params
-      });
+      let filtered = [...get().allProducts];
+
+      // 1. Filter by category (case-insensitive)
+      if (params.category) {
+        const catLower = params.category.trim().toLowerCase();
+        filtered = filtered.filter(p => {
+          if (!p.category) return false;
+          const pCatLower = p.category.trim().toLowerCase();
+          
+          if (catLower.includes('anchor') && pCatLower.includes('anchor')) return true;
+          if ((catLower.includes('corporate') || catLower.includes('promotional')) && 
+              (pCatLower.includes('corporate') || pCatLower.includes('promotional'))) return true;
+          if (catLower.includes('designer') && pCatLower.includes('designer')) return true;
+          if (catLower.includes('office') && pCatLower.includes('office')) return true;
+          if (catLower.includes('antique') && pCatLower.includes('antique')) return true;
+          if (catLower.includes('acrylic') && pCatLower.includes('acrylic')) return true;
+          
+          return pCatLower === catLower;
+        });
+      }
+
+      // 2. Search query filter
+      if (params.search) {
+        const searchLower = params.search.trim().toLowerCase();
+        filtered = filtered.filter(p => {
+          const modelNoMatch = p.modelNo && p.modelNo.toLowerCase().includes(searchLower);
+          const descMatch = p.description && p.description.toLowerCase().includes(searchLower);
+          return modelNoMatch || descMatch;
+        });
+      }
+
+      // 3. Sorting
+      if (params.sort) {
+        if (params.sort === 'newest') {
+          filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        } else if (params.sort === 'price_asc') {
+          filtered.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
+        } else if (params.sort === 'price_desc') {
+          filtered.sort((a, b) => (Number(b.price) || 0) - (Number(a.price) || 0));
+        } else if (params.sort === 'name_asc') {
+          filtered.sort((a, b) => (a.modelNo || '').localeCompare(b.modelNo || ''));
+        } else if (params.sort === 'name_desc') {
+          filtered.sort((a, b) => (b.modelNo || '').localeCompare(a.modelNo || ''));
+        }
+      }
 
       set({
-        products: Array.isArray(response.data?.products) ? response.data.products : [],
-        totalPages: response.data?.totalPages || 1,
-        currentPage: response.data?.currentPage || 1,
-        totalProductsCount: response.data?.totalProducts || 0,
+        products: filtered,
+        totalPages: 1,
+        currentPage: 1,
+        totalProductsCount: filtered.length,
         loading: false
       });
     } catch (err) {
       set({
         products: [],
-        error: err.response?.data?.message || 'Error fetching products',
+        error: err.message || 'Error processing products',
         loading: false
       });
     }
@@ -74,12 +140,10 @@ export const useProductStore = create((set, get) => ({
   fetchFeaturedProducts: async () => {
     set({ loading: true, error: null });
     try {
-      // Fetch products with featured query or limit
-      const response = await axios.get('/api/products', {
-        params: { limit: 100 } // Get all to filter or let server handle
-      });
-      const prods = Array.isArray(response.data?.products) ? response.data.products : [];
-      const featured = prods.filter(p => p.featured === true);
+      if (!get().allProductsFetched || get().allProducts.length === 0) {
+        await get().fetchAllProducts();
+      }
+      const featured = get().allProducts.filter(p => p.featured === true);
       set({ featuredProducts: featured, loading: false });
     } catch (err) {
       set({ featuredProducts: [], error: 'Error fetching featured products', loading: false });
@@ -126,7 +190,7 @@ export const useProductStore = create((set, get) => ({
   },
 
   createProduct: async (formData) => {
-    set({ actionLoading: true, error: null });
+    set({ actionLoading: true, error: null, allProductsFetched: false });
     try {
       const response = await axios.post('/api/products', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
@@ -144,7 +208,7 @@ export const useProductStore = create((set, get) => ({
   },
 
   updateProduct: async (id, formData) => {
-    set({ actionLoading: true, error: null });
+    set({ actionLoading: true, error: null, allProductsFetched: false });
     try {
       const response = await axios.put(`/api/products/${id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
@@ -162,7 +226,7 @@ export const useProductStore = create((set, get) => ({
   },
 
   deleteProduct: async (id) => {
-    set({ actionLoading: true, error: null });
+    set({ actionLoading: true, error: null, allProductsFetched: false });
     try {
       await axios.delete(`/api/products/${id}`);
       // Refresh products & categories

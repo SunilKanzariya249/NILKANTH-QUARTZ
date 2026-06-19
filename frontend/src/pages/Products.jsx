@@ -231,47 +231,6 @@ const Products = () => {
                     </button>
                   </div>
                 )}
-
-                {/* Pagination Controls */}
-                {totalPages > 1 && (
-                  <div className="flex items-center justify-center gap-3 pt-8 border-t border-[#EEEEEE] flex-wrap">
-                    <button
-                      disabled={currentPage === 1}
-                      onClick={() => handlePageChange(currentPage - 1)}
-                      className="p-2.5 bg-white border border-[#CCCCCC] hover:border-black disabled:opacity-40 disabled:hover:border-[#CCCCCC] rounded-none transition-all"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                    </button>
-                    
-                    <div className="flex items-center gap-2 flex-wrap justify-center">
-                      {[...Array(totalPages)].map((_, i) => {
-                        const pageNum = i + 1;
-                        const isCurrent = currentPage === pageNum;
-                        return (
-                          <button
-                            key={pageNum}
-                            onClick={() => handlePageChange(pageNum)}
-                            className={`w-10 h-10 rounded-none text-xs font-bold transition-all border ${
-                              isCurrent 
-                                ? 'bg-black border-black text-white shadow-sm' 
-                                : 'bg-white border-[#CCCCCC] text-gray-600 hover:border-black hover:text-black'
-                            }`}
-                          >
-                            {pageNum}
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    <button
-                      disabled={currentPage === totalPages}
-                      onClick={() => handlePageChange(currentPage + 1)}
-                      className="p-2.5 bg-white border border-[#CCCCCC] hover:border-black disabled:opacity-40 disabled:hover:border-[#CCCCCC] rounded-none transition-all"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                )}
               </>
             )}
           </main>
