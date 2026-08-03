@@ -164,7 +164,7 @@ At Nilkanth Quartz, we craft exceptional wall clocks that combine elegant design
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[10px] font-semibold  tracking-widest text-gray-500 gap-4">
           <p>© {new Date().getFullYear()} Nilkanth Quartz. All Rights Reserved.</p>
           <p className="text-gray-500 transition-colors duration-200">
-            Designed & Developed by <span className="font-bold text-gray-400">DotEye Infotech</span>
+            Designed & Developed by <a href="https://doteyeinfotech-r1gb.onrender.com/" target="_blank" rel="noopener noreferrer" className="font-bold text-gray-400 hover:text-brand-red transition-colors duration-200">DotEye Infotech</a>
           </p>
           <div className="flex items-center gap-4">
             <Link to="/admin/login" className="hover:text-brand-red flex items-center gap-1 transition-colors duration-250">
