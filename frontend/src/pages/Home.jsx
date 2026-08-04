@@ -255,6 +255,19 @@ const Home = () => {
   ];
   const trackPosters = [...categoryPosters, ...categoryPosters, ...categoryPosters];
 
+  const meganPosters = [
+    "/megan clock poster/WhatsApp Image 2026-08-03 at 8.19.46 PM (1).jpeg",
+    "/megan clock poster/WhatsApp Image 2026-08-03 at 8.19.46 PM (2).jpeg",
+    "/megan clock poster/WhatsApp Image 2026-08-03 at 8.19.46 PM.jpeg",
+    "/megan clock poster/WhatsApp Image 2026-08-03 at 8.19.47 PM (1).jpeg",
+    "/megan clock poster/WhatsApp Image 2026-08-03 at 8.19.47 PM (2).jpeg",
+    "/megan clock poster/WhatsApp Image 2026-08-03 at 8.19.47 PM.jpeg",
+    "/megan clock poster/WhatsApp Image 2026-08-03 at 8.19.48 PM (1).jpeg",
+    "/megan clock poster/WhatsApp Image 2026-08-03 at 8.19.48 PM (2).jpeg",
+    "/megan clock poster/WhatsApp Image 2026-08-03 at 8.19.48 PM.jpeg",
+    "/megan clock poster/WhatsApp Image 2026-08-03 at 8.19.49 PM.jpeg"
+  ];
+
   const [catIndex, setCatIndex] = useState(5);
   const [catTransition, setCatTransition] = useState(true);
   const [catItemsPerPage, setCatItemsPerPage] = useState(4);
@@ -612,16 +625,17 @@ const Home = () => {
               {[...Array(10)].map((_, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-10 text-6xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-[1px] marquee-text"
+                  className="flex items-center gap-10 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold uppercase tracking-[6px]"
+                  style={{ fontFamily: '"Space Grotesk", sans-serif' }}
                 >
                   {/* Filled Text */}
-                  <span className="text-black/90 marquee-text">Nilkanth</span>
+                  <span className="text-black">Nilkanth</span>
 
                   {/* Outline Text */}
                   <span
-                    className="text-transparent marquee-text"
+                    className="text-transparent"
                     style={{
-                      WebkitTextStroke: "1px rgba(0,0,0,0.25)",
+                      WebkitTextStroke: "1px black",
                     }}
                   >
                     Quartz
@@ -646,7 +660,7 @@ const Home = () => {
 
             .animate-marquee {
               width: max-content;
-              animation: marquee 450s linear infinite;
+              animation: marquee 200s linear infinite;
             }
 
             .animate-marquee:hover {
@@ -738,6 +752,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      
 
       {/* DESIGNED TO REFLECT YOUR STYLE SECTION */}
       <section className="relative w-full bg-white py-12 md:py-16 lg:py-24 border-t border-neutral-100">
@@ -996,6 +1012,131 @@ const Home = () => {
             >
               <span className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[7px] border-l-black ml-[2px] transition-colors duration-300"></span>
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* JYOTI ENTERPRISE - CORPORATE MANUFACTURER SECTION */}
+      <section className="py-24 bg-white border-t border-[#EEEEEE] relative overflow-hidden select-none">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            
+            {/* Left Column: Text & Facts */}
+            <div className="col-span-1 lg:col-span-7 space-y-8 text-left">
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="inline-block w-2.5 h-2.5 bg-brand-red"></span>
+                  <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#888888]">
+                    MANUFACTURING PARTNER
+                  </span>
+                </div>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 tracking-tight leading-tight uppercase">
+                  Jyoti Enterprise
+                </h2>
+                <h3 className="text-lg sm:text-xl font-medium text-brand-red tracking-wide">
+                  Appealing, Durable and Reliable Wall Clock & Square Wall Clock
+                </h3>
+                <p className="text-[#555555] text-sm leading-relaxed font-normal">
+                  Jyoti Enterprise presents a wide range of high-quality and durable Wall Clock and Square Wall Clock. We are a prime Manufacturer and Corporate Gift Supplier of high-quality products designed to add life to the spaces. We create eye-catching products in different sizes and dimensions for meeting the needs of the clients with perfection within their budget.
+                </p>
+              </div>
+
+              {/* Grid for Manufacturing & Team */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-4">
+                <div className="space-y-3 p-6 bg-[#FAFAFA] border border-[#EEEEEE] transition-all duration-300 hover:border-brand-red">
+                  <h4 className="text-sm font-bold uppercase tracking-wider text-gray-900">
+                    Manufacturing Facility
+                  </h4>
+                  <p className="text-xs text-[#666666] leading-relaxed">
+                    Creating high-grade clocks includes a blend of craftsmanship and modern manufacturing methods. We have a high-technology production unit with advanced machines and tools.
+                  </p>
+                </div>
+
+                <div className="space-y-3 p-6 bg-[#FAFAFA] border border-[#EEEEEE] transition-all duration-300 hover:border-brand-red">
+                  <h4 className="text-sm font-bold uppercase tracking-wider text-gray-900">
+                    Our Team
+                  </h4>
+                  <p className="text-xs text-[#666666] leading-relaxed">
+                    Our exceptional team of professionals works together with clients to deliver exceptional results. We have a group of creative designers responsible for innovative clock concepts.
+                  </p>
+                </div>
+              </div>
+
+              {/* Bulk orders banner */}
+              <div className="p-4 bg-brand-dark text-white flex items-center justify-between gap-4 uppercase tracking-widest text-xs font-bold">
+                <span>Business Policy:</span>
+                <span className="text-brand-red font-black">We deal only in bulk orders</span>
+              </div>
+
+              {/* Key Facts Table */}
+              <div className="pt-6 space-y-4">
+                <h4 className="text-sm font-bold uppercase tracking-wider text-gray-900">
+                  Key Facts of Jyoti Enterprise
+                </h4>
+                <div className="border border-[#EEEEEE] overflow-hidden">
+                  <div className="grid grid-cols-2 border-b border-[#EEEEEE] bg-[#FAFAFA] px-6 py-3.5 text-xs font-bold uppercase tracking-wider">
+                    <span className="text-[#888888]">Nature of Business</span>
+                    <span className="text-gray-900">Manufacturer and Supplier</span>
+                  </div>
+                  <div className="grid grid-cols-2 border-b border-[#EEEEEE] px-6 py-3.5 text-xs font-bold uppercase tracking-wider">
+                    <span className="text-[#888888]">Location</span>
+                    <span className="text-gray-900">Morbi, Gujarat, India</span>
+                  </div>
+                  <div className="grid grid-cols-2 border-b border-[#EEEEEE] bg-[#FAFAFA] px-6 py-3.5 text-xs font-bold uppercase tracking-wider">
+                    <span className="text-[#888888]">Year of Establishment</span>
+                    <span className="text-gray-900">2021</span>
+                  </div>
+                  <div className="grid grid-cols-2 border-b border-[#EEEEEE] px-6 py-3.5 text-xs font-bold uppercase tracking-wider">
+                    <span className="text-[#888888]">No. of Employees</span>
+                    <span className="text-gray-900">10</span>
+                  </div>
+                  <div className="grid grid-cols-2 px-6 py-3.5 text-xs font-bold uppercase tracking-wider bg-[#FAFAFA]">
+                    <span className="text-[#888888]">GST No.</span>
+                    <span className="text-gray-900 font-mono">24APKPD6261R1ZF</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right Column: Featured Megan Poster */}
+            <div className="col-span-1 lg:col-span-5 relative z-0">
+              <motion.div 
+                initial={{ opacity: 0, scale: 1.05 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className="group overflow-hidden rounded-none shadow-xl h-[450px] sm:h-[550px] w-full relative border border-neutral-200"
+              >
+                <img
+                  src="/megan poster .jpeg"
+                  alt="Jyoti Enterprise Wall Clock Showcase"
+                  className="w-full h-full object-cover object-center transition-transform duration-[1200ms] group-hover:scale-105"
+                />
+                {/* Sweep sheen effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1000ms] ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none" />
+                
+                {/* Elegant overlay badge */}
+                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-6 border border-neutral-100 flex flex-col justify-between">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#888888] mb-1">
+                      Featured Collection
+                    </span>
+                    <h4 className="text-base font-bold text-gray-900 uppercase tracking-wide">
+                      Premium Square & Round Wall Clocks
+                    </h4>
+                  </div>
+                  <Link 
+                    to="/products"
+                    className="mt-3 text-xs font-extrabold uppercase tracking-widest text-brand-red flex items-center gap-1.5 hover:text-black transition-colors"
+                  >
+                    <span>View Models</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+
           </div>
         </div>
       </section>
