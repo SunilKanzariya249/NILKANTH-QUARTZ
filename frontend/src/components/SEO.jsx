@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ 
   title = 'Nilkanth Quartz | Premium Wall Clock Manufacturer', 
@@ -7,71 +8,46 @@ const SEO = ({
   image = '/nilkanth-quartz-logo.png',
   schemaData = null
 }) => {
-  useEffect(() => {
-    // 1. Update Document Title
-    document.title = title;
+  const absoluteImage = image.startsWith('http') 
+    ? image 
+    : `https://nilkanthquartz.com${image.startsWith('/') ? '' : '/'}${image}`;
 
-    // Helper to update/create meta tags
-    const updateMetaTag = (nameAttr, nameVal, content) => {
-      let element = document.querySelector(`meta[${nameAttr}="${nameVal}"]`);
-      if (!element) {
-        element = document.createElement('meta');
-        element.setAttribute(nameAttr, nameVal);
-        document.head.appendChild(element);
-      }
-      element.setAttribute('content', content);
-    };
+  return (
+    <Helmet>
+      {/* Primary SEO */}
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href={url} />
 
-    // 2. Update Standard Meta Tags
-    updateMetaTag('name', 'description', description);
-    updateMetaTag('name', 'robots', 'index, follow');
+      {/* BRAND SIGNAL */}
+      <meta name="application-name" content="Nilkanth Quartz" />
+      <meta property="og:site_name" content="Nilkanth Quartz" />
 
-    // 3. Update Open Graph (Facebook) Meta Tags
-    updateMetaTag('property', 'og:title', title);
-    updateMetaTag('property', 'og:description', description);
-    updateMetaTag('property', 'og:url', url);
-    updateMetaTag('property', 'og:image', image);
-    updateMetaTag('property', 'og:type', 'website');
+      {/* Open Graph */}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={url} />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content={absoluteImage} />
 
-    // 4. Update Twitter Card Tags
-    updateMetaTag('name', 'twitter:card', 'summary_large_image');
-    updateMetaTag('name', 'twitter:title', title);
-    updateMetaTag('name', 'twitter:description', description);
-    updateMetaTag('name', 'twitter:image', image);
+      {/* Twitter SEO */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={absoluteImage} />
 
-    // 5. Update/Create Canonical Link Tag
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', url);
+      {/* FAVICON */}
+      <link rel="icon" href="/nilkanth-quartz-logo.png" />
 
-    // 6. Handle JSON-LD Structured Data
-    let schemaScript = document.getElementById('seo-schema-script');
-    if (schemaScript) {
-      schemaScript.remove();
-    }
-
-    if (schemaData) {
-      schemaScript = document.createElement('script');
-      schemaScript.id = 'seo-schema-script';
-      schemaScript.type = 'application/ld+json';
-      schemaScript.innerHTML = JSON.stringify(schemaData);
-      document.head.appendChild(schemaScript);
-    }
-
-    return () => {
-      // Cleanup schema script on unmount
-      const existingScript = document.getElementById('seo-schema-script');
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
-  }, [title, description, url, image, schemaData]);
-
-  return null;
+      {/* STRUCTURED DATA */}
+      {schemaData && (
+        <script type="application/ld+json">
+          {JSON.stringify(schemaData)}
+        </script>
+      )}
+    </Helmet>
+  );
 };
 
 export default SEO;

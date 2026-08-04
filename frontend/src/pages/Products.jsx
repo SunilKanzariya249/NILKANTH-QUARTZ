@@ -4,7 +4,7 @@ import { Search, RotateCcw, SlidersHorizontal, ChevronLeft, ChevronRight } from 
 import { useProductStore } from '../store/useProductStore';
 import ProductCard from '../components/ProductCard';
 import SkeletonLoader from '../components/SkeletonLoader';
-import SEO from '../components/SEO';
+import { Helmet } from 'react-helmet-async';
 
 const Products = () => {
   const { 
@@ -75,10 +75,62 @@ const Products = () => {
 
   return (
     <div className="bg-[#FCFCFC] py-0 min-h-screen select-none">
-      <SEO 
-        title="Browse Products | Nilkanth Quartz Wall Clocks" 
-        description="Search and filter our complete catalog of designer, office, promotional, acrylic, and gear wall clocks. Find the perfect fit for your home or business."
-      />
+      <Helmet>
+        {/*  Primary SEO */}
+        <title>
+          Wall Clocks Catalog | Nilkanth Quartz Premium Collections
+        </title>
+
+        <meta
+          name="description"
+          content="Search and filter our complete catalog of designer, office, promotional, acrylic, and gear wall clocks. Find the perfect fit for your home or business."
+        />
+
+        <meta
+          name="keywords"
+          content="wall clock catalog, designer clocks, office clocks, promotional clocks, bulk wall clocks, customized clocks"
+        />
+
+        <link rel="canonical" href="https://nilkanthquartz.com/products" />
+
+        {/*  BRAND SIGNAL */}
+        <meta name="application-name" content="Nilkanth Quartz" />
+        <meta property="og:site_name" content="Nilkanth Quartz" />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Wall Clocks Catalog | Nilkanth Quartz"
+        />
+        <meta
+          property="og:description"
+          content="Search and filter our complete catalog of designer, office, promotional, acrylic, and gear wall clocks. Find the perfect fit for your home or business."
+        />
+        <meta property="og:url" content="https://nilkanthquartz.com/products" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://nilkanthquartz.com/nilkanth-quartz-logo.png"
+        />
+
+        {/*  Twitter SEO */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Wall Clocks Catalog | Nilkanth Quartz"
+        />
+        <meta
+          name="twitter:description"
+          content="Search and filter our complete catalog of designer, office, promotional, acrylic, and gear wall clocks."
+        />
+        <meta
+          name="twitter:image"
+          content="https://nilkanthquartz.com/nilkanth-quartz-logo.png"
+        />
+
+        {/*  FAVICON */}
+        <link rel="icon" href="/nilkanth-quartz-logo.png" />
+      </Helmet>
 
       {/* Catalog Page Header Banner */}
       <div className="bg-brand-dark text-white pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-white/10 mb-12 min-h-[340px] sm:min-h-[300px] lg:min-h-[260px] flex flex-col justify-center">

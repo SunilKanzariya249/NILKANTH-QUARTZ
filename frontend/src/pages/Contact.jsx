@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send, MessageSquare, FileText } from 'lucide-react';
-import SEO from '../components/SEO';
+import { Helmet } from 'react-helmet-async';
 
 const WhatsAppIcon = ({ className = "w-4 h-4" }) => (
   <svg 
@@ -59,10 +59,62 @@ Message: ${form.message}`;
 
   return (
     <div className="bg-[#FCFCFC] py-0 min-h-screen select-none">
-      <SEO 
-        title="Contact Us | Nilkanth Quartz Wall Clocks" 
-        description="Get in touch with Nilkanth Quartz sales desk for wholesale dealership pricing, custom dial logo printing, or direct factory tours in Morbi, Gujarat."
-      />
+      <Helmet>
+        {/*  Primary SEO */}
+        <title>
+          Contact Us | Nilkanth Quartz Wall Clocks Manufacturer Morbi
+        </title>
+
+        <meta
+          name="description"
+          content="Get in touch with Nilkanth Quartz sales desk for wholesale dealership pricing, custom dial logo printing, or direct factory tours in Morbi, Gujarat."
+        />
+
+        <meta
+          name="keywords"
+          content="contact Nilkanth Quartz, wall clock manufacturer Morbi, custom logo clocks, wholesale clocks Morbi, wall clock factory Gujarat"
+        />
+
+        <link rel="canonical" href="https://nilkanthquartz.com/contact" />
+
+        {/*  BRAND SIGNAL */}
+        <meta name="application-name" content="Nilkanth Quartz" />
+        <meta property="og:site_name" content="Nilkanth Quartz" />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="Contact Us | Nilkanth Quartz Wall Clocks"
+        />
+        <meta
+          property="og:description"
+          content="Get in touch with Nilkanth Quartz sales desk for wholesale dealership pricing, custom dial logo printing, or direct factory tours in Morbi, Gujarat."
+        />
+        <meta property="og:url" content="https://nilkanthquartz.com/contact" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://nilkanthquartz.com/nilkanth-quartz-logo.png"
+        />
+
+        {/*  Twitter SEO */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Contact Us | Nilkanth Quartz Wall Clocks"
+        />
+        <meta
+          name="twitter:description"
+          content="Get in touch with Nilkanth Quartz sales desk for wholesale dealership pricing, custom dial logo printing, or direct factory tours in Morbi, Gujarat."
+        />
+        <meta
+          name="twitter:image"
+          content="https://nilkanthquartz.com/nilkanth-quartz-logo.png"
+        />
+
+        {/*  FAVICON */}
+        <link rel="icon" href="/nilkanth-quartz-logo.png" />
+      </Helmet>
 
       {/* Contact Page Header Banner */}
       <div className="bg-brand-dark text-white pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-white/10 mb-12 min-h-[340px] sm:min-h-[300px] lg:min-h-[260px] flex flex-col justify-center">

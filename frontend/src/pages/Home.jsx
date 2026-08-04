@@ -21,8 +21,8 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { useProductStore } from '../store/useProductStore';
 import ProductCard from '../components/ProductCard';
+import { Helmet } from 'react-helmet-async';
 import SkeletonLoader from '../components/SkeletonLoader';
-import SEO from '../components/SEO';
 
 const WhatsAppIcon = ({ className = "w-4 h-4" }) => (
   <svg 
@@ -428,10 +428,85 @@ const Home = () => {
 
   return (
     <div className="bg-brand-light">
-      <SEO 
-        title="Nilkanth Quartz | Premium Wall Clock Manufacturers" 
-        description="Premium silent-sweep wall clocks for designer homes, modern offices, and custom corporate branding. Crafted directly in Morbi, India."
-      />
+      <Helmet>
+        {/*  Primary SEO */}
+        <title>
+          Nilkanth Quartz | Premium Wall Clocks Manufacturer in Morbi, India
+        </title>
+
+        <meta
+          name="description"
+          content="Nilkanth Quartz is a leading manufacturer of premium wall clocks in India. We provide customized branding clocks for corporate gifting, advertising, and bulk orders."
+        />
+
+        <meta
+          name="keywords"
+          content="Nilkanth Quartz, premium wall clocks, custom wall clocks India, corporate gifting clocks, advertising clocks manufacturer, bulk wall clocks supplier"
+        />
+
+        <link rel="canonical" href="https://nilkanthquartz.com/" />
+
+        {/*  BRAND SIGNAL (VERY IMPORTANT) */}
+        <meta name="application-name" content="Nilkanth Quartz" />
+        <meta property="og:site_name" content="Nilkanth Quartz" />
+
+        {/* Open Graph (Facebook / WhatsApp) */}
+        <meta
+          property="og:title"
+          content="Nilkanth Quartz | Premium Wall Clocks & Custom Branding"
+        />
+        <meta
+          property="og:description"
+          content="Custom printed wall clocks for branding, corporate gifting, and advertising. High-quality bulk manufacturing by Nilkanth Quartz."
+        />
+        <meta property="og:url" content="https://nilkanthquartz.com/" />
+        <meta property="og:type" content="website" />
+
+        {/* Replace with real homepage image */}
+        <meta
+          property="og:image"
+          content="https://nilkanthquartz.com/nilkanth-quartz-logo.png"
+        />
+
+        {/*  Twitter SEO */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Nilkanth Quartz | Premium Wall Clocks Manufacturer"
+        />
+        <meta
+          name="twitter:description"
+          content="Bulk customized wall clocks for advertising and corporate gifting."
+        />
+        <meta
+          name="twitter:image"
+          content="https://nilkanthquartz.com/nilkanth-quartz-logo.png"
+        />
+
+        {/*  FAVICON (Important for branding in search) */}
+        <link rel="icon" href="/nilkanth-quartz-logo.png" />
+
+        {/*  STRUCTURED DATA (MOST IMPORTANT FOR NAME FIX) */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Nilkanth Quartz",
+            url: "https://nilkanthquartz.com/",
+            logo: "https://nilkanthquartz.com/nilkanth-quartz-logo.png",
+            sameAs: [],
+          })}
+        </script>
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Nilkanth Quartz",
+            url: "https://nilkanthquartz.com/",
+          })}
+        </script>
+      </Helmet>
 
       {/* 1. HERO SECTION */}
       <section 

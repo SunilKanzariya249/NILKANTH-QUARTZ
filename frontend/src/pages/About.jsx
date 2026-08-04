@@ -1,15 +1,67 @@
 import React from 'react';
 import { Target, Eye, Clock, ShieldCheck, Award, Layers, Zap, Gift, Building2, Palette, CheckCircle2, Factory, Handshake } from 'lucide-react';
 import { motion } from 'framer-motion';
-import SEO from '../components/SEO';
+import { Helmet } from 'react-helmet-async';
 
 const About = () => {
   return (
     <div className="bg-[#FCFCFC] py-0 min-h-screen select-none overflow-hidden">
-      <SEO 
-        title="About Us | Nilkanth Quartz Wall Clocks" 
-        description="Learn about Nilkanth Quartz wall clock manufacturing history, our corporate mission, vision, core values, and our wide range of custom commercial clocks."
-      />
+      <Helmet>
+        {/*  Primary SEO */}
+        <title>
+          About Us | Nilkanth Quartz Wall Clocks Manufacturer Morbi.
+        </title>
+
+        <meta
+          name="description"
+          content="Learn about Nilkanth Quartz wall clock manufacturing history, our corporate mission, vision, core values, and our wide range of custom commercial clocks."
+        />
+
+        <meta
+          name="keywords"
+          content="about Nilkanth Quartz, clock manufacturer India, wall clock factory, wall clock brand Morbi, premium clock manufacturing"
+        />
+
+        <link rel="canonical" href="https://nilkanthquartz.com/about" />
+
+        {/*  BRAND SIGNAL */}
+        <meta name="application-name" content="Nilkanth Quartz" />
+        <meta property="og:site_name" content="Nilkanth Quartz" />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="About Us | Nilkanth Quartz Wall Clocks"
+        />
+        <meta
+          property="og:description"
+          content="Learn about Nilkanth Quartz wall clock manufacturing history, our corporate mission, vision, core values, and our wide range of custom commercial clocks."
+        />
+        <meta property="og:url" content="https://nilkanthquartz.com/about" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://nilkanthquartz.com/nilkanth-quartz-logo.png"
+        />
+
+        {/*  Twitter SEO */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="About Us | Nilkanth Quartz Wall Clocks"
+        />
+        <meta
+          name="twitter:description"
+          content="Learn about Nilkanth Quartz wall clock manufacturing history, our corporate mission, vision, core values, and our wide range of custom commercial clocks."
+        />
+        <meta
+          name="twitter:image"
+          content="https://nilkanthquartz.com/nilkanth-quartz-logo.png"
+        />
+
+        {/*  FAVICON */}
+        <link rel="icon" href="/nilkanth-quartz-logo.png" />
+      </Helmet>
 
       {/* About Page Header Banner */}
       <div className="bg-brand-dark text-white pt-32 pb-16 sm:pt-40 sm:pb-20 border-b border-white/10 mb-12 min-h-[340px] sm:min-h-[300px] lg:min-h-[260px] flex flex-col justify-center">
