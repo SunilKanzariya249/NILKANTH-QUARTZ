@@ -26,6 +26,7 @@ const productSchema = new mongoose.Schema({
   modelNo: {
     type: String,
     required: [true, 'Model number is required'],
+    unique: false,
     trim: true
   },
   size: {
