@@ -35,11 +35,11 @@ export const loginAdmin = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // Generate JWT token
+    // Generate JWT token (expires in 60 years)
     const token = jwt.sign(
       { email: admin.email, role: 'admin' },
       process.env.JWT_SECRET,
-      { expiresIn: '7d' }
+      { expiresIn: '60y' }
     );
 
     res.status(200).json({
