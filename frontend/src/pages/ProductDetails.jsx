@@ -76,7 +76,7 @@ const ProductDetails = () => {
     );
   }
 
-  const { price, category, description, images, video, modelNo, size, pkg, moq, colors } = currentProduct;
+  const { category, description, images, video, modelNo, size, pkg, moq, colors } = currentProduct;
   const currentImage = images && images.length > 0 ? images[activeImageIdx] : 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=600&auto=format&fit=crop';
 
   // Handle Zoom Hover Move
@@ -108,7 +108,6 @@ const ProductDetails = () => {
 I am interested in the following product:
 
 Model No: ${modelNo || 'NK-N/A'}
-Wholesale Price: ₹${price}
 Category: ${category}
 Available Colors: ${colors || 'N/A'}
 MOQ: ${moq || 100} pcs
@@ -129,13 +128,7 @@ Please provide more details.`;
     "@type": "Product",
     "name": `Model ${modelNo}`,
     "image": images,
-    "description": description,
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "INR",
-      "price": price,
-      "availability": "https://schema.org/InStock"
-    }
+    "description": description
   };
 
   return (
@@ -287,11 +280,7 @@ Please provide more details.`;
               {description}
             </p>
 
-            {/* Price & MOQ Banner - Bordered row block */}
-            <div className="border-t border-b border-[#E5E7EB] py-4 my-2 flex items-center justify-between text-black text-sm sm:text-base font-semibold tracking-wide">
-              <span>₹{price} / Piece</span>
-             
-            </div>
+
 
             {/* Specifications Table - Keeping layout, updating order & typography */}
             <div className="border border-[#EEEEEE] rounded-none bg-white divide-y divide-[#EEEEEE] overflow-hidden mt-2">

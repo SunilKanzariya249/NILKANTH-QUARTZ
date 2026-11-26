@@ -17,7 +17,7 @@ export const ProductCardSkeleton = () => {
           <div className="h-4 bg-gray-200 rounded-md w-5/6" />
         </div>
         
-        {/* Price and Action */}
+        {/* MOQ and Action */}
         <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
           <div className="space-y-1">
             <div className="h-3 bg-gray-200 rounded-md w-10" />

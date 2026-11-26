@@ -13,7 +13,7 @@ const WhatsAppIcon = ({ className = "w-4 h-4" }) => (
 );
 
 const ProductCard = ({ product }) => {
-  const { modelNo, slug, price, category, images, moq } = product;
+  const { modelNo, slug, category, images, moq } = product;
 
   const mainImage = images && images.length > 0 
     ? images[0] 
@@ -29,7 +29,6 @@ const ProductCard = ({ product }) => {
 I am interested in inquiring about the following clock model:
 
 Model No: ${modelNo || 'N/A'}
-Wholesale Price: ₹${price}
 MOQ: ${moq || 100} pcs
 Product Link: ${productUrl}
 
@@ -63,9 +62,9 @@ Please provide more details.`;
             {modelNo}
           </h3>
           
-          {/* MOQ & Price */}
+          {/* MOQ */}
           <p className="text-[11px] sm:text-xs text-gray-700 font-semibold tracking-widest uppercase mb-4">
-            MOQ : {moq || 100}pcs <span className="text-gray-300 mx-1">||</span> Price : ₹{price}
+            MOQ : {moq || 100} pcs
           </p>
         </div>
 

@@ -21,7 +21,7 @@ export const useProductStore = create((set, get) => ({
   filters: {
     search: '',
     category: '',
-    sort: 'newest', // newest, price_asc, price_desc, name_asc, name_desc
+    sort: 'newest', // newest, name_asc, name_desc
     page: 1,
     limit: 1000
   },
@@ -110,10 +110,6 @@ export const useProductStore = create((set, get) => ({
       if (params.sort) {
         if (params.sort === 'newest') {
           filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        } else if (params.sort === 'price_asc') {
-          filtered.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
-        } else if (params.sort === 'price_desc') {
-          filtered.sort((a, b) => (Number(b.price) || 0) - (Number(a.price) || 0));
         } else if (params.sort === 'name_asc') {
           filtered.sort((a, b) => (a.modelNo || '').localeCompare(b.modelNo || ''));
         } else if (params.sort === 'name_desc') {

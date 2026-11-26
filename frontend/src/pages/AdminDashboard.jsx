@@ -45,7 +45,6 @@ const AdminDashboard = () => {
 
   // Form Fields State
   const [colors, setColors] = useState('');
-  const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [featured, setFeatured] = useState(false);
@@ -96,7 +95,6 @@ const AdminDashboard = () => {
   const handleOpenAddModal = () => {
     setEditProduct(null);
     setColors('');
-    setPrice('');
     setCategory('');
     setDescription('');
     setFeatured(false);
@@ -117,7 +115,6 @@ const AdminDashboard = () => {
   const handleOpenEditModal = (prod) => {
     setEditProduct(prod);
     setColors(prod.colors || '');
-    setPrice(prod.price);
     setCategory(prod.category);
     setDescription(prod.description);
     setFeatured(prod.featured);
@@ -204,7 +201,6 @@ const AdminDashboard = () => {
 
     const formData = new FormData();
     formData.append('colors', colors);
-    formData.append('price', price);
     formData.append('category', category);
     formData.append('description', description);
     formData.append('featured', featured);
@@ -356,7 +352,7 @@ const AdminDashboard = () => {
                     <th className="px-3 sm:px-6 py-3.5">Model No.</th>
                     <th className="px-3 sm:px-6 py-3.5 hidden md:table-cell">Category</th>
                     <th className="px-3 sm:px-6 py-3.5 hidden md:table-cell">Colors</th>
-                    <th className="px-3 sm:px-6 py-3.5 hidden md:table-cell">Price / MOQ</th>
+                    <th className="px-3 sm:px-6 py-3.5 hidden md:table-cell">MOQ</th>
                     <th className="px-3 sm:px-6 py-3.5 hidden md:table-cell">Featured</th>
                     <th className="px-3 sm:px-6 py-3.5 text-right">Actions</th>
                   </tr>
@@ -385,8 +381,7 @@ const AdminDashboard = () => {
                         {prod.colors}
                       </td>
                       <td className="px-3 sm:px-6 py-3.5 hidden md:table-cell font-bold text-black">
-                        <span className="block text-sm font-extrabold text-black tracking-tight">₹{prod.price}</span>
-                        <span className="text-[10px] text-gray-400 block font-mono font-medium mt-0.5">MOQ: {prod.moq || 100} pcs</span>
+                        <span className="block text-sm font-extrabold text-black tracking-tight">MOQ: {prod.moq || 100} pcs</span>
                       </td>
                       <td className="px-3 sm:px-6 py-3.5 hidden md:table-cell">
                         {prod.featured ? (
@@ -482,23 +477,6 @@ const AdminDashboard = () => {
 
                 <div>
                   <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600 mb-2">
-                    Wholesale Price (₹)
-                  </label>
-                  <input
-                    type="number"
-                    required
-                    min="0"
-                    placeholder="450"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    className="w-full bg-[#F9FAFB] border border-[#D1D5DB] rounded-none px-4 py-3.5 text-xs text-black focus:border-brand-red focus:bg-white focus:outline-none transition-all duration-200"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-600 mb-2">
                     Category Range
                   </label>
                   <input
@@ -519,21 +497,21 @@ const AdminDashboard = () => {
                     <option value="Anchor Wall Clock" />
                   </datalist>
                 </div>
+              </div>
 
-                <div className="flex items-center justify-between sm:pt-6">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-gray-600">Featured Placement</span>
-                  <button
-                    type="button"
-                    onClick={() => setFeatured(!featured)}
-                    className="text-black focus:outline-none transition-colors"
-                  >
-                    {featured ? (
-                      <ToggleRight className="w-12 h-12 text-brand-red" />
-                    ) : (
-                      <ToggleLeft className="w-12 h-12 text-gray-300" />
-                    )}
-                  </button>
-                </div>
+              <div className="flex items-center justify-between sm:pt-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-gray-600">Featured Placement</span>
+                <button
+                  type="button"
+                  onClick={() => setFeatured(!featured)}
+                  className="text-black focus:outline-none transition-colors"
+                >
+                  {featured ? (
+                    <ToggleRight className="w-12 h-12 text-brand-red" />
+                  ) : (
+                    <ToggleLeft className="w-12 h-12 text-gray-300" />
+                  )}
+                </button>
               </div>
 
               {/* Added Schema Fields: Model No, Size, Packaging, MOQ */}

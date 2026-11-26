@@ -193,8 +193,6 @@ const Products = () => {
                 <option value="newest">Newest Arrivals</option>
                 <option value="name_asc">Model Number (A - Z)</option>
                 <option value="name_desc">Model Number (Z - A)</option>
-                <option value="price_asc">Price (Low to High)</option>
-                <option value="price_desc">Price (High to Low)</option>
               </select>
             </div>
 

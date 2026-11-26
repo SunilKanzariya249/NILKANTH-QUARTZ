@@ -64,9 +64,7 @@ export const getProducts = async (req, res) => {
     // Determine sorting
     let sortOption = { createdAt: -1 }; // Default: Newest first
     if (sort) {
-      if (sort === 'price_asc') sortOption = { price: 1 };
-      else if (sort === 'price_desc') sortOption = { price: -1 };
-      else if (sort === 'name_asc') sortOption = { modelNo: 1 };
+      if (sort === 'name_asc') sortOption = { modelNo: 1 };
       else if (sort === 'name_desc') sortOption = { modelNo: -1 };
     }
 
@@ -124,12 +122,12 @@ export const getProductBySlug = async (req, res) => {
 // @access  Private (Admin)
 export const createProduct = async (req, res) => {
   try {
-    const { price, category, description, featured, modelNo, size, pkg, moq, colors } = req.body;
+    const { category, description, featured, modelNo, size, pkg, moq, colors } = req.body;
 
-    if (!price || !category || !description || !modelNo || !size || !pkg || !moq || !colors) {
+    if (!category || !description || !modelNo || !size || !pkg || !moq || !colors) {
       // Clean up uploaded files in temp_uploads if validation fails
       cleanupTempFiles(req.files);
-      return res.status(400).json({ message: 'Price, category, description, modelNo, size, pkg, MOQ, and Available Colors are required' });
+      return res.status(400).json({ message: 'Category, description, modelNo, size, pkg, MOQ, and Available Colors are required' });
     }
 
     const imageUrls = [];
@@ -150,7 +148,6 @@ export const createProduct = async (req, res) => {
     }
 
     const product = new Product({
-      price: parseFloat(price),
       category: normalizeCategory(category),
       modelNo,
       size,
@@ -177,7 +174,7 @@ export const createProduct = async (req, res) => {
 // @access  Private (Admin)
 export const updateProduct = async (req, res) => {
   try {
-    const { price, category, description, featured, existingImages, removeVideo, modelNo, size, pkg, moq, colors } = req.body;
+    const { category, description, featured, existingImages, removeVideo, modelNo, size, pkg, moq, colors } = req.body;
     const productId = req.params.id;
 
     const product = await Product.findById(productId);
@@ -237,7 +234,6 @@ export const updateProduct = async (req, res) => {
     }
 
     // Update fields
-    product.price = price ? parseFloat(price) : product.price;
     product.category = category ? normalizeCategory(category) : product.category;
     product.modelNo = modelNo || product.modelNo;
     product.size = size || product.size;

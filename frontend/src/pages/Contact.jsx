@@ -26,7 +26,6 @@ const Contact = () => {
         ...prev,
         message: `Hi, I would like to inquire about the following product:
 - Model No: ${prod.modelNo || 'N/A'}
-- Price: ₹${prod.price}
 - Available Colors: ${prod.colors || 'N/A'}
 - MOQ: ${prod.moq || 'N/A'} pcs
 
