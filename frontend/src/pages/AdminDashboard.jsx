@@ -14,7 +14,8 @@ import {
   Upload, 
   CheckCircle, 
   Video,
-  FileVideo
+  FileVideo,
+  ExternalLink
 } from 'lucide-react';
 import { useAuthStore } from '../store/useAuthStore';
 import { useProductStore } from '../store/useProductStore';
@@ -394,6 +395,15 @@ const AdminDashboard = () => {
                       </td>
                       <td className="px-3 sm:px-6 py-3.5 text-right">
                         <div className="flex items-center justify-end gap-2 sm:gap-3">
+                          <a
+                            href={`/product/${prod.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title={`View Product Page (/product/${prod.slug})`}
+                            className="p-2 sm:p-2.5 bg-white hover:bg-gray-100 text-gray-500 hover:text-black rounded-none border border-[#D1D5DB] transition-colors duration-200"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
                           <button
                             onClick={() => handleOpenEditModal(prod)}
                             title="Edit Clock details"

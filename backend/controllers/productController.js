@@ -98,7 +98,8 @@ export const getProducts = async (req, res) => {
 // @access  Public
 export const getProductBySlug = async (req, res) => {
   try {
-    const product = await Product.findOne({ slug: req.params.slug });
+    const slugParam = req.params.slug ? req.params.slug.trim().toLowerCase() : '';
+    const product = await Product.findOne({ slug: slugParam });
     
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
@@ -160,7 +161,18 @@ export const createProduct = async (req, res) => {
       video: videoUrl
     });
 
-    await product.save();
+    try {
+      await product.save();
+    } catch (saveErr) {
+      // Retry in case of rare race condition on unique slug
+      if (saveErr.code === 11000) {
+        product.slug = undefined;
+        await product.save();
+      } else {
+        throw saveErr;
+      }
+    }
+
     res.status(201).json({ message: 'Product created successfully', product });
   } catch (error) {
     cleanupTempFiles(req.files);
@@ -245,7 +257,16 @@ export const updateProduct = async (req, res) => {
     product.images = finalImageUrls;
     product.video = finalVideoUrl;
 
-    await product.save();
+    try {
+      await product.save();
+    } catch (saveErr) {
+      if (saveErr.code === 11000) {
+        product.slug = undefined;
+        await product.save();
+      } else {
+        throw saveErr;
+      }
+    }
     res.status(200).json({ message: 'Product updated successfully', product });
   } catch (error) {
     cleanupTempFiles(req.files);
